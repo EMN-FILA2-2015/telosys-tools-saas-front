@@ -8,10 +8,8 @@ Il est nécessaire d'installer les éléments suivants :
 * ```ruby``` : [Download](https://www.ruby-lang.org/fr/downloads/) en version 1.x ou 2.x
 
 Exécuter les commandes suivantes :
-* installation de grunt :
-```npm install -g grunt-cli```
-* installation de bower :
-```npm install -g bower```
+* installation de grunt, bower et yeoman :
+```npm install -g yo bower grunt-cli ```
 * installation de sass :
 ```gem install sass```
 

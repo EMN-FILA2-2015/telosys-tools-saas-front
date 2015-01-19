@@ -14,12 +14,7 @@ angular.module('telosysToolsSaasFrontApp')
 
     $scope.msg = "none";
 
-    /*
     $http(req).success(function(msg) {
       $scope.msg = msg;
-    });*/
-    $http({
-      url: 'http://localhost:8080/hello'
-    }).get(req)
-
+    });
   });

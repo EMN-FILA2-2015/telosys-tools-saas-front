@@ -1,7 +1,7 @@
 # telosys-tools-saas-front
 Telosys Tools as a Service - Front
 
-# Pré-requis
+## Pré-requis
 
 Il est nécessaire d'installer les éléments suivants :
 * ```node.js``` : [Download](http://nodejs.org/download/)
@@ -13,22 +13,22 @@ Exécuter les commandes suivantes :
 * installation de sass :
 ```gem install sass```
 
-# Commandes
+## Commandes
 
 Les commandes sont à saisir en ligne de commandes :
 
-## Installer le front
+### Installer le front
 ```npm install```
 
 ```bower install```
 
-## Démarrer le serveur du front
+### Démarrer le serveur du front
 ```grunt serve```
 
-## Lancer les tests 
+### Lancer les tests 
 ```grunt test```
 
-## Packaging final
+### Packaging final
 ```grunt build```
 
 Les fichiers du packaging final sont dans : ```/dist/client```

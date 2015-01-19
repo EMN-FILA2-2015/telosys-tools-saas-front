@@ -13,7 +13,7 @@ describe('Controller: MainCtrl', function () {
   beforeEach(inject(function (_$httpBackend_, $controller, $rootScope) {
     $httpBackend = _$httpBackend_;
     $httpBackend.expectGET('http://localhost:8080/hello')
-      .respond({"id":13,"content":"Hello, World!"});
+      .respond({"id":1,"content":"Hello, World!"});
 
     scope = $rootScope.$new();
     MainCtrl = $controller('MainCtrl', {
@@ -21,8 +21,9 @@ describe('Controller: MainCtrl', function () {
     });
   }));
 
-  it('should attach a list of things to the scope', function () {
+  it('should get a message', function () {
     $httpBackend.flush();
-    expect(scope.awesomeThings.length).toBe(4);
+    expect(scope.msg.id).toBe(1);
+    expect(scope.msg.content).toBe('Hello, World!')
   });
 });

@@ -17,19 +17,18 @@ Exécuter les commandes suivantes :
 
 Les commandes sont à saisir en ligne de commandes :
 
-* Installer le front
+## Installer le front
 ```npm install```
 
 ```bower install```
 
-* Démarrer le serveur du front
+## Démarrer le serveur du front
 ```grunt serve```
 
-* Lancer les tests 
+## Lancer les tests 
 ```grunt test```
 
-* Packaging final
-
+## Packaging final
 ```grunt build```
 
 Les fichiers du packaging final sont dans : ```/dist/client```

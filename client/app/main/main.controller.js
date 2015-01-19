@@ -1,11 +1,25 @@
-'use strict';
+  'use strict';
 
 angular.module('telosysToolsSaasFrontApp')
   .controller('MainCtrl', function ($scope, $http) {
     $scope.awesomeThings = [];
 
-    $http.get('/api/things').success(function(awesomeThings) {
-      $scope.awesomeThings = awesomeThings;
-    });
+    var req = {
+      method: 'GET',
+      url: 'http://localhost:8080/hello',
+      headers: {
+        'Content-Type': undefined
+      }
+    };
+
+    $scope.msg = "none";
+
+    /*
+    $http(req).success(function(msg) {
+      $scope.msg = msg;
+    });*/
+    $http({
+      url: 'http://localhost:8080/hello'
+    }).get(req)
 
   });

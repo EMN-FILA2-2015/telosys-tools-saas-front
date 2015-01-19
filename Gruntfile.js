@@ -33,6 +33,7 @@ module.exports = function (grunt) {
       client: require('./bower.json').appPath || 'client',
       dist: 'dist'
     },
+    /*
     express: {
       options: {
         port: process.env.PORT || 9000
@@ -52,6 +53,51 @@ module.exports = function (grunt) {
     open: {
       server: {
         url: 'http://localhost:<%= express.options.port %>'
+      }
+    },
+    */
+    connect: {
+      options: {
+        port: 9000,
+        // Change this to 'localhost' to deny access to the server from outside.
+        hostname: '0.0.0.0',
+        livereload: 35729
+      },
+      livereload: {
+        options: {
+          open: true,
+          middleware: function (connect) {
+            return [
+              connect.static('.tmp'),
+              connect().use(
+                '/client/bower_components',
+                connect.static('./client/bower_components')
+              ),
+              connect.static('client')
+            ];
+          }
+        }
+      },
+      test: {
+        options: {
+          port: 9001,
+          middleware: function (connect) {
+            return [
+              connect.static('.tmp'),
+              connect().use(
+                '/client/bower_components',
+                connect.static('./client/bower_components')
+              ),
+              connect.static('client')
+            ];
+          }
+        }
+      },
+      dist: {
+        options: {
+          open: true,
+          base: '<%= yeoman.dist %>'
+        }
       }
     },
     watch: {
@@ -105,17 +151,17 @@ module.exports = function (grunt) {
         options: {
           livereload: true
         }
-      },
-      express: {
-        files: [
-          'server/**/*.{js,json}'
-        ],
-        tasks: ['express:dev', 'wait'],
-        options: {
-          livereload: true,
-          nospawn: true //Without this option specified express won't be reloaded
-        }
-      }
+      } //,
+//      express: {
+//        files: [
+//          'server/**/*.{js,json}'
+//        ],
+//        tasks: ['express:dev', 'wait'],
+//        options: {
+//          livereload: true,
+//          nospawn: true //Without this option specified express won't be reloaded
+//        }
+//      }
     },
 
     // Make sure code styles are up to par and there are no obvious mistakes
@@ -124,21 +170,23 @@ module.exports = function (grunt) {
         jshintrc: '<%= yeoman.client %>/.jshintrc',
         reporter: require('jshint-stylish')
       },
+      /*
       server: {
         options: {
           jshintrc: 'server/.jshintrc'
         },
         src: [
-          'server/**/*.js',
-          '!server/**/*.spec.js'
+          'server/** /*.js',
+          '!server/** /*.spec.js'
         ]
       },
       serverTest: {
         options: {
           jshintrc: 'server/.jshintrc-spec'
         },
-        src: ['server/**/*.spec.js']
+        src: ['server/** /*.spec.js']
       },
+      */
       all: [
         '<%= yeoman.client %>/{app,components}/**/*.js',
         '!<%= yeoman.client %>/{app,components}/**/*.spec.js',
@@ -194,6 +242,7 @@ module.exports = function (grunt) {
     },
 
     // Use nodemon to run server in debug mode with an initial breakpoint
+    /*
     nodemon: {
       debug: {
         script: 'server/app.js',
@@ -217,6 +266,7 @@ module.exports = function (grunt) {
         }
       }
     },
+    */
 
     // Automatically inject Bower components into the app
     wiredep: {
@@ -362,14 +412,15 @@ module.exports = function (grunt) {
           cwd: '.tmp/images',
           dest: '<%= yeoman.dist %>/public/assets/images',
           src: ['generated/*']
-        }, {
+        }
+          /*, {
           expand: true,
           dest: '<%= yeoman.dist %>',
           src: [
             'package.json',
-            'server/**/*'
+            // 'server/** /*'
           ]
-        }]
+        }*/]
       },
       styles: {
         expand: true,
@@ -411,7 +462,7 @@ module.exports = function (grunt) {
       ],
       debug: {
         tasks: [
-          'nodemon',
+          //'nodemon',
           'node-inspector'
         ],
         options: {
@@ -432,14 +483,14 @@ module.exports = function (grunt) {
         singleRun: true
       }
     },
-
+/*
     mochaTest: {
       options: {
         reporter: 'spec'
       },
-      src: ['server/**/*.spec.js']
+      src: ['server/** /*.spec.js']
     },
-
+*/
     protractor: {
       options: {
         configFile: 'protractor.conf.js'
@@ -569,8 +620,8 @@ module.exports = function (grunt) {
       return grunt.task.run([
         'clean:server',
         'env:all',
-        'injector:sass', 
-        'concurrent:server',
+        'injector:sass',
+        //'concurrent:server',
         'injector',
         'wiredep',
         'autoprefixer',
@@ -581,14 +632,15 @@ module.exports = function (grunt) {
     grunt.task.run([
       'clean:server',
       'env:all',
-      'injector:sass', 
+      'injector:sass',
       'concurrent:server',
       'injector',
       'wiredep',
       'autoprefixer',
-      'express:dev',
+      //'express:dev',
       'wait',
-      'open',
+      'connect:livereload',
+      //'open',
       'watch'
     ]);
   });
@@ -611,7 +663,7 @@ module.exports = function (grunt) {
       return grunt.task.run([
         'clean:server',
         'env:all',
-        'injector:sass', 
+        'injector:sass',
         'concurrent:test',
         'injector',
         'autoprefixer',
@@ -624,7 +676,7 @@ module.exports = function (grunt) {
         'clean:server',
         'env:all',
         'env:test',
-        'injector:sass', 
+        'injector:sass',
         'concurrent:test',
         'injector',
         'wiredep',
@@ -642,7 +694,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask('build', [
     'clean:dist',
-    'injector:sass', 
+    'injector:sass',
     'concurrent:dist',
     'injector',
     'wiredep',

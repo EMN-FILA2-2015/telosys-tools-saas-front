@@ -16,8 +16,41 @@ module.exports = function (grunt) {
   // Time how long tasks take. Can help when optimizing build times
   require('time-grunt')(grunt);
 
+  // Require for the replacement of configuration values
+  grunt.loadNpmTasks('grunt-replace');
+
   // Define the configuration for all the tasks
   grunt.initConfig({
+
+    // Environment settings
+    replace: {
+      development: {
+        options: {
+          patterns: [{
+            json: grunt.file.readJSON('./config/environments/development.json')
+          }]
+        },
+        files: [{
+          expand: true,
+          flatten: true,
+          src: ['./config/configuration.js'],
+          dest: '<%= yeoman.client %>/components/env/'
+        }]
+      },
+      production: {
+        options: {
+          patterns: [{
+            json: grunt.file.readJSON('./config/environments/production.json')
+          }]
+        },
+        files: [{
+          expand: true,
+          flatten: true,
+          src: ['./config/configuration.js'],
+          dest: '<%= yeoman.client %>/components/env/'
+        }]
+      }
+    },
 
     // Project settings
     pkg: grunt.file.readJSON('package.json'),
@@ -527,6 +560,7 @@ module.exports = function (grunt) {
 
     grunt.task.run([
       'clean:server',
+      'replace:development',
       'injector:sass',
       'concurrent:server',
       'injector',
@@ -582,6 +616,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask('build', [
     'clean:dist',
+    'replace:production',
     'injector:sass',
     'concurrent:dist',
     'injector',

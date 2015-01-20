@@ -1,0 +1,5 @@
+{
+  "env": "developement",
+  "backendHost": "localhost",
+  "backendPort": "8080"
+}

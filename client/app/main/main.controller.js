@@ -1,7 +1,7 @@
   'use strict';
 
 angular.module('telosysToolsSaasFrontApp')
-  .controller('MainCtrl', function ($scope, $http, Restangular) {
+  .controller('MainCtrl', function ($scope, $http, Restangular, Configuration) {
 
     /*
     var req = {
@@ -37,4 +37,6 @@ angular.module('telosysToolsSaasFrontApp')
       }).catch(function (e) {
         console.log('error : ' + e);
       });
+
+    $scope.currentEnv = Configuration.env;
   });

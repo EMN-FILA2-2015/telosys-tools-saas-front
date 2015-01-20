@@ -6,13 +6,14 @@ angular.module('telosysToolsSaasFrontApp', [
   'ngSanitize',
   'ui.router',
   'ui.bootstrap',
-  'restangular'
+  'restangular',
+  'configuration'
 ])
-  .config(function ($stateProvider, $urlRouterProvider, $locationProvider, RestangularProvider) {
+  .config(function ($stateProvider, $urlRouterProvider, $locationProvider, RestangularProvider, Configuration) {
     $urlRouterProvider
       .otherwise('/');
 
     $locationProvider.html5Mode(true);
 
-    RestangularProvider.setBaseUrl('http://localhost:8080');
+    RestangularProvider.setBaseUrl('http://' + Configuration.backendHost + ':' + Configuration.backendPort);
   });

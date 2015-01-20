@@ -2,12 +2,6 @@
 'use strict';
 
 module.exports = function (grunt) {
-  var localConfig;
-  try {
-    localConfig = require('./server/config/local.env');
-  } catch(e) {
-    localConfig = {};
-  }
 
   // Load grunt tasks automatically, when needed
   require('jit-grunt')(grunt, {
@@ -418,8 +412,7 @@ module.exports = function (grunt) {
       },
       prod: {
         NODE_ENV: 'production'
-      },
-      all: localConfig
+      }
     },
 
     // Compiles Sass to CSS
@@ -517,13 +510,12 @@ module.exports = function (grunt) {
 
   grunt.registerTask('serve', function (target) {
     if (target === 'dist') {
-      return grunt.task.run(['build', 'env:all', 'env:prod', 'wait', 'connect:livereload']);
+      return grunt.task.run(['build', 'env:prod', 'wait', 'connect:livereload']);
     }
 
     if (target === 'debug') {
       return grunt.task.run([
         'clean:server',
-        'env:all',
         'injector:sass',
         'concurrent:server',
         'injector',
@@ -535,7 +527,6 @@ module.exports = function (grunt) {
 
     grunt.task.run([
       'clean:server',
-      'env:all',
       'injector:sass',
       'concurrent:server',
       'injector',
@@ -555,7 +546,6 @@ module.exports = function (grunt) {
   grunt.registerTask('test', function(target) {
     if (target === 'server') {
       return grunt.task.run([
-        'env:all',
         'env:test'
       ]);
     }
@@ -563,7 +553,6 @@ module.exports = function (grunt) {
     else if (target === 'client') {
       return grunt.task.run([
         'clean:server',
-        'env:all',
         'injector:sass',
         'concurrent:test',
         'injector',
@@ -575,7 +564,6 @@ module.exports = function (grunt) {
     else if (target === 'e2e') {
       return grunt.task.run([
         'clean:server',
-        'env:all',
         'env:test',
         'injector:sass',
         'concurrent:test',

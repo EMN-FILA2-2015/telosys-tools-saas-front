@@ -9,6 +9,8 @@ angular.module('configuration', [])
     backendHost : '@@backendHost',
     backendPort : '@@backendPort',
 
+    logLevel: '@@logLevel',
+
     // Global properties
     /////////////////////////
     defaultLanguage: 'en'

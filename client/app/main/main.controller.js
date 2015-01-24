@@ -1,42 +1,36 @@
-  'use strict';
+(function () {
+  "use strict";
 
-angular.module('telosysToolsSaasFrontApp')
-  .controller('MainCtrl', function ($scope, $http, Restangular, Configuration) {
+  angular
+    .module('telosysToolsSaasFrontApp')
+    .controller('MainController', MainController);
 
-    /*
-    var req = {
-      method: 'GET',
-      url: 'http://localhost:8080/hello',
-      headers: {
-        'Content-Type': undefined
-      }
-    };
+  MainController.$inject = ['HelloService', 'Configuration', 'Logger'];
 
-    $scope.msg = "none";
+  function MainController(HelloService, Configuration, Logger) {
+    /* jshint validthis: true */
+    var vm = this
+    var logger = Logger.getInstance('MainController');
 
-    $http(req).success(function(msg) {
-      $scope.msg = msg;
-    });
-    */
-/*
-    // First way of creating a Restangular object. Just saying the base URL
-    Restangular
-      .oneUrl('server', 'http://localhost:8080/hello')
-      .get()
-      .then(function(hello) {
-        $scope.msg = hello;
-      }).catch(function (e) {
-        console.log('error : ' + e);
-      });
-*/
-    Restangular
-      .one('hello', 'John')
-      .get()
-      .then(function(hello) {
-        $scope.msg = hello;
-      }).catch(function (e) {
-        console.log('error : ' + e);
-      });
+    vm.message = ''
+    vm.currentEnv = Configuration.env;
 
-    $scope.currentEnv = Configuration.env;
-  });
+    activate();
+
+    ////////////////
+
+    function activate() {
+      logger.debug('activate()','Controller activated');
+      HelloService.sayHello()
+        .then(function(message){
+          vm.message = "Message is : " + message;
+          logger.debug('Retrive the message --> ' + message)
+        })
+        .catch(function(error) {
+          logger.error('Enabled to get the message.');
+        });
+    }
+
+  }
+
+})();

@@ -9,10 +9,10 @@
 
   function MainController(HelloService, Configuration, Logger) {
     /* jshint validthis: true */
-    var vm = this
+    var vm = this;
     var logger = Logger.getInstance('MainController');
 
-    vm.message = ''
+    vm.message = '';
     vm.currentEnv = Configuration.env;
 
     activate();

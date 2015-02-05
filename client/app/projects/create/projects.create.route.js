@@ -9,7 +9,7 @@
     .module('telosysToolsSaasFrontApp')
     .config(function ($stateProvider) {
       $stateProvider
-        .state('projects.create', {
+        .state('create', {
           url: '/projects/create',
           templateUrl: 'app/projects/create/projects.create.html',
           controller: 'ProjectsCreateController as projectsCreate'

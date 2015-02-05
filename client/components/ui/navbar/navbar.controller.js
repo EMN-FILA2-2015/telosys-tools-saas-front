@@ -2,10 +2,15 @@
 
 angular.module('telosysToolsSaasFrontApp')
   .controller('NavbarCtrl', function ($scope, $location) {
-    $scope.menu = [{
-      'title': 'Home',
-      'link': '/'
-    }];
+    $scope.menu = [
+      {
+        'title': 'Home',
+        'link': '/'
+      },{
+        'title': 'Create a project',
+        'link': '/projects/create'
+      }
+    ];
 
     $scope.isCollapsed = true;
 

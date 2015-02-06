@@ -9,7 +9,8 @@
     'ui.bootstrap',
     'restangular',
     'configuration',
-    'logger'
+    'logger',
+    'translate'
   ]);
 
 })();

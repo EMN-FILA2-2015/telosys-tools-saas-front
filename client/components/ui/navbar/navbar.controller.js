@@ -4,11 +4,11 @@ angular.module('telosysToolsSaasFrontApp')
   .controller('NavbarCtrl', function ($scope, $state) {
     $scope.menu = [
       {
-        'title': 'Home',
-        'state': 'main'
+        'title': 'HOME',
+        'link': 'main'
       },{
-        'title': 'Projects',
-        'state': 'projects'
+        'title': 'CREATE',
+        'link': 'projects'
       }
     ];
 
@@ -17,5 +17,4 @@ angular.module('telosysToolsSaasFrontApp')
     $scope.isActive = function(state) {
       return state === $state.is(state);
     };
-
   });

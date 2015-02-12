@@ -2,5 +2,11 @@
   "MESSAGE": "Bonjour le monde",
   "HOME_MESSAGE": "Démarrez votre prochaine application web avec TelosysTools",
   "HOME": "Accueil",
-  "CREATE": "Créer un projet"
+  "CREATE": "Créer un projet",
+  "PROJECT_LIST" : "Liste des projets",
+  "PROJECT_CREATION" : "Création d'un projet",
+  "CREATE_REPO" : "Créer un dépôt",
+  "PROJECT_NAME" : "Nom du projet",
+  "NO_PROJECT" : "Aucun projet n'a été trouvé. Créez-en un ici !",
+  "ERROR_GETPROJECT": "Impossible de récupérer la liste des projets."
 }

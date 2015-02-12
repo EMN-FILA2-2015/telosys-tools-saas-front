@@ -36,7 +36,7 @@
           logger.error('Unable to get the projects list.');
           vm.alerts.push({
             type:'danger',
-            msg:'Unable to get the projects list.'
+            msg:'ERROR_GETPROJECT'
           });
           return [];
         });

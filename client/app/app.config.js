@@ -15,10 +15,9 @@
     /**
      * Route and Navigation configuration
      */
-    $locationProvider.html5Mode(true);
-    //$urlRouterProvider
-    //  .otherwise('/');
-
+    //$locationProvider.html5Mode(true);
+    $urlRouterProvider
+      .otherwise('/');
 
     /**
      * HTTP and REST Service configuration

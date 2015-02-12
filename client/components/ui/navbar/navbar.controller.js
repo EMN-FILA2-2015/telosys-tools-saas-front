@@ -1,20 +1,21 @@
 'use strict';
 
 angular.module('telosysToolsSaasFrontApp')
-  .controller('NavbarCtrl', function ($scope, $location) {
+  .controller('NavbarCtrl', function ($scope, $state) {
     $scope.menu = [
       {
         'title': 'Home',
-        'link': '/'
+        'state': 'main'
       },{
-        'title': 'Create a project',
-        'link': '/projects/create'
+        'title': 'Projects',
+        'state': 'projects'
       }
     ];
 
     $scope.isCollapsed = true;
 
-    $scope.isActive = function(route) {
-      return route === $location.path();
+    $scope.isActive = function(state) {
+      return state === $state.is(state);
     };
+
   });

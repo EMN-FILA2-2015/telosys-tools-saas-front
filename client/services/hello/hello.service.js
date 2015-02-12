@@ -34,7 +34,7 @@
         .catch(function(error) {
           logger.error('sayHello',"Error lors de l'appel du service REST Hello",error);
           throw error;
-        })
+        });
     }
 
   }

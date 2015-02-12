@@ -8,6 +8,7 @@
   MainController.$inject = ['HelloService', 'Configuration', 'Logger'];
 
   function MainController(HelloService, Configuration, Logger) {
+
     /* jshint validthis: true */
     var vm = this;
     var logger = Logger.getInstance('MainController');

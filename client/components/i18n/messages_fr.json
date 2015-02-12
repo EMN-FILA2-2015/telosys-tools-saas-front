@@ -8,5 +8,6 @@
   "CREATE_REPO" : "Créer un dépôt",
   "PROJECT_NAME" : "Nom du projet",
   "NO_PROJECT" : "Aucun projet n'a été trouvé. Créez-en un ici !",
-  "ERROR_GETPROJECT": "Impossible de récupérer la liste des projets."
+  "ERROR_GETPROJECT": "Impossible de récupérer la liste des projets.",
+  "ERROR_CREATEPROJECT" : "Impossible de créer le projet."
 }

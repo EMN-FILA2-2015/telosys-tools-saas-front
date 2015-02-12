@@ -55,7 +55,7 @@
           logger.error('Unable to create the projects list.');
           vm.alerts.push({
             type:'danger',
-            msg:'Unable to create the project.'
+            msg:'ERROR_CREATEPROJECT'
           });
         });
     }

@@ -38,7 +38,7 @@
 
     function create(name) {
       logger.debug('call the post /projects service')
-      return service.post(name)
+      return service.post({"name" : name})
         .then(function(data) {
           return data;
         })

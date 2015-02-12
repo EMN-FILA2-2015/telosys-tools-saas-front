@@ -18,9 +18,13 @@
   angular
     .module('translate', ['pascalprecht.translate'])
     .config(function($translateProvider) {
-      $translateProvider.translations('en', english_translation);
-      $translateProvider.translations('fr', french_translation);
+      $translateProvider.useStaticFilesLoader({
+        prefix: 'components/i18n/messages_',
+        suffix: '.json'
+      });
       $translateProvider.preferredLanguage('fr');
+      $translateProvider.fallbackLanguage('fr');
+      $translateProvider.useLocalStorage();
     });
 
 

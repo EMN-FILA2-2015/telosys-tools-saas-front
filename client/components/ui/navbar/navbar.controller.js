@@ -5,16 +5,16 @@ angular.module('telosysToolsSaasFrontApp')
     $scope.menu = [
       {
         'title': 'HOME',
-        'link': 'main'
+        'state': 'main'
       },{
         'title': 'CREATE',
-        'link': 'projects'
+        'state': 'projects'
       }
     ];
 
     $scope.isCollapsed = true;
 
     $scope.isActive = function(state) {
-      return state === $state.is(state);
+      return $state.is(state);
     };
   });

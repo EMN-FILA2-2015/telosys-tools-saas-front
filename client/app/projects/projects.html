@@ -3,18 +3,18 @@
 <div class="container">
   <div class="row">
 
-    <alert ng-repeat="alert in projects.alerts" type="{{alert.type}}" close="projects.closeAlert($index)">{{alert.msg}}</alert>
+    <alert ng-repeat="alert in projects.alerts" type="{{alert.type}}" close="projects.closeAlert($index)">{{alert.msg | translate}}</alert>
 
     <!-- PROJECTS LIST -->
 
     <div class="col-lg-3">
 
-      <h2><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> Projects list</h2>
+      <h2><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>  <span data-translate="PROJECT_LIST"></span></h2>
 
       <hr/>
 
       <div ng-hide="projects.list.length">
-        <div class="alert alert-info" role="alert">No project found. You can create one right in this page!</div>
+        <div class="alert alert-info" role="alert"><span data-translate="NO_PROJECT"></span></div>
       </div>
       <div class="list-group">
         <a ng-repeat="project in projects.list" href="open(project)" class="list-group-item">{{project.name}}</a>
@@ -28,20 +28,20 @@
 
       <form>
 
-        <h2><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Project creation</h2>
+        <h2><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> <span data-translate="PROJECT_CREATION"></span></h2>
 
         <hr/>
 
         <div class="row">
           <div class="col-lg-4">
-            <label for="projectName">Project name</label>
+            <label for="projectName"><span data-translate="PROJECT_NAME"></span></label>
             <input type="text" class="form-control" id="projectName" place-holder="Example project" ng-model="projects.name"/>
           </div>
         </div>
 
         <hr/>
 
-        <button type="button" class="btn btn-success" ng-click="projects.create()">Create repository</button>
+        <button type="button" class="btn btn-success" ng-click="projects.create()"><span data-translate="CREATE_REPO"></span></button>
 
       </form>
 

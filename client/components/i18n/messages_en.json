@@ -1,0 +1,13 @@
+{
+  "MESSAGE": "Hello world",
+  "HOME_MESSAGE": "Kick-start your next web app with TelosysTools",
+  "HOME": "Home",
+  "CREATE": "Create a project",
+  "PROJECT_LIST": "Projects list",
+  "PROJECT_CREATION" : "Project creation",
+  "CREATE_REPO" : "Create repository",
+  "PROJECT_NAME" : "Project name",
+  "NO_PROJECT" : "No project found. You can create one right in this page !",
+  "ERROR_GETPROJECT" : "Unable to get the projects list.",
+  "ERROR_CREATEPROJECT" : "Unable to create the project."
+}

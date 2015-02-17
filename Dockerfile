@@ -9,4 +9,4 @@ ADD dist/public /var/www/html
 
 EXPOSE 80
 
-CMD ["apache2", "-DFOREGROUND"]
+CMD source /etc/apache2/envvars && exec apache2 -D FOREGROUND

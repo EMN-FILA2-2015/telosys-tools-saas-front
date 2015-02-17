@@ -3,7 +3,7 @@ MAINTAINER TelosysToolsSaas <telosysteam@gmail.com>
 
 RUN apt-get -y update
 
-RUN sudo apt-get install apache2
+RUN sudo apt-get install -y apache2
 
 ADD dist/public /var/www/html
 

@@ -23,7 +23,7 @@
      * HTTP and REST Service configuration
      */
     RestangularProvider
-        .setBaseUrl('http://' + Configuration.backendHost + ':' + Configuration.backendPort);
+        .setBaseUrl('http://' + Configuration.backendHost);
 
     /**
      * Logger Configuration

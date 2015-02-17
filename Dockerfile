@@ -9,4 +9,4 @@ ADD dist/public /var/www/html
 
 EXPOSE 80
 
-CMD service apache2 start
+CMD ["apache2", "-DFOREGROUND"]

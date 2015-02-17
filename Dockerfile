@@ -1,5 +1,4 @@
-FROM      tutum/apache-php
+FROM nginx
 MAINTAINER TelosysToolsSaas <telosysteam@gmail.com>
 
-RUN rm -fr /app
-ADD dist/public /app
+ADD dist/public /usr/share/nginx/html

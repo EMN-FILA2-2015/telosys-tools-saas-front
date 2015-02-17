@@ -1,6 +1,6 @@
 {
   "env": "production",
-  "backendHost": "localhost",
+  "backendHost": "tomcat",
   "backendPort": "8080",
   "logLevel": "warn"
 }

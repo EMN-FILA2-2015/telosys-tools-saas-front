@@ -7,6 +7,8 @@ RUN echo "deb http://nginx.org/packages/mainline/debian/ wheezy nginx" >> /etc/a
 # nginx
 RUN sudo apt-get install -y nginx
 
+RUN sudo rm /etc/nginx/sites-enabled/default
+
 ADD dist/public /opt/telosyssaasfront
 
 RUN sudo chown -R www-data:www-data /opt/telosyssaasfront

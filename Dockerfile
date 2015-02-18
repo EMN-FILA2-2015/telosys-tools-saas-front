@@ -5,7 +5,7 @@ RUN apt-key adv --keyserver pgp.mit.edu --recv-keys 573BFD6B3D8FBC641079A6ABABF5
 RUN echo "deb http://nginx.org/packages/mainline/debian/ wheezy nginx" >> /etc/apt/sources.list
 
 # nginx
-RUN sudo apt-get install nginx
+RUN sudo apt-get install -y nginx
 
 ADD dist/public /opt/telosyssaasfront
 

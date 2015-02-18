@@ -12,7 +12,7 @@ ADD dist/public /opt/telosyssaasfront
 RUN sudo chown -R www-data:www-data /opt/telosyssaasfront
 RUN sudo chmod 755 /opt/telosyssaasfront
 
-ADD telosyssaasfront /etc/nginx/sites-available/telosyssaasfron
+ADD telosyssaasfront /etc/nginx/sites-available/telosyssaasfront
 
 RUN sudo ln -s /etc/nginx/sites-available/telosyssaasfront /etc/nginx/sites-enabled/telosyssaasfront
 RUN sudo service nginx restart

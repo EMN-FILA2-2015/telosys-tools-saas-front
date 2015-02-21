@@ -13,11 +13,11 @@
 
       <hr/>
 
-      <div ng-hide="projects.list.length">
+      <div ng-hide="projects.names.length">
         <div class="alert alert-info" role="alert"><span data-translate="NO_PROJECT"></span></div>
       </div>
       <div class="list-group">
-        <a ng-repeat="project in projects.list" href="open(project)" class="list-group-item">{{project.name}}</a>
+        <a ng-repeat="name in projects.names" href="open(project)" class="list-group-item">{{name}}</a>
       </div>
 
     </div>
@@ -34,8 +34,8 @@
 
         <div class="row">
           <div class="col-lg-4">
-            <label for="projectName"><span data-translate="PROJECT_NAME"></span></label>
-            <input type="text" class="form-control" id="projectName" place-holder="Example project" ng-model="projects.name"/>
+            <label for="newProjectName"><span data-translate="PROJECT_NAME"></span></label>
+            <input type="text" class="form-control" id="newProjectName" place-holder="Example project" ng-model="projects.newProjectName"/>
           </div>
         </div>
 

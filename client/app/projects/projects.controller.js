@@ -20,17 +20,21 @@
     vm.alerts = [];
     vm.closeAlert = closeAlert;
 
-    vm.list = getList();
-    vm.name = '';
+    vm.names = getProjectNames();
+    vm.newProjectName = '';
     vm.create = create;
 
     ////////////////
 
-    function getList() {
-      logger.debug('getList()','Get projects list');
+    function getProjectNames() {
+      logger.debug('getProjectNames()','Get project names');
       ProjectsService.getList()
         .then(function(list){
-          return list;
+          var names = [];
+          list.forEach(function(project){
+            names.push(project.name);
+          });
+          return names;
         })
         .catch(function(error) {
           logger.error('Unable to get the projects list.');
@@ -44,11 +48,11 @@
 
     function create() {
       logger.debug('create()','Project creation');
-      ProjectsService.create(vm.name)
+      ProjectsService.create(vm.newProjectName)
         .then(function(project){
           vm.alerts.push({
             type:'success',
-            msg:'The project "' + project.name + '" has been created.'
+            msg:'The project "' + project.newProjectName + '" has been created.'
           });
         })
         .catch(function(error) {

@@ -1,0 +1,10 @@
+node_modules
+public
+.tmp
+.sass-cache
+.idea
+client/bower_components
+dist
+.idea
+.settings
+client/components/env/configuration.js

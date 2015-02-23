@@ -1,0 +1,5 @@
+{
+  "env": "production",
+  "backendHost": "ns507652.ip-192-99-10.net/telosyssaasback/",
+  "logLevel": "warn"
+}

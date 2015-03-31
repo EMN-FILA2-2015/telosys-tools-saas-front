@@ -9,9 +9,9 @@
     .module('telosysToolsSaasFrontApp')
     .controller('ProjectsController', ProjectsController);
 
-  ProjectsController.$inject = ['ProjectsService', 'Configuration', 'Logger'];
+  ProjectsController.$inject = ['ProjectService', 'Logger'];
 
-  function ProjectsController(ProjectsService, Configuration, Logger) {
+  function ProjectsController(ProjectService, Logger) {
 
     /* jshint validthis: true */
     var vm = this;
@@ -31,7 +31,7 @@
 
     function getProjectNames() {
       logger.debug('getProjectNames()','Get project names');
-      ProjectsService.getList()
+      ProjectService.getList()
         .then(function(list){
           var names = [];
           list.forEach(function(project){
@@ -51,7 +51,7 @@
 
     function create() {
       logger.debug('create()','Project creation');
-      ProjectsService.create(vm.newProjectName)
+      ProjectService.create(vm.newProjectName)
         .then(function(project){
           logger.debug('Project created');
           vm.alerts.push({

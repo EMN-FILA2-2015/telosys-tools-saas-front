@@ -1,7 +1,11 @@
+/**
+ * Created by Killian on 31/03/2015.
+ */
+
 'use strict';
 
 angular.module('telosysToolsSaasFrontApp')
-  .controller('NavbarCtrl', function ($scope, $state) {
+  .controller('Footer', function ($scope, $state) {
     $scope.menu = [
       {
         'title': 'navbar.home',

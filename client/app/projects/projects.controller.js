@@ -20,9 +20,12 @@
     vm.alerts = [];
     vm.closeAlert = closeAlert;
 
-    vm.names = getProjectNames();
+    vm.names = [];
     vm.newProjectName = '';
+    vm.createdProjectName = '';
     vm.create = create;
+
+    getProjectNames();
 
     ////////////////
 
@@ -34,15 +37,15 @@
           list.forEach(function(project){
             names.push(project.name);
           });
-          return names;
+          vm.names = names;
         })
         .catch(function(error) {
-          logger.error('Unable to get the projects list.');
+          logger.error('Unable to get the projects list.', error);
           vm.alerts.push({
             type:'danger',
-            msg:'ERROR_GETPROJECT'
+            msg:'projects.error.list'
           });
-          return [];
+          vm.names = [];
         });
     }
 
@@ -50,16 +53,20 @@
       logger.debug('create()','Project creation');
       ProjectsService.create(vm.newProjectName)
         .then(function(project){
+          logger.debug('Project created');
           vm.alerts.push({
             type:'success',
-            msg:'The project "' + project.newProjectName + '" has been created.'
+            msg:'projects.ok.go'
           });
+          vm.names.push(project.name);
+          vm.createdProjectName = vm.newProjectName;
+          vm.newProjectName = '';
         })
         .catch(function(error) {
           logger.error('Unable to create the projects list.');
           vm.alerts.push({
             type:'danger',
-            msg:'ERROR_CREATEPROJECT'
+            msg:'projects.error.go'
           });
         });
     }

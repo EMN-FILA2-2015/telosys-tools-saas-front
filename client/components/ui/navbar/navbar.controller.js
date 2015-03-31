@@ -4,10 +4,10 @@ angular.module('telosysToolsSaasFrontApp')
   .controller('NavbarCtrl', function ($scope, $state) {
     $scope.menu = [
       {
-        'title': 'HOME',
+        'title': 'navbar.home',
         'state': 'main'
       },{
-        'title': 'CREATE',
+        'title': 'navbar.create_project',
         'state': 'projects'
       }
     ];

@@ -1,0 +1,23 @@
+{
+  "navbar" : {
+    "home" : "Home",
+    "create_project" : "Create a project"
+  },
+  "projects" : {
+    "list" : "Project list",
+    "creation" : "Project creation",
+    "name" : "Project name",
+    "no_project" : "No project found. You can create one right in this page!",
+    "go" : "Get started!",
+    "ok" : {
+      "go" : "The \"{{name}}\" project has been created."
+    },
+    "error" : {
+      "list" : "Unable to get the project list.",
+      "go" : "Unable to create the project."
+    }
+  },
+  "main" : {
+    "get_started" : "Kick-start your next web app with TelosysTools"
+  }
+}

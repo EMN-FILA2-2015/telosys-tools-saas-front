@@ -1,7 +1,8 @@
 {
   "navbar" : {
     "home" : "Home",
-    "create_project" : "Create a project"
+    "create_project" : "Create a project",
+    "language" : "Language"
   },
   "projects" : {
     "list" : "Project list",

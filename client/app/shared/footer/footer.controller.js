@@ -2,23 +2,17 @@
  * Created by Killian on 31/03/2015.
  */
 
-'use strict';
+(function() {
+  'use strict';
 
-angular.module('telosysToolsSaasFrontApp')
-  .controller('Footer', function ($scope, $state) {
-    $scope.menu = [
-      {
-        'title': 'navbar.home',
-        'state': 'main'
-      },{
-        'title': 'navbar.create_project',
-        'state': 'projects'
-      }
-    ];
+  angular
+    .module('telosysToolsSaasFrontApp')
+    .controller('FooterController', FooterController)
 
-    $scope.isCollapsed = true;
+  FooterController.$inject = ['Configuration']
 
-    $scope.isActive = function(state) {
-      return $state.is(state);
-    };
-  });
+  function FooterController(Configuration) {
+
+  }
+
+})();

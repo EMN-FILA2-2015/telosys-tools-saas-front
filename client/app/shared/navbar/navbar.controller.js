@@ -2,15 +2,22 @@
  * Created by Killian on 31/03/2015.
  */
 
-'use strict';
+(function () {
+  'use strict';
 
-angular.module('telosysToolsSaasFrontApp')
-  .controller('NavbarCtrl', function ($scope, $state) {
+  angular
+    .module('telosysToolsSaasFrontApp')
+    .controller('NavbarController', NavbarController)
+
+  NavbarController.$inject = ['$scope', '$state'];
+
+  function NavbarController($scope, $state) {
+
     $scope.menu = [
       {
         'title': 'navbar.home',
         'state': 'main'
-      },{
+      }, {
         'title': 'navbar.create_project',
         'state': 'projects'
       }
@@ -18,7 +25,10 @@ angular.module('telosysToolsSaasFrontApp')
 
     $scope.isCollapsed = true;
 
-    $scope.isActive = function(state) {
+    $scope.isActive = function (state) {
       return $state.is(state);
     };
-  });
+
+  }
+
+})();

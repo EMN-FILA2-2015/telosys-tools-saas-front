@@ -19,5 +19,9 @@
   },
   "main" : {
     "get_started" : "Kick-start your next web app with TelosysTools"
+  },
+  "footer" : {
+    "contact" : "Contact",
+    "terms" : "Terms"
   }
 }

@@ -3,6 +3,9 @@
     "home" : "Accueil",
     "create_project" : "Créer un projet"
   },
+  "main" : {
+    "get_started" : "Démarrez votre prochaine application web avec TelosysTools"
+  },
   "projects" : {
     "create" : "Créer un projet",
     "list" : "Liste des projets",
@@ -18,7 +21,8 @@
       "go" : "Impossible de créer le projet."
     }
   },
-  "main" : {
-    "get_started" : "Démarrez votre prochaine application web avec TelosysTools"
+  "footer" : {
+    "contact" : "Contact",
+    "terms" : "Mentions légales"
   }
 }

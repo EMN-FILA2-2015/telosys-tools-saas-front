@@ -51,6 +51,7 @@
 
     function create() {
       logger.debug('create()','Project creation');
+      vm.alerts.flush();
       ProjectService.create(vm.newProjectName)
         .then(function(project){
           logger.debug('Project created');

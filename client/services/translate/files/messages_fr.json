@@ -1,0 +1,28 @@
+{
+  "navbar" : {
+    "home" : "Accueil",
+    "create_project" : "Créer un projet"
+  },
+  "main" : {
+    "get_started" : "Démarrez votre prochaine application web avec TelosysTools"
+  },
+  "projects" : {
+    "create" : "Créer un projet",
+    "list" : "Liste des projets",
+    "creation" : "Création d'un projet",
+    "name" : "Nom du projet",
+    "no_project" : "Aucun projet n'a été trouvé. Vous pouvez en créer un ici !",
+    "go" : "C'est parti !",
+    "ok" : {
+      "go" : "Le projet \"{{name}}\" a été créé."
+    },
+    "error" : {
+      "list" : "Impossible de récupérer la liste des projets.",
+      "go" : "Impossible de créer le projet."
+    }
+  },
+  "footer" : {
+    "contact" : "Contact",
+    "terms" : "Mentions légales"
+  }
+}

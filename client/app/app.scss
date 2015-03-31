@@ -9,10 +9,20 @@ $fa-font-path: "/bower_components/font-awesome/fonts";
  */
 
 .browsehappy {
-    margin: 0.2em 0;
-    background: #ccc;
-    color: #000;
-    padding: 0.2em 0;
+  margin: 0.2em 0;
+  background: #ccc;
+  color: #000;
+  padding: 0.2em 0;
+}
+
+/**
+ * Bootstrap overriding
+ */
+
+.list-group-item:hover,
+.list-group-item:focus {
+  background: #4393B9 !important;
+  color: white !important;
 }
 
 // Component styles are injected through grunt

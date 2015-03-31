@@ -1,9 +1,9 @@
-<div ng-include="'components/ui/navbar/navbar.html'"></div>
+<div ng-include="'app/shared/navbar/navbar.html'"></div>
 
 <header class="hero-unit" id="banner">
   <div class="container">
     <h1>TelosysTools</h1>
-    <p class="lead">{{'HOME_MESSAGE' | translate}}</p>
+    <p class="lead"><span data-translate="main.get_started"></span></p>
     <img src="assets/images/telosyslogo.png" alt="TelosysTools" style="width:80px;">
   </div>
 </header>
@@ -11,17 +11,6 @@
 <div class="container">
   <div class="row">
     <div class="col-lg-12">
-      <h1>{{main.message}}</h1>
-      <p>{{'MESSAGE' | translate}}</p>
     </div>
   </div>
 </div>
-
-<footer class="footer">
-  <div class="container">
-      <p>Current environment : {{main.currentEnv}}</p>
-      <p>Angular Fullstack v2.0.13 |
-      <a href="https://twitter.com/tyhenkel">@tyhenkel</a> |
-       <a href="https://github.com/DaftMonk/generator-angular-fullstack/issues?state=open">Issues</a></p>
-  </div>
-</footer>

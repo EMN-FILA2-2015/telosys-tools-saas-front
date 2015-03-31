@@ -8,9 +8,9 @@
     .module('telosysToolsSaasFrontApp')
     .config(config);
 
-  config.$inject = ['$urlRouterProvider', '$locationProvider', 'RestangularProvider', 'Configuration', 'LoggerProvider'];
+  config.$inject = ['$urlRouterProvider', 'RestangularProvider', 'Configuration', 'LoggerProvider'];
 
-  function config($urlRouterProvider, $locationProvider, RestangularProvider, Configuration, LoggerProvider) {
+  function config($urlRouterProvider, RestangularProvider, Configuration, LoggerProvider) {
 
     /**
      * Route and Navigation configuration

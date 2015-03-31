@@ -7,7 +7,6 @@ angular.module('configuration', [])
     ////////////////////////////////
     env: '@@env',
     backendHost : '@@backendHost',
-    backendPort : '@@backendPort',
 
     logLevel: '@@logLevel',
 

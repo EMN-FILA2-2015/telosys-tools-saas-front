@@ -1,23 +1,25 @@
-<div ng-include="'components/ui/navbar/navbar.html'"></div>
+<div ng-include="'app/shared/navbar/navbar.html'"></div>
 
 <div class="container">
   <div class="row">
 
-    <alert ng-repeat="alert in projects.alerts" type="{{alert.type}}" close="projects.closeAlert($index)">{{alert.msg | translate}}</alert>
+    <alert ng-repeat="alert in projects.alerts" type="{{alert.type}}" close="projects.closeAlert($index)">
+      <span translate="{{alert.msg}}" translate-values="{name:projects.createdProjectName}"></span>
+    </alert>
 
-    <!-- PROJECTS LIST -->
+    <!-- PROJECT LIST -->
 
     <div class="col-lg-3">
 
-      <h2><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>  <span data-translate="PROJECT_LIST"></span></h2>
+      <h2><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> <span translate="projects.list"></span></h2>
 
       <hr/>
 
-      <div ng-hide="projects.list.length">
-        <div class="alert alert-info" role="alert"><span data-translate="NO_PROJECT"></span></div>
+      <div ng-hide="projects.names.length">
+        <div class="alert alert-info" role="alert"><span translate="projects.no_project"></span></div>
       </div>
       <div class="list-group">
-        <a ng-repeat="project in projects.list" href="open(project)" class="list-group-item">{{project.name}}</a>
+        <a ng-repeat="name in projects.names" href="#" class="list-group-item">{{name}}</a>
       </div>
 
     </div>
@@ -28,20 +30,20 @@
 
       <form>
 
-        <h2><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> <span data-translate="PROJECT_CREATION"></span></h2>
+        <h2><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> <span translate="projects.creation"></span></h2>
 
         <hr/>
 
         <div class="row">
           <div class="col-lg-4">
-            <label for="projectName"><span data-translate="PROJECT_NAME"></span></label>
-            <input type="text" class="form-control" id="projectName" place-holder="Example project" ng-model="projects.name"/>
+            <label for="newProjectName"><span translate="projects.name"></span></label>
+            <input type="text" class="form-control" id="newProjectName" place-holder="Example project" ng-model="projects.newProjectName"/>
           </div>
         </div>
 
         <hr/>
 
-        <button type="button" class="btn btn-success" ng-click="projects.create()"><span data-translate="CREATE_REPO"></span></button>
+        <button type="button" class="btn btn-info" ng-click="projects.create()"><span translate="projects.go"></span></button>
 
       </form>
 
@@ -50,10 +52,4 @@
   </div>
 </div>
 
-<footer class="footer">
-  <div class="container">
-    <p>Angular Fullstack v2.0.13 |
-      <a href="https://twitter.com/tyhenkel">@tyhenkel</a> |
-      <a href="https://github.com/DaftMonk/generator-angular-fullstack/issues?state=open">Issues</a></p>
-  </div>
-</footer>
+<div ng-include="'app/shared/footer/footer.html'"></div>

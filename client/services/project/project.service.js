@@ -7,14 +7,14 @@
 
   angular
     .module('telosysToolsSaasFrontApp')
-    .factory('ProjectsService', ProjectsService);
+    .factory('ProjectService', ProjectService);
 
-  ProjectsService.$inject = ['Restangular', 'Logger'];
+  ProjectService.$inject = ['Restangular', 'Logger'];
 
   /* @ngInject */
-  function ProjectsService(Restangular, Logger) {
+  function ProjectService(Restangular, Logger) {
 
-    var logger = Logger.getInstance('ProjectsService');
+    var logger = Logger.getInstance('ProjectService');
     var service = Restangular.service('projects');
 
     return {

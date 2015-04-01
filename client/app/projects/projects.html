@@ -19,7 +19,7 @@
         <div class="alert alert-info" role="alert"><span translate="projects.no_project"></span></div>
       </div>
       <div class="list-group">
-        <a ng-repeat="name in projects.names" href="#" class="list-group-item">{{name}}</a>
+        <a ng-repeat="name in projects.names" ui-sref="project({projectId:'{{name}}'})" class="list-group-item">{{name}}</a>
       </div>
 
     </div>

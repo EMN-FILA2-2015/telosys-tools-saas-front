@@ -18,11 +18,24 @@
     var service = Restangular.service('projects');
 
     return {
+      get: get,
       getList: getList,
       create: create
     };
 
     //////////////////////
+
+    function get(id) {
+      logger.debug('call the get /projects/id service');
+      return service.one(id).get()
+        .then(function(data) {
+          return data;
+        })
+        .catch(function(error) {
+          logger.error('get','Error during the get /projects/id call',error);
+          throw error;
+        });
+    }
 
     function getList() {
       logger.debug('call the get /projects service');
@@ -31,7 +44,7 @@
           return data;
         })
         .catch(function(error) {
-          logger.error('getList',"Error during the get /projects call",error);
+          logger.error('getList','Error during the get /projects call',error);
           throw error;
         });
     }

@@ -9,9 +9,9 @@
     .module('telosysToolsSaasFrontApp')
     .controller('ProjectController', ProjectController);
 
-  ProjectsController.$inject = ['ProjectService', 'Logger'];
+  ProjectController.$inject = ['ProjectService', 'Logger', '$stateParams'];
 
-  function ProjectController(ProjectService, Logger) {
+  function ProjectController(ProjectService, Logger, $stateParams) {
 
     /* jshint validthis: true */
     var vm = this;
@@ -20,7 +20,24 @@
     vm.alerts = [];
     vm.closeAlert = closeAlert;
 
+    vm.name = $stateParams.projectId;
+
+    //getProject();
+
     ////////////////
+
+    /**
+     * Fonction permettant de récupérer le projet à charger.
+     */
+    function getProject() {
+      ProjectService.get(vm.name)
+        .then(function(data) {
+          vm.name = data.name;
+        })
+        .catch(function(error) {
+          vm.name = '';
+        });
+    }
 
     /**
      * Fonction permettant de fermer une notification.

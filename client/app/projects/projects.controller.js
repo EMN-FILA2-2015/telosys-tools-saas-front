@@ -15,7 +15,7 @@
 
     /* jshint validthis: true */
     var vm = this;
-    var logger = Logger.getInstance('ProjectsCreateController');
+    var logger = Logger.getInstance('ProjectsController');
 
     vm.alerts = [];
     vm.closeAlert = closeAlert;

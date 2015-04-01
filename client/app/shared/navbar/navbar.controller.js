@@ -18,7 +18,7 @@
         'title': 'navbar.home',
         'state': 'home'
       }, {
-        'title': 'navbar.create_project',
+        'title': 'navbar.projects',
         'state': 'projects'
       }
     ];

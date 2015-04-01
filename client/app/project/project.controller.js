@@ -22,9 +22,24 @@
 
     vm.name = $stateParams.projectId;
 
+    notify();
+
     //getProject();
 
     ////////////////
+
+    /**
+     * Méthode permettant de notifier l'utilisateur que le projet a bien été créé
+     * lorsque l'on vient de la page de création.
+     */
+    function notify() {
+      if ($stateParams.new) {
+        vm.alerts.push({
+          type: 'success',
+          msg: 'project.notification.created'
+        });
+      }
+    }
 
     /**
      * Fonction permettant de récupérer le projet à charger.

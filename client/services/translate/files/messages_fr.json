@@ -7,6 +7,19 @@
   "main" : {
     "get_started" : "Démarrez votre prochaine application web avec TelosysTools"
   },
+  "project" : {
+    "welcome" : "Bievenue sur le projet {{name}} !",
+    "message" : "Vous pouvez le modifier sur cette page.",
+    "menu" : {
+      "content" : "Contenu",
+      "configuration" : "Configuration",
+      "bundle" : "Bundle",
+      "generation" : "Génération"
+    },
+    "notification" : {
+      "created" : "Le projet {{name}} a été créé."
+    }
+  },
   "projects" : {
     "create" : "Créer un projet",
     "list" : "Liste des projets",
@@ -14,9 +27,6 @@
     "name" : "Nom du projet",
     "no_project" : "Aucun projet n'a été trouvé. Vous pouvez en créer un ici !",
     "go" : "C'est parti !",
-    "ok" : {
-      "go" : "Le projet \"{{name}}\" a été créé."
-    },
     "error" : {
       "list" : "Impossible de récupérer la liste des projets.",
       "go" : "Impossible de créer le projet."

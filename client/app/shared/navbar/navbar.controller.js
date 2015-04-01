@@ -13,7 +13,7 @@
 
   function NavbarController($scope, $state) {
 
-    $scope.menu = [
+    $scope.navbar = [
       {
         'title': 'navbar.home',
         'state': 'home'

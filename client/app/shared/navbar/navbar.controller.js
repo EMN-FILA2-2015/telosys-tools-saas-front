@@ -16,7 +16,7 @@
     $scope.menu = [
       {
         'title': 'navbar.home',
-        'state': 'main'
+        'state': 'home'
       }, {
         'title': 'navbar.create_project',
         'state': 'projects'

@@ -5,10 +5,10 @@
     .module('telosysToolsSaasFrontApp')
     .config(function ($stateProvider) {
       $stateProvider
-        .state('main', {
+        .state('home', {
           url: '/',
-          templateUrl: 'app/main/main.html',
-          controller: 'MainController as main'
+          templateUrl: 'app/home/home.html',
+          controller: 'HomeController as home'
         });
     });
 

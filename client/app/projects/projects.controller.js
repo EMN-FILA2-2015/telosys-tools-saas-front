@@ -29,6 +29,9 @@
 
     ////////////////
 
+    /**
+     * Fonction permettant de récupérer le nom des projets.
+     */
     function getProjectNames() {
       logger.debug('getProjectNames()','Get project names');
       ProjectService.getList()
@@ -49,6 +52,10 @@
         });
     }
 
+    /**
+     * Fonction permettant de créer un projet.
+     * En cas d'erreur, les champs servant à la création d'un projet ne sont pas réinitialisés.
+     */
     function create() {
       logger.debug('create()','Project creation');
       vm.alerts = [];
@@ -72,6 +79,10 @@
         });
     }
 
+    /**
+     * Fonction permettant de fermer une notification.
+     * @param index
+     */
     function closeAlert(index) {
       vm.alerts.splice(index, 1);
     }

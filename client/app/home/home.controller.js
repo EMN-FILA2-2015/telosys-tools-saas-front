@@ -3,15 +3,15 @@
 
   angular
     .module('telosysToolsSaasFrontApp')
-    .controller('MainController', MainController);
+    .controller('HomeController', HomeController);
 
-  MainController.$inject = ['Logger'];
+  HomeController.$inject = ['Logger'];
 
-  function MainController(Logger) {
+  function HomeController(Logger) {
 
     /* jshint validthis: true */
     var vm = this;
-    var logger = Logger.getInstance('MainController');
+    var logger = Logger.getInstance('HomeController');
 
     vm.message = '';
 

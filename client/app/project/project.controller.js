@@ -9,9 +9,9 @@
     .module('telosysToolsSaasFrontApp')
     .controller('ProjectController', ProjectController);
 
-  ProjectController.$inject = ['ProjectService', 'Logger', '$stateParams'];
+  ProjectController.$inject = ['ProjectService', 'Logger', '$stateParams', '$state'];
 
-  function ProjectController(ProjectService, Logger, $stateParams) {
+  function ProjectController(ProjectService, Logger, $stateParams, $state) {
 
     /* jshint validthis: true */
     var vm = this;
@@ -22,24 +22,35 @@
 
     vm.name = $stateParams.projectId;
 
-    notify();
+    vm.menu = {
+      isActive: isActive,
+      items: [
+        {
+          'title': vm.name,
+          'icon': 'glyphicon-folder-open',
+          'state': 'project.content'
+        }, {
+          'title': 'project.menu.configuration',
+          'icon': 'glyphicon-edit',
+          'state': 'project.configuration'
+        }, {
+          'title': 'project.menu.bundle',
+          'icon': 'glyphicon-list-alt',
+          'state': 'project.bundle'
+        }, {
+          'title': 'project.menu.generation',
+          'icon': 'glyphicon glyphicon-log-out',
+          'state': 'project.generation'
+        }
+      ]
+    };
 
     //getProject();
 
-    ////////////////
+    // Injection de la vue correspondant au contenu d'un projet.
+    $state.transitionTo('project.content', {projectId:vm.name});
 
-    /**
-     * Méthode permettant de notifier l'utilisateur que le projet a bien été créé
-     * lorsque l'on vient de la page de création.
-     */
-    function notify() {
-      if ($stateParams.new) {
-        vm.alerts.push({
-          type: 'success',
-          msg: 'project.notification.created'
-        });
-      }
-    }
+    ////////////////
 
     /**
      * Fonction permettant de récupérer le projet à charger.
@@ -52,6 +63,15 @@
         .catch(function(error) {
           vm.name = '';
         });
+    }
+
+    /**
+     * Fonction permettant de savoir si un état est actif.
+     * @param state
+     * @returns {boolean}
+     */
+    function isActive(state) {
+      return $state.is(state);
     }
 
     /**

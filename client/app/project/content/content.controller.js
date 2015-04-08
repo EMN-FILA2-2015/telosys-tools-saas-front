@@ -1,5 +1,5 @@
 /**
- * Created by Killian on 01/04/2015.
+ * Created by Killian on 08/04/2015.
  */
 
 (function () {
@@ -7,15 +7,15 @@
 
   angular
     .module('telosysToolsSaasFrontApp')
-    .controller('ConfigurationController', ConfigurationController)
+    .controller('ContentController', ContentController)
 
-  ConfigurationController.$inject = ['ProjectService', 'Logger'];
+  ContentController.$inject = ['ProjectService', 'Logger'];
 
-  function ConfigurationController(ProjectService, Logger) {
+  function ContentController(ProjectService, Logger) {
 
     /* jshint validthis: true */
     var vm = this;
-    var logger = Logger.getInstance('ConfigurationController');
+    var logger = Logger.getInstance('ContentController');
 
     vm.alerts = [];
     vm.closeAlert = closeAlert;

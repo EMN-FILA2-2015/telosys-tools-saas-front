@@ -10,7 +10,7 @@
     .config(function ($stateProvider) {
       $stateProvider
         .state('project', {
-          url: '/projects/{projectId}?new',
+          url: '/projects/{projectId}',
           templateUrl: 'app/project/project.html',
           controller: 'ProjectController as project'
         });

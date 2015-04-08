@@ -7,7 +7,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <!--base href="/"-->
-    <title></title>
+    <title>Telosys Tools</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
@@ -27,8 +27,14 @@
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
+    <!-- Navbar always included -->
+    <div ng-include="'app/shared/navbar/navbar.html'"></div>
+
     <!-- Add your site or application content here -->
     <div ui-view=""></div>
+
+    <!-- Footer always included -->
+    <div ng-include="'app/shared/footer/footer.html'"></div>
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
     <script>
@@ -69,9 +75,14 @@
       <script src="app/app.config.js"></script>
       <script src="app/home/home.controller.js"></script>
       <script src="app/home/home.route.js"></script>
+      <script src="app/project/bundle/bundle.configuration.js"></script>
+      <script src="app/project/bundle/bundle.route.js"></script>
       <script src="app/project/configuration/configuration.controller.js"></script>
       <script src="app/project/configuration/configuration.route.js"></script>
-      <script src="app/project/menu/menu.controller.js"></script>
+      <script src="app/project/content/content.controller.js"></script>
+      <script src="app/project/content/content.route.js"></script>
+      <script src="app/project/generation/generation.controller.js"></script>
+      <script src="app/project/generation/generation.route.js"></script>
       <script src="app/project/project.controller.js"></script>
       <script src="app/project/project.route.js"></script>
       <script src="app/projects/projects.controller.js"></script>

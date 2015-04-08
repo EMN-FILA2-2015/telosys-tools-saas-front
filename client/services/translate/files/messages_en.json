@@ -4,17 +4,15 @@
     "projects" : "Projects",
     "language" : "Language"
   },
+  "home" : {
+    "get_started" : "Kick-start your next web app with TelosysTools"
+  },
   "project" : {
-    "welcome" : "Welcome on the {{name}} project!",
-    "message" : "You can modify it here.",
     "menu" : {
       "content" : "Content",
       "configuration" : "Configuration",
       "bundle" : "Bundle",
       "generation" : "Generation"
-    },
-    "notification" : {
-      "created" : "The {{name}} project has been created."
     }
   },
   "projects" : {
@@ -23,13 +21,13 @@
     "name" : "Project name",
     "no_project" : "No project found. You can create one right in this page!",
     "go" : "Get started!",
+    "notification" : {
+      "created" : "The {{name}} project has been created. Redirecting..."
+    },
     "error" : {
-      "list" : "Unable to get the project list.",
-      "go" : "Unable to create the project."
+      "getting_list" : "Unable to get the project list.",
+      "creating" : "Unable to create the project."
     }
-  },
-  "main" : {
-    "get_started" : "Kick-start your next web app with TelosysTools"
   },
   "footer" : {
     "contact" : "Contact",

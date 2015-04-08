@@ -9,9 +9,9 @@
     .module('telosysToolsSaasFrontApp')
     .controller('ProjectsController', ProjectsController);
 
-  ProjectsController.$inject = ['ProjectService', 'Logger', '$state'];
+  ProjectsController.$inject = ['ProjectService', 'Logger', '$state', '$timeout'];
 
-  function ProjectsController(ProjectService, Logger, $state) {
+  function ProjectsController(ProjectService, Logger, $state, $timeout) {
 
     /* jshint validthis: true */
     var vm = this;
@@ -45,7 +45,7 @@
           logger.error('Unable to get the projects list.', error);
           vm.alerts.push({
             type:'danger',
-            msg:'projects.error.list'
+            msg:'projects.error.getting_list'
           });
           vm.names = [];
         });
@@ -61,14 +61,19 @@
       ProjectService.create(vm.newProjectName)
         .then(function(project){
           logger.debug('Project created');
-          $state.go('project', {projectId:vm.newProjectName,new:true});
-          vm.newProjectName = '';
+          vm.alerts.push({
+            type: 'success',
+            msg: 'projects.notification.created'
+          });
+          $timeout(function() {
+            $state.go('project', {projectId:vm.newProjectName});
+          }, 3000);
         })
         .catch(function(error) {
           logger.error('Unable to create the projects list.');
           vm.alerts.push({
             type:'danger',
-            msg:'projects.error.go'
+            msg:'projects.error.creating'
           });
         });
     }

@@ -10,7 +10,6 @@
     .config(function ($stateProvider) {
       $stateProvider
         .state('project.configuration', {
-          url: '/projects/{projectId}/configuration',
           templateUrl: 'app/project/configuration/configuration.html',
           controller: 'ConfigurationController as configuration'
         });

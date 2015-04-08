@@ -1,8 +1,12 @@
-<div ng-include="'app/shared/navbar/navbar.html'"></div>
-
 <div class="container">
 
-  <div ng-include="'app/project/menu/menu.html'"></div>
+  <div class="row">
+    <ul class="nav nav-tabs">
+      <li ng-repeat="item in project.menu.items" ng-class="{active: project.menu.isActive(item.state)}">
+        <a ui-sref="{{item.state}}"><span class="glyphicon {{item.icon}}" aria-hidden="true"></span>&nbsp; <span translate="{{item.title}}"></span></a>
+      </li>
+    </ul>
+  </div>
 
   <br/>
 
@@ -10,9 +14,8 @@
     <span translate="{{alert.msg}}" translate-values="{name:project.name}"></span>
   </alert>
 
-  <div class="row">
-    <h3><span translate="project.welcome" translate-values="{name:project.name}"></span></h3>
-    <span translate="project.message"></span>
-  </div>
+  <!-- This is where the nested view is injected. -->
+  <div ui-view></div>
 
 </div>
+

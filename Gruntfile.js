@@ -366,6 +366,16 @@ module.exports = function (grunt) {
           ]
         }]
       },
+      fonts: {
+        expand: true,
+        flatten: true,
+        cwd: '<%= yeoman.app %>',
+        dest: '<%= yeoman.dist %>/public/assets/fonts',
+        src: [
+          'client/bower_components/font-awesome/fonts/*',
+          'client/bower_components/bootstrap-sass-official/vendor/assets/fonts/bootstrap/*'
+        ]
+      },
       styles: {
         expand: true,
         cwd: '<%= yeoman.client %>',
@@ -633,6 +643,7 @@ module.exports = function (grunt) {
     'ngtemplates',
     'concat',
     'ngAnnotate',
+    'copy:fonts',
     'copy:dist',
     'cdnify',
     'cssmin',

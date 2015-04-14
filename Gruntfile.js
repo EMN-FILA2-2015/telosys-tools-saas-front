@@ -260,12 +260,7 @@ module.exports = function (grunt) {
         patterns: {
           js: [
             [/(assets\/images\/.*?\.(?:gif|jpeg|jpg|png|webp|svg))/gm, 'Update the JS to reference our revved images']
-          ]/*,
-          css: [
-            [/(\/bower_components\/bootstrap-sass-official\/vendor\/assets\/fonts\/bootstrap)/g, 'god help me', function(match) {
-              return match.replace('/bower_components/bootstrap-sass-official/vendor/assets/fonts/bootstrap', '../assets/fonts');
-            }]
-          ]*/
+          ]
         }
       }
     },
@@ -371,18 +366,6 @@ module.exports = function (grunt) {
           ]
         }]
       },
-      /*
-      fonts: {
-        expand: true,
-        flatten: true,
-        cwd: '<%= yeoman.app %>',
-        dest: '<%= yeoman.dist %>/public/assets/fonts',
-        src: [
-          'client/bower_components/font-awesome/fonts/*',
-          'client/bower_components/bootstrap-sass-official/vendor/assets/fonts/bootstrap/*'
-        ]
-      },
-      */
       styles: {
         expand: true,
         cwd: '<%= yeoman.client %>',
@@ -650,7 +633,6 @@ module.exports = function (grunt) {
     'ngtemplates',
     'concat',
     'ngAnnotate',
-    //'copy:fonts',
     'copy:dist',
     'cdnify',
     'cssmin',

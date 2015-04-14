@@ -22,6 +22,12 @@ module.exports = function (grunt) {
   // Define the configuration for all the tasks
   grunt.initConfig({
 
+    cssmin: {
+      options: {
+        root: 'telosyssaas'
+      }
+    },
+
     // Environment settings
     replace: {
       development: {
@@ -550,7 +556,7 @@ module.exports = function (grunt) {
           ]
         }
       }
-    },
+    }
   });
 
   // Used for delaying livereload until after server has restarted

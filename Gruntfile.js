@@ -263,7 +263,7 @@ module.exports = function (grunt) {
           ],
           css: [
             [/(\/bower_components\/bootstrap-sass-official\/vendor\/assets\/fonts\/bootstrap)/g, 'god help me', function(match) {
-              return match.replace('/bower_components/bootstrap-sass-official/vendor/assets/fonts/bootstrap', '../fonts');
+              return match.replace('/bower_components/bootstrap-sass-official/vendor/assets/fonts/bootstrap', '../assets/fonts');
             }]
           ]
         }
@@ -375,7 +375,7 @@ module.exports = function (grunt) {
         expand: true,
         flatten: true,
         cwd: '<%= yeoman.app %>',
-        dest: '<%= yeoman.dist %>/fonts',
+        dest: '<%= yeoman.dist %>/public/assets/fonts',
         src: [
           'client/bower_components/font-awesome/fonts/*',
           'client/bower_components/bootstrap-sass-official/vendor/assets/fonts/bootstrap/*'

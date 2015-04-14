@@ -262,7 +262,7 @@ module.exports = function (grunt) {
             [/(assets\/images\/.*?\.(?:gif|jpeg|jpg|png|webp|svg))/gm, 'Update the JS to reference our revved images']
           ],
           css: [
-            [/(\/bower_components\/bootstrap\/dist\/fonts)/g, 'god help me', function(match) {
+            [/(\/bower_components\/bootstrap-sass-official\/vendor\/assets\/fonts\/bootstrap)/g, 'god help me', function(match) {
               return match.replace('/bower_components/bootstrap-sass-official/vendor/assets/fonts/bootstrap', '../fonts');
             }]
           ]

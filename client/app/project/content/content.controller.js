@@ -20,6 +20,11 @@
     vm.alerts = [];
     vm.closeAlert = closeAlert;
 
+    vm.aceOptions = {
+      mode: 'html',
+      useWrapMode : true
+    };
+
     ////////////////
 
     /**

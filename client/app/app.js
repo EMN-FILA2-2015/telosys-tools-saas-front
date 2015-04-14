@@ -7,6 +7,7 @@
     'ngSanitize',
     'ui.router',
     'ui.bootstrap',
+    'ui.ace',
     'restangular',
     'configuration',
     'logger',

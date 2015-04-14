@@ -9,8 +9,6 @@
       </ul>
     </div>
 
-    <br/>
-
     <alert ng-repeat="alert in project.alerts" type="{{alert.type}}" close="project.closeAlert($index)">
       <span translate="{{alert.msg}}" translate-values="{name:project.name}"></span>
     </alert>

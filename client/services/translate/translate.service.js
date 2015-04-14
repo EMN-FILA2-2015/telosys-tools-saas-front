@@ -5,7 +5,7 @@
     .module('translate', ['pascalprecht.translate', 'configuration'])
     .config(function($translateProvider, Configuration) {
       $translateProvider.useStaticFilesLoader({
-        prefix: 'services/translate/files/messages_',
+        prefix: 'components/i18n/messages_',
         suffix: '.json'
       });
       $translateProvider.preferredLanguage(Configuration.defaultLanguage);

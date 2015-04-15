@@ -32,10 +32,13 @@
         "tests_resources" : "Tests resources",
         "documentation" : "Documentation",
         "temporary_files" : "Fichiers temporaires",
+        "maven_folders" : "Dossiers Maven",
+        "project_folders" : "Dossiers Projet",
         "need_more" : "Si vous avez besoin de plus de dossiers, définissez les dans la section \"Variables\"."
       },
       "variables" : {
-        "label" : "Variables"
+        "label" : "Variables",
+        "description" : "Définissez ici les variables du projet (utilisables dans les cibles et les templates)."
       }
     }
   },

@@ -74,8 +74,8 @@
 
       <div class="form-group">
         <div class="col-lg-offset-4 col-lg-8">
-          <a class="btn btn-primary" ng-click="configuration.setMavenFolders()">Maven folders</a>
-          <a class="btn btn-primary" ng-click="configuration.setProjectFolders()">Project folders</a>
+          <a class="btn btn-primary" ng-click="configuration.setMavenFolders()"><span translate="project.configuration.folders.maven_folders"></span></a>
+          <a class="btn btn-primary" ng-click="configuration.setProjectFolders()"><span translate="project.configuration.folders.project_folders"></span></a>
         </div>
       </div>
 
@@ -103,7 +103,26 @@
   <div class="panel-body" ng-show="configuration.editVariables">
 
     <div class="form-horizontal">
-      Panel content
+
+      <div class="form-group">
+        <div class="col-lg-12">
+          <span translate="project.configuration.variables.description"></span>
+        </div>
+      </div>
+
+      <br/>
+
+      <div class="form-group">
+
+        <div class="col-lg-5">
+        </div>
+        <div class="col-lg-5">
+        </div>
+        <div class="col-lg-2">
+        </div>
+
+      </div>
+
     </div>
 
   </div>

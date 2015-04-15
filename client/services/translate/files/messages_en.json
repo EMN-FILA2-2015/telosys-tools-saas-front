@@ -32,10 +32,13 @@
         "tests_resources" : "Tests resources",
         "documentation" : "Documentation",
         "temporary_files" : "Temporary files",
+        "maven_folders" : "Maven folders",
+        "project_folders" : "Project folders",
         "need_more" : "If you need more folders, define them in the \"Variables\" section."
       },
       "variables" : {
-        "label" : "Variables"
+        "label" : "Variables",
+        "description" : "Define here the project variables (usable in targets and templates)."
       }
     }
   },

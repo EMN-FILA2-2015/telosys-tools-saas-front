@@ -5,7 +5,7 @@
     margin: 0;
     .nav-tabs {
       padding: 4px 0;
-      background-color: #fcfcfc;
+      background-color: #ffffff;
       border-bottom: 1px solid #cfcfcf;
       li {
         text-align: center;
@@ -14,8 +14,7 @@
       li a {
         margin: none;
         border-radius: 0 0 0 0;
-        width: 150px;
-        border-bottom-width: 2px;
+        border-top-width: 2px;
       }
       li a:hover {
         background-color: #ffffff;
@@ -24,7 +23,7 @@
       }
       li.active a {
         border: 1px solid #ddd;
-        border-bottom-width: 2px;
+        border-top-width: 2px;
       }
     }
   }

@@ -1,1 +1,111 @@
-Config
+<!-- PACKAGES -->
+
+<div class="panel panel-default">
+
+  <div class="panel-heading"><a href="" ng-click="configuration.showPackages()"><span translate="project.configuration.packages.label"></span></a></div>
+
+  <div class="panel-body" ng-show="configuration.editPackages">
+
+    <form class="form-horizontal">
+
+      <div class="form-group">
+        <div class="col-lg-12">
+          <span translate="project.configuration.packages.description"></span>
+        </div>
+      </div>
+
+      <br/>
+
+      <div class="form-group" ng-repeat="package in configuration.packages">
+        <div class="col-lg-2">
+          <label for="package.id" translate="{{package.name}}"></label>
+        </div>
+        <div class="col-lg-2">
+          <p>{{package.shortcut}}</p>
+        </div>
+        <div class="col-lg-8">
+          <input id="package.id" type="text" class="form-control" placeholder="{{package.example}}">
+        </div>
+      </div>
+
+      <br/>
+
+      <div class="form-group">
+        <div class="col-lg-12">
+          <span translate="project.configuration.packages.need_more"></span>
+        </div>
+      </div>
+
+    </form>
+
+  </div>
+
+</div>
+
+<!-- FOLDERS -->
+
+<div class="panel panel-default">
+
+  <div class="panel-heading"><a href="" ng-click="configuration.showFolders()"><span translate="project.configuration.folders.label"></a></div>
+
+  <div class="panel-body" ng-show="configuration.editFolders">
+
+    <form class="form-horizontal">
+
+      <div class="form-group">
+        <div class="col-lg-12">
+          <span translate="project.configuration.folders.description"></span>
+        </div>
+      </div>
+
+      <br/>
+
+      <div class="form-group" ng-repeat="folder in configuration.folders">
+        <div class="col-lg-2">
+          <label for="package.id" translate="{{folder.name}}"></label>
+        </div>
+        <div class="col-lg-2">
+          <p>{{folder.shortcut}}</p>
+        </div>
+        <div class="col-lg-8">
+          <input id="folder.id" type="text" class="form-control" placeholder="{{folder.example}}" value="{{folder.value}}">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-lg-offset-4 col-lg-8">
+          <a class="btn btn-primary" ng-click="configuration.setMavenFolders()">Maven folders</a>
+          <a class="btn btn-primary" ng-click="configuration.setProjectFolders()">Project folders</a>
+        </div>
+      </div>
+
+      <br/><br/>
+
+      <div class="form-group">
+        <div class="col-lg-12">
+          <span translate="project.configuration.folders.need_more"></span>
+        </div>
+      </div>
+
+    </form>
+
+
+  </div>
+
+</div>
+
+<!-- VARIABLES -->
+
+<div class="panel panel-default">
+
+  <div class="panel-heading"><a href="" ng-click="configuration.showVariables()"><span translate="project.configuration.variables.label"></a></div>
+
+  <div class="panel-body" ng-show="configuration.editVariables">
+
+    <div class="form-horizontal">
+      Panel content
+    </div>
+
+  </div>
+
+</div>

@@ -13,6 +13,30 @@
       "configuration" : "Configuration",
       "bundle" : "Bundle",
       "generation" : "Génération"
+    },
+    "configuration" : {
+      "packages" : {
+        "label" : "Packages",
+        "description": "Définissez ici les variables des packages du projet (utilisables dans les cibles et les templates).",
+        "root_package" : "Package racine",
+        "entity_classes_package" : "Package des entités",
+        "need_more" : "Si vous avec besoin de plus de packages, définissez les dans la section \"Variables\"."
+      },
+      "folders" : {
+        "label" : "Dossiers",
+        "description" : "Définissez ici les variables des dossiers du projet (utilisables dans les cibles et les templates).",
+        "sources" : "Sources",
+        "resources" : "Ressources",
+        "web_content" : "Web content",
+        "tests_sources" : "Tests sources",
+        "tests_resources" : "Tests resources",
+        "documentation" : "Documentation",
+        "temporary_files" : "Fichiers temporaires",
+        "need_more" : "Si vous avez besoin de plus de dossiers, définissez les dans la section \"Variables\"."
+      },
+      "variables" : {
+        "label" : "Variables"
+      }
     }
   },
   "projects" : {

@@ -38,7 +38,13 @@
       },
       "variables" : {
         "label" : "Variables",
-        "description" : "Define here the project variables (usable in targets and templates)."
+        "description" : "Define here the project variables (usable in targets and templates).",
+        "name" : "Name",
+        "value" : "Value",
+        "action" : "Action",
+        "delete" : "Delete",
+        "new" : "New variable",
+        "show_reserved" : "Show reserved variable names"
       }
     }
   },

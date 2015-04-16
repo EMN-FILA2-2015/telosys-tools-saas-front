@@ -90,6 +90,25 @@
     vm.setMavenFolders = setMavenFolders;
     vm.setProjectFolders = setProjectFolders;
 
+    vm.variables = [
+      {
+        'name' : 'MAVEN_ARTIFACT_ID',
+        'value' : 'jpa-generation'
+      }, {
+        'name' : 'MAVEN_GROUP_ID',
+        'value' : 'group.to.be.defined'
+      }, {
+        'name' : 'PROJECT_NAME',
+        'value' : 'jpa-generation'
+      }, {
+        'name' : 'PROJECT_VERSION',
+        'value' : '0.1'
+      }
+    ];
+
+    vm.deleteVariable = deleteVariable;
+    vm.createVariable = createVariable;
+
     ////////////////
 
     /**
@@ -185,6 +204,27 @@
           default :
             logger.error("Impossible case");
         }
+      });
+    }
+
+    /**
+     * Fonction permettant de supprimer une variable selon son index.
+     * @param index
+     */
+    function deleteVariable(index) {
+      logger.debug('deleteVariable()','Deleting a variable');
+      vm.variables.splice(index, 1);
+    }
+
+    /**
+     * Fonction permettant d'ajouter une nouvelle variable vide à un index.
+     * @param index
+     */
+    function createVariable(index) {
+      logger.debug('addVariable()','Creating a new variable');
+      vm.variables.splice(index, 0, {
+        'name' : '',
+        'value' : ''
       });
     }
 

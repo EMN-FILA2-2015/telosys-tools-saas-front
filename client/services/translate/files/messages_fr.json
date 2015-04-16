@@ -38,7 +38,13 @@
       },
       "variables" : {
         "label" : "Variables",
-        "description" : "Définissez ici les variables du projet (utilisables dans les cibles et les templates)."
+        "description" : "Définissez ici les variables du projet (utilisables dans les cibles et les templates).",
+        "name" : "Nom",
+        "value" : "Valeur",
+        "action" : "Action",
+        "delete" : "Supprimer",
+        "new" : "Nouvelle variable",
+        "show_reserved" : "Voir les noms de variables réservés"
       }
     }
   },

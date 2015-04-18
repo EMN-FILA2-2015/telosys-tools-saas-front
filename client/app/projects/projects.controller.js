@@ -68,7 +68,7 @@
             type: 'success',
             msg: 'projects.notification.created'
           });
-          $state.go('project', {projectId:vm.newProjectName});
+          $state.go('project', {projectId:project.id});
         })
         .catch(function(error) {
           logger.error('Unable to create the projects list.');

@@ -15,18 +15,9 @@ $fa-font-path: "../bower_components/font-awesome/fonts";
   padding: 0.2em 0;
 }
 
-/**
- * Bootstrap overriding
- */
-
-.list-group-item:hover,
-.list-group-item:focus {
-  background: #4393B9 !important;
-  color: white !important;
-}
-
 // Component styles are injected through grunt
 // injector
+@import 'error/error.scss';
 @import 'home/home.scss';
 @import 'project/bundle/bundle.scss';
 @import 'project/configuration/configuration.scss';

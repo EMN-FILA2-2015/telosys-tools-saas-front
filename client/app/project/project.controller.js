@@ -20,35 +20,10 @@
     vm.alerts = [];
     vm.closeAlert = closeAlert;
 
-    vm.name = $stateParams.projectId;
+    vm.id = $stateParams.projectId;
+    vm.menu = {};
 
-    vm.menu = {
-      isActive: isActive,
-      items: [
-        {
-          'title': vm.name,
-          'icon': 'glyphicon-folder-open',
-          'state': 'project.content'
-        }, {
-          'title': 'project.menu.configuration',
-          'icon': 'glyphicon-edit',
-          'state': 'project.configuration'
-        }, {
-          'title': 'project.menu.bundle',
-          'icon': 'glyphicon-list-alt',
-          'state': 'project.bundle'
-        }, {
-          'title': 'project.menu.generation',
-          'icon': 'glyphicon glyphicon-log-out',
-          'state': 'project.generation'
-        }
-      ]
-    };
-
-    //getProject();
-
-    // Injection de la vue correspondant au contenu d'un projet.
-    $state.transitionTo('project.content', {projectId:vm.name});
+    getProject();
 
     ////////////////
 
@@ -56,12 +31,37 @@
      * Fonction permettant de récupérer le projet à charger.
      */
     function getProject() {
-      ProjectService.get(vm.name)
+      ProjectService.get(vm.id)
         .then(function(data) {
-          vm.name = data.name;
+          vm.menu = {
+            isActive: isActive,
+            items: [
+              {
+                'title': data.name,
+                'icon': 'glyphicon-folder-open',
+                'state': 'project.content'
+              }, {
+                'title': 'project.menu.configuration',
+                'icon': 'glyphicon-edit',
+                'state': 'project.configuration'
+              }, {
+                'title': 'project.menu.bundle',
+                'icon': 'glyphicon-list-alt',
+                'state': 'project.bundle'
+              }, {
+                'title': 'project.menu.generation',
+                'icon': 'glyphicon glyphicon-log-out',
+                'state': 'project.generation'
+              }
+            ]
+          };
+          $state.transitionTo('project.content', {projectId:vm.id});
         })
         .catch(function(error) {
-          vm.name = '';
+          $state.transitionTo('error', {
+            code : error.status,
+            text : error.statusText
+          });
         });
     }
 

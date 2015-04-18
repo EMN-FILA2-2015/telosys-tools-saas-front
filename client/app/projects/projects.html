@@ -1,54 +1,59 @@
-<div class="container">
-  <div class="row">
+<div class="projects">
 
-    <br/>
+  <div class="container">
 
-    <alert ng-repeat="alert in projects.alerts" type="{{alert.type}}" close="projects.closeAlert($index)">
-      <span translate="{{alert.msg}}" translate-values="{name:projects.createdProjectName}"></span>
-    </alert>
+    <div class="row">
 
-    <!-- PROJECT LIST -->
+      <br/>
 
-    <div class="col-lg-3">
+      <alert ng-repeat="alert in projects.alerts" type="{{alert.type}}" close="projects.closeAlert($index)">
+        <span translate="{{alert.msg}}" translate-values="{name:projects.createdProjectName}"></span>
+      </alert>
 
-      <h2><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> <span translate="projects.list"></span></h2>
+      <!-- PROJECT LIST -->
 
-      <hr/>
+      <div class="col-lg-3">
 
-      <div ng-hide="projects.names.length">
-        <div class="alert alert-info" role="alert"><span translate="projects.no_project"></span></div>
-      </div>
-      <div class="list-group">
-        <a ng-repeat="name in projects.names" ui-sref="project({projectId:'{{name}}'})" class="list-group-item">{{name}}</a>
-      </div>
-
-    </div>
-
-    <!-- PROJECT CREATION -->
-
-    <div class="col-lg-9">
-
-      <form>
-
-        <h2><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> <span translate="projects.creation"></span></h2>
+        <h2><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> <span translate="projects.list"></span></h2>
 
         <hr/>
 
-        <div class="row">
-          <div class="col-lg-4">
-            <label for="newProjectName"><span translate="projects.name"></span></label>
-            <input type="text" class="form-control" id="newProjectName" place-holder="Example project" ng-model="projects.newProjectName"/>
-          </div>
+        <div ng-hide="projects.projects.length">
+          <div class="alert alert-info" role="alert"><span translate="projects.no_project"></span></div>
+        </div>
+        <div class="list-group">
+          <a ng-repeat="project in projects.projects" ui-sref="project({projectId:'{{project.id}}'})" class="list-group-item">{{project.name}}</a>
         </div>
 
-        <br/>
+      </div>
 
-        <button type="button" class="btn btn-primary" ng-click="projects.create()"><span translate="projects.go"></span></button>
+      <!-- PROJECT CREATION -->
 
-      </form>
+      <div class="col-lg-9">
+
+        <form>
+
+          <h2><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> <span translate="projects.creation"></span></h2>
+
+          <hr/>
+
+          <div class="row">
+            <div class="col-lg-4">
+              <label for="newProjectName"><span translate="projects.name"></span></label>
+              <input type="text" class="form-control" id="newProjectName" place-holder="Example project" ng-model="projects.newProjectName"/>
+            </div>
+          </div>
+
+          <br/>
+
+          <button type="button" class="btn btn-primary" ng-click="projects.create()"><span translate="projects.go"></span></button>
+
+        </form>
+
+      </div>
 
     </div>
 
   </div>
-</div>
 
+</div>

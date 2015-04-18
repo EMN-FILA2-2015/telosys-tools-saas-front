@@ -1,11 +1,7 @@
 .project-configuration {
   .panel-heading {
-    a {
-      color: black;
-      text-decoration: none;
+    &:hover {
+      cursor: pointer;
     }
-  }
-  .form-variables {
-    // TODO faire en sorte que l'input text soit transparent sauf lorsque l'on clique dessus
   }
 }

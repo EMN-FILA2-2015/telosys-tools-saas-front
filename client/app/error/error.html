@@ -1,0 +1,17 @@
+<div class="error">
+
+  <div class="container">
+
+    <div class="code">
+      <span translate="error.error"></span> {{error.code}}
+    </div>
+
+    <div class="text">
+      <div ng-hide="error.text=='default_message'">{{error.text}}</div>
+      <div ng-show="error.text=='default_message'"><span translate="error.default_message"></span></div>
+    </div>
+
+  </div>
+
+</div>
+

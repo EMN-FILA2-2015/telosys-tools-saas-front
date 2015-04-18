@@ -21,11 +21,8 @@
     vm.closeAlert = closeAlert;
 
     vm.editPackages = true;
-    vm.editFolders = false;
-    vm.editVariables = false;
-    vm.showPackages = showPackages;
-    vm.showFolders = showFolders;
-    vm.showVariables = showVariables;
+    vm.editFolders = true;
+    vm.editVariables = true;
 
     vm.packages = [
       {
@@ -112,33 +109,6 @@
     ////////////////
 
     /**
-     * Fonction permettant de montrer le formulaire d'édition des packages.
-     */
-    function showPackages() {
-      vm.editPackages = true;
-      vm.editFolders = false;
-      vm.editVariables = false;
-    }
-
-    /**
-     * Fonction permettant de montrer le formulaire d'édition des folders.
-     */
-    function showFolders() {
-      vm.editPackages = false;
-      vm.editFolders = true;
-      vm.editVariables = false;
-    }
-
-    /**
-     * Fonction permettant de montrer le formulaire d'édition des variables.
-     */
-    function showVariables() {
-      vm.editPackages = false;
-      vm.editFolders = false;
-      vm.editVariables = true;
-    }
-
-    /**
      * Fonction permettant de définir les dossiers maven.
      */
     function setMavenFolders() {
@@ -222,10 +192,17 @@
      */
     function createVariable(index) {
       logger.debug('addVariable()','Creating a new variable');
-      vm.variables.splice(index, 0, {
-        'name' : '',
-        'value' : ''
-      });
+      if (index === undefined) {
+        vm.variables.push({
+          'name' : '',
+          'value' : ''
+        });
+      } else {
+        vm.variables.splice(index, 0, {
+          'name' : '',
+          'value' : ''
+        });
+      }
     }
 
     /**

@@ -1,0 +1,10 @@
+.projects {
+  .list-group-item {
+    &:hover,
+    &:focus {
+      background-color: #428bca;
+      border-color: #357ebd;
+      color: white;
+    }
+  }
+}

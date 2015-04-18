@@ -17,8 +17,12 @@ describe('Controller: ProjectsController', function() {
       getList: function(){
         var deferred = $q.defer();
         deferred.resolve([
-          {name:'Project1'},
-          {name:'Project2'}
+          { id:'id1',
+            name:'Project1'
+          },{
+            id:'id2',
+            name:'Project2'
+          }
         ]);
         return deferred.promise;
       }

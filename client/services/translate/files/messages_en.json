@@ -4,6 +4,10 @@
     "projects" : "Projects",
     "language" : "Language"
   },
+  "error" : {
+    "error" : "Error",
+    "default_message" : "An unexpected error occured."
+  },
   "home" : {
     "get_started" : "Kick-start your next web app with TelosysTools"
   },
@@ -43,9 +47,20 @@
         "value" : "Value",
         "action" : "Action",
         "delete" : "Delete",
+        "insert" : "Insert variable",
         "new" : "New variable",
         "show_reserved" : "Show reserved variable names"
       }
+    },
+    "bundle" : {
+      "description" : "Download bundles from GitHub (templates and resources).",
+      "github_username" : "GitHub user name",
+      "get_available" : "Get available bundles",
+      "github_bundles" : "GitHub bundles",
+      "github_url_pattern" : "GitHub URL pattern",
+      "download" : "Download selected bundles",
+      "install" : "Install downloaded bundles",
+      "log" : "Logs"
     }
   },
   "projects" : {

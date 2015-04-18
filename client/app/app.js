@@ -2,12 +2,12 @@
   "use strict";
 
   angular.module('telosysToolsSaasFrontApp', [
-    'ngCookies',
-    'ngResource',
-    'ngSanitize',
     'ui.router',
     'ui.bootstrap',
     'ui.ace',
+    'ngCookies',
+    'ngResource',
+    'ngSanitize',
     'restangular',
     'configuration',
     'logger',

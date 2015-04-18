@@ -4,7 +4,7 @@
 
   <div class="panel panel-default">
 
-    <div class="panel-heading"><a href="" ng-click="configuration.showPackages()"><span translate="project.configuration.packages.label"></span></a></div>
+    <div class="panel-heading" ng-click="configuration.editPackages = !configuration.editPackages"><span translate="project.configuration.packages.label"></span></div>
 
     <div class="panel-body" ng-show="configuration.editPackages">
 
@@ -20,13 +20,13 @@
 
         <div class="form-group" ng-repeat="package in configuration.packages">
           <div class="col-lg-2">
-            <label for="package.id" translate="{{package.name}}"></label>
+            <label for="{{package.id}}" translate="{{package.name}}"></label>
           </div>
-          <div class="col-lg-2">
+          <div class="col-lg-10">
             <p>{{package.shortcut}}</p>
           </div>
-          <div class="col-lg-8">
-            <input id="package.id" type="text" class="form-control" placeholder="{{package.example}}">
+          <div class="col-lg-12">
+            <input id="{{package.id}}" type="text" class="form-control" placeholder="{{package.example}}">
           </div>
         </div>
 
@@ -48,7 +48,7 @@
 
   <div class="panel panel-default">
 
-    <div class="panel-heading"><a href="" ng-click="configuration.showFolders()"><span translate="project.configuration.folders.label"></a></div>
+    <div class="panel-heading" ng-click="configuration.editFolders = !configuration.editFolders"><span translate="project.configuration.folders.label"></span></div>
 
     <div class="panel-body" ng-show="configuration.editFolders">
 
@@ -64,18 +64,18 @@
 
         <div class="form-group" ng-repeat="folder in configuration.folders">
           <div class="col-lg-2">
-            <label for="package.id" translate="{{folder.name}}"></label>
+            <label for="{{folder.id}}" translate="{{folder.name}}"></label>
           </div>
-          <div class="col-lg-2">
+          <div class="col-lg-10">
             <p>{{folder.shortcut}}</p>
           </div>
-          <div class="col-lg-8">
-            <input id="folder.id" type="text" class="form-control" placeholder="{{folder.example}}" value="{{folder.value}}">
+          <div class="col-lg-12">
+            <input id="{{folder.id}}" type="text" class="form-control" placeholder="{{folder.example}}" ng-model="folder.value">
           </div>
         </div>
 
         <div class="form-group">
-          <div class="col-lg-offset-4 col-lg-8">
+          <div class="col-lg-12">
             <a class="btn btn-primary" ng-click="configuration.setMavenFolders()"><span translate="project.configuration.folders.maven_folders"></span></a>
             <a class="btn btn-primary" ng-click="configuration.setProjectFolders()"><span translate="project.configuration.folders.project_folders"></span></a>
           </div>
@@ -99,7 +99,7 @@
 
   <div class="panel panel-default">
 
-    <div class="panel-heading"><a href="" ng-click="configuration.showVariables()"><span translate="project.configuration.variables.label"></a></div>
+    <div class="panel-heading" ng-click="configuration.editVariables = !configuration.editVariables"><span translate="project.configuration.variables.label"></span></div>
 
     <div class="panel-body" ng-show="configuration.editVariables">
 
@@ -122,14 +122,15 @@
                 <th><span translate="project.configuration.variables.action"></span></th>
               </tr>
               <tr ng-repeat="variable in configuration.variables">
-                <td><input type="text" class="form-control" value="{{variable.name}}" placeholder="VARIABLE_NAME"></td>
-                <td><input type="text" class="form-control" value="{{variable.value}}" placeholder="VARIABLE_VALUE"></td>
+                <td><input type="text" class="form-control" ng-model="variable.name" placeholder="VARIABLE_NAME"></td>
+                <td><input type="text" class="form-control" ng-model="variable.value" placeholder="VARIABLE_VALUE"></td>
                 <td>
+                  <a class="btn btn-primary" ng-click="configuration.createVariable($index+1)"><span translate="project.configuration.variables.insert"></span></a>
                   <a class="btn btn-danger" ng-click="configuration.deleteVariable($index)"><span translate="project.configuration.variables.delete"></span></a>
-                  <a class="btn btn-primary" ng-click="configuration.createVariable($index+1)"><span translate="project.configuration.variables.new"></span></a>
                 </td>
               </tr>
             </table>
+            <a class="btn btn-primary" ng-click="configuration.createVariable()"><span translate="project.configuration.variables.new"></span></a>
             <a class="btn btn-primary" ng-click=""><span translate="project.configuration.variables.show_reserved"></span></a>
           </div>
         </div>

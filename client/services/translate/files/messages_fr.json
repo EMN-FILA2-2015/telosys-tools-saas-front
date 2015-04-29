@@ -50,6 +50,15 @@
         "insert" : "Insérer une variable",
         "new" : "Nouvelle variable",
         "show_reserved" : "Voir les noms de variables réservés"
+      },
+      "reinitialisation" : "Annuler les changements",
+      "save" : "Enregister",
+      "notification" : {
+        "saved" : "La configuration a été enregistrée."
+      },
+      "error" : {
+        "getting" : "Une erreur est survenue pendant la récupération de la configuration.",
+        "saving" : "Une erreur est survenue pendant l'enregistrement."
       }
     },
     "bundle" : {

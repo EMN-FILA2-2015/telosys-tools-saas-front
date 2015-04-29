@@ -7,11 +7,11 @@
 
   angular
     .module('telosysToolsSaasFrontApp')
-    .controller('ConfigurationController', ConfigurationController)
+    .controller('ConfigurationController', ConfigurationController);
 
-  ConfigurationController.$inject = ['ProjectService', 'Logger'];
+  ConfigurationController.$inject = ['ProjectService', 'Logger', '$stateParams', '$modal'];
 
-  function ConfigurationController(ProjectService, Logger) {
+  function ConfigurationController(ProjectService, Logger, $stateParams, $modal) {
 
     /* jshint validthis: true */
     var vm = this;
@@ -20,93 +20,161 @@
     vm.alerts = [];
     vm.closeAlert = closeAlert;
 
+    vm.id = $stateParams.projectId;
+
     vm.editPackages = true;
     vm.editFolders = true;
     vm.editVariables = true;
 
-    vm.packages = [
-      {
-        'name' : 'project.configuration.packages.root_package',
-        'id' : 'root-package',
-        'shortcut' : '${ROOT_PKG}',
-        'example' : 'org.demo'
-      }, {
-        'name' : 'project.configuration.packages.entity_classes_package',
-        'id' : 'entity-classes-package',
-        'shortcut' : '${ENTITY_PKG}',
-        'example' : 'org.demo.bean'
-      }
-    ];
+    vm.packages = [];
 
-    vm.folders = [
-      {
-        'name' : 'project.configuration.folders.sources',
-        'id' : 'sources',
-        'shortcut' : '${SRC}',
-        'example' : 'src',
-        'value' : ''
-      }, {
-        'name' : 'project.configuration.folders.resources',
-        'id' : 'resources',
-        'shortcut' : '${RES}',
-        'example' : 'src/resources',
-        'value' : ''
-      }, {
-        'name' : 'project.configuration.folders.web_content',
-        'id' : 'web-content',
-        'shortcut' : '${WEB}',
-        'example' : 'webapp',
-        'value' : ''
-      }, {
-        'name' : 'project.configuration.folders.tests_sources',
-        'id' : 'tests-sources',
-        'shortcut' : '${TEST_SRC}',
-        'example' : 'test',
-        'value' : ''
-      }, {
-        'name' : 'project.configuration.folders.tests_resources',
-        'id' : 'tests-resources',
-        'shortcut' : '${TEST_RES}',
-        'example' : 'test/resources',
-        'value' : ''
-      }, {
-        'name' : 'project.configuration.folders.documentation',
-        'id' : 'documentation',
-        'shortcut' : '${DOC}',
-        'example' : 'doc',
-        'value' : ''
-      }, {
-        'name' : 'project.configuration.folders.temporary_files',
-        'id' : 'temporary-files',
-        'shortcut' : '${TMP}',
-        'example' : 'tmp',
-        'value' : ''
-      }
-    ];
-
+    vm.folders = [];
     vm.setMavenFolders = setMavenFolders;
     vm.setProjectFolders = setProjectFolders;
 
-    vm.variables = [
-      {
-        'name' : 'MAVEN_ARTIFACT_ID',
-        'value' : 'jpa-generation'
-      }, {
-        'name' : 'MAVEN_GROUP_ID',
-        'value' : 'group.to.be.defined'
-      }, {
-        'name' : 'PROJECT_NAME',
-        'value' : 'jpa-generation'
-      }, {
-        'name' : 'PROJECT_VERSION',
-        'value' : '0.1'
-      }
-    ];
-
-    vm.deleteVariable = deleteVariable;
+    vm.variables = [];
     vm.createVariable = createVariable;
+    vm.deleteVariable = deleteVariable;
+    vm.reservedVariables = [];
+    getReservedVariables();
+
+    vm.setConfig = setConfig;
+    vm.getConfig = getConfig;
+
+    getConfig();
 
     ////////////////
+
+    /**
+     * Méthode permettant de récupérer la configuration du projet (couples de clé / valeur.
+     * Les packages et les folders sont statiques (clés connues).
+     * Les variables sont variables (clés à priori inconnues).
+     */
+    function getConfig() {
+      ProjectService.getConfig($stateParams.projectId)
+        .then(function(data){
+
+          vm.packages = [
+            {
+              'name' : 'project.configuration.packages.root_package',
+              'id' : 'ROOT_PKG',
+              'shortcut' : '${ROOT_PKG}',
+              'example' : 'org.demo',
+              'value' : data.packages.ROOT_PKG
+            }, {
+              'name' : 'project.configuration.packages.entity_classes_package',
+              'id' : 'ENTITY_PKG',
+              'shortcut' : '${ENTITY_PKG}',
+              'example' : 'org.demo.entities',
+              'value' : data.packages.ENTITY_PKG
+            }
+          ];
+
+          vm.folders = [
+            {
+              'name' : 'project.configuration.folders.sources',
+              'id' : 'SRC',
+              'shortcut' : '${SRC}',
+              'example' : 'src',
+              'value' : data.folders.SRC
+            }, {
+              'name' : 'project.configuration.folders.resources',
+              'id' : 'RES',
+              'shortcut' : '${RES}',
+              'example' : 'src/resources',
+              'value' : data.folders.RES
+            }, {
+              'name' : 'project.configuration.folders.web_content',
+              'id' : 'WEB',
+              'shortcut' : '${WEB}',
+              'example' : 'webapp',
+              'value' : data.folders.WEB
+            }, {
+              'name' : 'project.configuration.folders.tests_sources',
+              'id' : 'TEST_SRC',
+              'shortcut' : '${TEST_SRC}',
+              'example' : 'test',
+              'value' : data.folders.TEST_SRC
+            }, {
+              'name' : 'project.configuration.folders.tests_resources',
+              'id' : 'TEST_RES',
+              'shortcut' : '${TEST_RES}',
+              'example' : 'test/resources',
+              'value' : data.folders.TEST_RES
+            }, {
+              'name' : 'project.configuration.folders.documentation',
+              'id' : 'DOC',
+              'shortcut' : '${DOC}',
+              'example' : 'doc',
+              'value' : data.folders.DOC
+            }, {
+              'name' : 'project.configuration.folders.temporary_files',
+              'id' : 'TMP',
+              'shortcut' : '${TMP}',
+              'example' : 'tmp',
+              'value' : data.folders.TMP
+            }
+          ];
+
+          vm.variables = [];
+          for (var variable in data.variables) {
+            if (data.variables.hasOwnProperty(variable)) {
+              vm.variables.push({
+                'name' : variable,
+                'value' : data.variables[variable]
+              });
+            }
+          }
+
+        })
+        .catch(function(error){
+          logger.error('Unable to get the configuration', error);
+          vm.alerts.push({
+            type: 'danger',
+            msg: 'project.configuration.error.getting'
+          });
+        })
+    }
+
+    /**
+     * Méthode permettant d'enregistrer la configuration saisie par l'utilisateur.
+     */
+    function setConfig() {
+      // Transformation des données
+      var config = {
+        'packages' : {},
+        'folders' : {},
+        'variables' : {}
+      };
+      for (var pkg = 0; pkg < vm.packages.length; pkg++) {
+        config.packages[vm.packages[pkg].id] = vm.packages[pkg].value;
+      }
+      for (var fld = 0; fld < vm.folders.length; fld++) {
+        config.folders[vm.folders[fld].id] = vm.folders[fld].value;
+      }
+      for (var vrb = 0; vrb < vm.variables.length; vrb++) {
+        config.variables[vm.variables[vrb].name] = vm.variables[vrb].value;
+      }
+      // Envoi des données
+      ProjectService.setConfig($stateParams.projectId, config)
+        .then(function() {
+          vm.alerts.push({
+            type: 'success',
+            msg: 'project.configuration.notification.saved'
+          });
+        })
+        .catch(function(error) {
+          logger.error("Unable to save the configuration", error);
+          vm.alerts.push({
+            type: 'danger',
+            msg: 'project.configuration.error.saving'
+          });
+        })
+        .finally(function() {
+          // Déplacement vers le haut de la page pour afficher la notification
+          $('html, body').animate({ scrollTop: 0 }, 'fast');
+        })
+    }
 
     /**
      * Fonction permettant de définir les dossiers maven.
@@ -115,25 +183,25 @@
       logger.debug('setMavenFolders()','Setting maven folders');
       vm.folders.forEach(function(folder) {
         switch (folder.id) {
-          case "sources" :
+          case "SRC" :
             folder.value = "src/main/java";
             break;
-          case "resources" :
+          case "RES" :
             folder.value = "src/main/resources";
             break;
-          case "web-content" :
+          case "WEB" :
             folder.value = "src/main/webapp";
             break;
-          case "tests-sources" :
+          case "TEST_SRC" :
             folder.value = "src/test/java";
             break;
-          case "tests-resources" :
+          case "TEST_RES" :
             folder.value = "src/test/resources";
             break;
-          case "documentation" :
+          case "DOC" :
             folder.value = "doc";
             break;
-          case "temporary-files" :
+          case "TMP" :
             folder.value = "tmp";
             break;
           default :
@@ -142,33 +210,32 @@
       });
     }
 
-
     /**
      * Fonction permettant de définir les dossiers maven.
      */
     function setProjectFolders() {
-      logger.debug('setMavenFolders()','Setting maven folders');
+      logger.debug('setProjectFolders()','Setting project folders');
       vm.folders.forEach(function(folder) {
         switch (folder.id) {
-          case "sources" :
+          case "SRC" :
             folder.value = "src";
             break;
-          case "resources" :
+          case "RES" :
             folder.value = "";
             break;
-          case "web-content" :
+          case "WEB" :
             folder.value = "WebContent";
             break;
-          case "tests-sources" :
+          case "TEST_SRC" :
             folder.value = "src";
             break;
-          case "tests-resources" :
+          case "TEST_RES" :
             folder.value = "";
             break;
-          case "documentation" :
+          case "DOC" :
             folder.value = "doc";
             break;
-          case "temporary-files" :
+          case "TMP" :
             folder.value = "tmp";
             break;
           default :
@@ -203,6 +270,53 @@
           'value' : ''
         });
       }
+    }
+
+    function getReservedVariables() {
+      vm.reservedVariables = [
+        'AMP',
+        'DOC',
+        'DOLLAR',
+        'ENTITY_PKG',
+        'GT',
+        'LBRACE',
+        'LT',
+        'QUOT',
+        'RBRACE',
+        'RES',
+        'ROOT_PKG',
+        'SHARP',
+        'SRC',
+        'TEST_RES',
+        'TEST_SRC',
+        'TMP',
+        'WEB',
+        'attrib',
+        'attribute',
+        'beanValidation',
+        'const',
+        'database',
+        'databases',
+        'entity',
+        'env',
+        'field',
+        'fk',
+        'fkcol',
+        'fn',
+        'generation',
+        'generator',
+        'java',
+        'joinColumn',
+        'jpa',
+        'link',
+        'linkAttribute',
+        'loader',
+        'model',
+        'project',
+        'selectedEntities',
+        'target',
+        'today'
+      ];
     }
 
     /**

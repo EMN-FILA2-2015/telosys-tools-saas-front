@@ -7,7 +7,7 @@
 
   angular
     .module('telosysToolsSaasFrontApp')
-    .controller('BundleController', BundleController)
+    .controller('BundleController', BundleController);
 
   BundleController.$inject = ['ProjectService', 'Logger'];
 

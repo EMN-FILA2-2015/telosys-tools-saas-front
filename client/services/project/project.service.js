@@ -20,7 +20,9 @@
     return {
       get: get,
       getList: getList,
-      create: create
+      create: create,
+      getConfig: getConfig,
+      setConfig: setConfig
     };
 
     //////////////////////
@@ -57,6 +59,35 @@
         })
         .catch(function(error) {
           logger.error('create','Error during the post /projects call',error);
+          throw error;
+        })
+    }
+
+    function getConfig(id) {
+      logger.debug('call the get /projects/id/config/telosystoolscfg service');
+      return service.one(id).one('config').one('telosystoolscfg').get()
+        .then(function(data) {
+          var config = {
+            'folders' : data.folders,
+            'packages' : data.packages,
+            'variables' : data.variables
+          };
+          return config;
+        })
+        .catch(function(error) {
+          logger.error('getConfig','Error during the get /project/id/config/telosystoolscfg service');
+          throw error;
+        })
+    }
+
+    function setConfig(id, config) {
+      logger.debug('call the set /projects/id/config/telosystoolscfg service');
+      return service.one(id).one('config').one('telosystoolscfg').customPOST(config)
+        .then(function(data) {
+          // Rien à faire
+        })
+        .catch(function(error) {
+          logger.error('setConfig','Error during the post /projects/id/config/telosystoolscfg service');
           throw error;
         })
     }

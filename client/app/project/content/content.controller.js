@@ -7,7 +7,7 @@
 
   angular
     .module('telosysToolsSaasFrontApp')
-    .controller('ContentController', ContentController)
+    .controller('ContentController', ContentController);
 
   ContentController.$inject = ['ProjectService', 'Logger'];
 
@@ -16,9 +16,6 @@
     /* jshint validthis: true */
     var vm = this;
     var logger = Logger.getInstance('ContentController');
-
-    vm.alerts = [];
-    vm.closeAlert = closeAlert;
 
     vm.aceOptions = {
       mode: 'html',

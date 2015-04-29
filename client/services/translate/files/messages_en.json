@@ -50,6 +50,15 @@
         "insert" : "Insert variable",
         "new" : "New variable",
         "show_reserved" : "Show reserved variable names"
+      },
+      "reinitialisation" : "Revert changes",
+      "save" : "Save",
+      "notification" : {
+        "saved" : "The configuration has been saved."
+      },
+      "error" : {
+        "getting" : "An arror occured while getting the configuration.",
+        "saving" : "An error occured while saving the configuration."
       }
     },
     "bundle" : {

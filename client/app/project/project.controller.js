@@ -20,7 +20,6 @@
     vm.alerts = [];
     vm.closeAlert = closeAlert;
 
-    vm.id = $stateParams.projectId;
     vm.menu = {};
 
     getProject();
@@ -31,7 +30,7 @@
      * Fonction permettant de récupérer le projet à charger.
      */
     function getProject() {
-      ProjectService.get(vm.id)
+      ProjectService.get($stateParams.projectId)
         .then(function(data) {
           vm.menu = {
             isActive: isActive,
@@ -55,7 +54,9 @@
               }
             ]
           };
-          $state.transitionTo('project.content', {projectId:vm.id});
+          $state.transitionTo('project.content', {
+            projectId : $stateParams.projectId
+          });
         })
         .catch(function(error) {
           $state.transitionTo('error', {

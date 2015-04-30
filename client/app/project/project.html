@@ -2,17 +2,13 @@
 
   <div class="container">
 
-    <br/>
-
-    <div class="row">
+    <div class="row buttons-bar">
       <ul class="nav nav-tabs col-lg-offset-1 col-lg-10">
         <li ng-repeat="item in project.menu.items" ng-class="{active: project.menu.isActive(item.state)}">
           <a ui-sref="{{item.state}}"><span class="glyphicon {{item.icon}}" aria-hidden="true"></span>&nbsp; <span translate="{{item.title}}"></span></a>
         </li>
       </ul>
     </div>
-
-    <hr/>
 
     <br/>
 

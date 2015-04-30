@@ -62,8 +62,8 @@ module.exports = function (grunt) {
     connect: {
       options: {
         port: 9000,
-        // Change this to 'localhost' to deny access to the server from outside.
-        hostname: '0.0.0.0',
+        // Change '0.0.0.0' to 'localhost' to deny access to the server from outside.
+        hostname: 'localhost',
         livereload: 35729
       },
       livereload: {

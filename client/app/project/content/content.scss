@@ -63,13 +63,15 @@
         text-align: center;
         a {
           display: inline-block;
-          padding: 5px 5px 3px 5px;
+          padding: 5px 8px 3px 8px;
           border: 1px solid transparent;
-          text-decoration: none
+          text-decoration: none;
+          color: #777777;
         }
         a:hover {
           border: 1px solid #cfcfcf;
           background-color: #fdfdfd;
+          color: black;
         }
       }
     }

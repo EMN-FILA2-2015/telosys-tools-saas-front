@@ -4,30 +4,36 @@
     padding: 0;
     margin: 0;
     .buttons-bar {
-      padding: 5px;
+      padding: 0;
       margin: 0;
       border-bottom: 1px solid #dedede;
     }
     .nav-tabs {
-      padding: 4px 0;
+      padding: 0 0;
       background-color: #ffffff;
       border-bottom: none;
       li {
         text-align: center;
-        margin-left: 5px;
+        padding: 0;
+        margin: 0;
       }
       li a {
+        display: inline-block;
         margin: none;
-        border-radius: 0 0 0 0;
+        border: 0;
+        color: #888888;
+        padding: 20px;
       }
       li a:hover {
         background-color: #ffffff;
         border-color: #cfcfcf;
-        border-top-width: 2px;
+        border: 0;
+        color: black;
       }
       li.active a {
-        border: 1px solid #ddd;
-        border-top-width: 2px;
+        border: 0;
+        border-bottom: 2px solid orangered;
+        color: black;
       }
     }
   }

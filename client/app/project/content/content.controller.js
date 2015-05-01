@@ -71,7 +71,8 @@
       vm.treedata[0].children[0],
       vm.treedata[0].children[0].children[0],
       vm.treedata[0].children[0].children[0].children[0],
-      vm.treedata[0].children[0].children[0].children[0].children[0]
+      vm.treedata[0].children[0].children[0].children[0].children[0],
+      vm.treedata[0].children[0].children[0].children[0].children[1]
     ];
 
     vm.selectedNode = vm.treedata[0].children[0].children[0].children[0].children[0].children[0];

@@ -1,8 +1,28 @@
-<div class="project-content">
-  <div class="project-files">
-    Content
+<div class="project-content row">
+  <div class="project-files col-lg-3">
+    <!-- -->
+    <!-- treecontrol : -->
+    <!-- Documentation : http://wix.github.io/angular-tree-control/ -->
+    <!-- -->
+
+    <!-- as a Dom element -->
+    <treecontrol class="tree-classic"
+                 tree-model="content.dataForTheTree"
+                 options="content.treeOptions"
+                 on-selection="showSelected(node)"
+                 selected-node="node1">
+      employee: {{node.name}} age {{node.age}}
+    </treecontrol>
+    <!-- as an attribute -->
+    <!--div treecontrol class="tree-classic"
+         tree-model="content.dataForTheTree"
+         options="content.treeOptions"
+         on-selection="showSelected(node)"
+         selected-node="node1">
+      employee: {{node.name}} age {{node.age}}
+    </div-->
   </div>
-  <div class="project-editor">
+  <div class="project-editor col-lg-9">
     <div class="editor-tabs">
       <ul>
         <li>

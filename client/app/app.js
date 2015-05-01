@@ -11,7 +11,8 @@
     'restangular',
     'configuration',
     'logger',
-    'translate'
+    'translate',
+    'treeControl'
   ]);
 
 })();

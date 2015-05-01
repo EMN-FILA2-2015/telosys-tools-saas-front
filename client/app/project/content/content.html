@@ -4,23 +4,14 @@
     <!-- treecontrol : -->
     <!-- Documentation : http://wix.github.io/angular-tree-control/ -->
     <!-- -->
-
-    <!-- as a Dom element -->
-    <treecontrol class="tree-classic"
+    <treecontrol class="tree-light"
                  tree-model="content.dataForTheTree"
                  options="content.treeOptions"
                  on-selection="showSelected(node)"
                  selected-node="node1">
-      employee: {{node.name}} age {{node.age}}
+      <span class="glyphicon glyphicon-folder-close" ng-if="node.type == 'folder'"></span>
+      {{node.name}}
     </treecontrol>
-    <!-- as an attribute -->
-    <!--div treecontrol class="tree-classic"
-         tree-model="content.dataForTheTree"
-         options="content.treeOptions"
-         on-selection="showSelected(node)"
-         selected-node="node1">
-      employee: {{node.name}} age {{node.age}}
-    </div-->
   </div>
   <div class="project-editor col-lg-9">
     <div class="editor-tabs">

@@ -43,17 +43,27 @@
 
     vm.dataForTheTree =
       [
-        { "name" : "Joe", "age" : "21", "children" : [
-          { "name" : "Smith", "age" : "42", "children" : [] },
-          { "name" : "Gary", "age" : "21", "children" : [
-            { "name" : "Jenifer", "age" : "23", "children" : [
-              { "name" : "Dani", "age" : "32", "children" : [] },
-              { "name" : "Max", "age" : "34", "children" : [] }
+        { "name" : "src", "type" : "folder", "children" : [
+          { "name" : "main", "type" : "folder", "children" : [
+            { "name" : "java", "type" : "folder", "children" : [
+              { "name" : "org.demo.myapp", "type" : "folder", "children" : [
+                { "name" : "domain", "type" : "folder", "children" : [
+                  { "name" : "Book.java", "type" : "file", "children" : [] },
+                  { "name" : "Author.java", "type" : "file", "children" : [] }
+                ] },
+                { "name" : "repository", "type" : "folder", "children" : [
+                  { "name" : "BookRepository.java", "type" : "file", "children" : [] },
+                  { "name" : "AuthorRepository.java", "type" : "file", "children" : [] }
+                ] },
+                { "name" : "web", "type" : "folder", "children" : [
+                  { "name" : "BookController.java", "type" : "file", "children" : [] },
+                  { "name" : "AuthorController.java", "type" : "file", "children" : [] }
+                ] },
+                { "name" : "Application.java", "type" : "file", "children" : [] }
+              ]}
             ]}
           ]}
-        ]},
-        { "name" : "Albert", "age" : "33", "children" : [] },
-        { "name" : "Ron", "age" : "29", "children" : [] }
+        ]}
       ];
 
     ////////////////

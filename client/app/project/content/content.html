@@ -3,11 +3,37 @@
     <div class="panel panel-default">
       <div class="panel-heading"><h6 class="panel-title">Model</h6></div>
       <div class="panel-body">
+        <!-- -->
+        <!-- treecontrol : -->
+        <!-- Documentation : http://wix.github.io/angular-tree-control/ -->
+        <!-- -->
+        <treecontrol class="tree-light"
+                     options="content.treeOptions"
+                     tree-model="content.model.treedata"
+                     expanded-nodes="content.model.expandedNodes"
+                     on-selection="showSelected(node)"
+                     selected-node="content.selectedNode">
+          <span class="glyphicon glyphicon-folder-close" ng-if="node.type == 'folder'"></span>
+          {{node.name}}
+        </treecontrol>
       </div>
     </div>
     <div class="panel panel-default">
       <div class="panel-heading"><h6 class="panel-title">Bundles</h6></div>
       <div class="panel-body">
+        <!-- -->
+        <!-- treecontrol : -->
+        <!-- Documentation : http://wix.github.io/angular-tree-control/ -->
+        <!-- -->
+        <treecontrol class="tree-light"
+                     options="content.treeOptions"
+                     tree-model="content.bundles.treedata"
+                     expanded-nodes="content.bundles.expandedNodes"
+                     on-selection="showSelected(node)"
+                     selected-node="content.selectedNode">
+          <span class="glyphicon glyphicon-folder-close" ng-if="node.type == 'folder'"></span>
+          {{node.name}}
+        </treecontrol>
       </div>
     </div>
     <div class="panel panel-default">
@@ -18,9 +44,9 @@
         <!-- Documentation : http://wix.github.io/angular-tree-control/ -->
         <!-- -->
         <treecontrol class="tree-light"
-                     tree-model="content.treedata"
                      options="content.treeOptions"
-                     expanded-nodes="content.expandedNodes"
+                     tree-model="content.generated.treedata"
+                     expanded-nodes="content.generated.expandedNodes"
                      on-selection="showSelected(node)"
                      selected-node="content.selectedNode">
           <span class="glyphicon glyphicon-folder-close" ng-if="node.type == 'folder'"></span>

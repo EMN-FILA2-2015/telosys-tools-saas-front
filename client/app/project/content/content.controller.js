@@ -41,7 +41,49 @@
       }
     };
 
-    vm.treedata =
+    vm.model = {};
+
+    vm.model.treedata =
+      [
+        { "name" : "book", "type" : "file", "children" : [] },
+        { "name" : "author", "type" : "file", "children" : [] },
+      ];
+
+    vm.model.expandedNodes = [
+    ];
+
+    vm.bundles = {};
+
+    vm.bundles.treedata =
+      [
+        { "name" : "back-jpa", "type" : "folder", "children" : [
+          { "name" : "Bean.vm", "type" : "file", "children" : [] },
+          { "name" : "repository", "type" : "folder", "children" : [
+            { "name" : "BookRepository.java", "type" : "file", "children" : [] },
+            { "name" : "AuthorRepository.java", "type" : "file", "children" : [] }
+          ]}
+        ]},
+        { "name" : "front-spring-mvc", "type" : "folder", "children" : [
+          { "name" : "domain", "type" : "folder", "children" : [
+            { "name" : "Book.java", "type" : "file", "children" : [] },
+            { "name" : "Author.java", "type" : "file", "children" : [] }
+          ] },
+          { "name" : "web", "type" : "folder", "children" : [
+            { "name" : "BookController.java", "type" : "file", "children" : [] },
+            { "name" : "AuthorController.java", "type" : "file", "children" : [] }
+          ] },
+          { "name" : "Application.java", "type" : "file", "children" : [] }
+        ]}
+      ];
+
+    vm.bundles.expandedNodes = [
+      vm.bundles.treedata[0],
+      vm.bundles.treedata[1]
+    ];
+
+    vm.generated = {};
+
+    vm.generated.treedata =
       [
         { "name" : "src", "type" : "folder", "children" : [
           { "name" : "main", "type" : "folder", "children" : [
@@ -66,16 +108,16 @@
         ]}
       ];
 
-    vm.expandedNodes = [
-      vm.treedata[0],
-      vm.treedata[0].children[0],
-      vm.treedata[0].children[0].children[0],
-      vm.treedata[0].children[0].children[0].children[0],
-      vm.treedata[0].children[0].children[0].children[0].children[0],
-      vm.treedata[0].children[0].children[0].children[0].children[1]
+    vm.generated.expandedNodes = [
+      vm.generated.treedata[0],
+      vm.generated.treedata[0].children[0],
+      vm.generated.treedata[0].children[0].children[0],
+      vm.generated.treedata[0].children[0].children[0].children[0],
+      vm.generated.treedata[0].children[0].children[0].children[0].children[0],
+      vm.generated.treedata[0].children[0].children[0].children[0].children[1]
     ];
 
-    vm.selectedNode = vm.treedata[0].children[0].children[0].children[0].children[0].children[0];
+    vm.selectedNode = vm.generated.treedata[0].children[0].children[0].children[0].children[0].children[0];
 
     ////////////////
 

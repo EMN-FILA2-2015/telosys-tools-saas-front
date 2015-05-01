@@ -5,10 +5,11 @@
     <!-- Documentation : http://wix.github.io/angular-tree-control/ -->
     <!-- -->
     <treecontrol class="tree-light"
-                 tree-model="content.dataForTheTree"
+                 tree-model="content.treedata"
                  options="content.treeOptions"
+                 expanded-nodes="content.expandedNodes"
                  on-selection="showSelected(node)"
-                 selected-node="node1">
+                 selected-node="content.selectedNode">
       <span class="glyphicon glyphicon-folder-close" ng-if="node.type == 'folder'"></span>
       {{node.name}}
     </treecontrol>

@@ -41,7 +41,7 @@
       }
     };
 
-    vm.dataForTheTree =
+    vm.treedata =
       [
         { "name" : "src", "type" : "folder", "children" : [
           { "name" : "main", "type" : "folder", "children" : [
@@ -65,6 +65,16 @@
           ]}
         ]}
       ];
+
+    vm.expandedNodes = [
+      vm.treedata[0],
+      vm.treedata[0].children[0],
+      vm.treedata[0].children[0].children[0],
+      vm.treedata[0].children[0].children[0].children[0],
+      vm.treedata[0].children[0].children[0].children[0].children[0]
+    ];
+
+    vm.selectedNode = vm.treedata[0].children[0].children[0].children[0].children[0].children[0];
 
     ////////////////
 

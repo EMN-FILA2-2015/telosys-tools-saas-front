@@ -1,7 +1,10 @@
 <div class="project-content row">
   <div class="project-files col-lg-4">
     <div class="panel panel-default">
-      <div class="panel-heading"><h6 class="panel-title">Model</h6></div>
+      <div class="panel-heading">
+        <button class="btn btn-default" style="float: right; margin:-7px 0; padding: 5px"><span class="glyphicon glyphicon-plus" style="font-weight: normal"></span> New file</button>
+        <h6 class="panel-title">Model</h6>
+      </div>
       <div class="panel-body">
         <!-- -->
         <!-- treecontrol : -->
@@ -12,7 +15,7 @@
                      tree-model="content.model.treedata"
                      expanded-nodes="content.model.expandedNodes"
                      on-selection="showSelected(node)"
-                     selected-node="content.selectedNode">
+                     selected-node="content.model.selectedNode">
           <span class="glyphicon glyphicon-folder-close" ng-if="node.type == 'folder'"></span>
           {{node.name}}
         </treecontrol>
@@ -30,7 +33,7 @@
                      tree-model="content.bundles.treedata"
                      expanded-nodes="content.bundles.expandedNodes"
                      on-selection="showSelected(node)"
-                     selected-node="content.selectedNode">
+                     selected-node="content.bundles.selectedNode">
           <span class="glyphicon glyphicon-folder-close" ng-if="node.type == 'folder'"></span>
           {{node.name}}
         </treecontrol>
@@ -48,7 +51,7 @@
                      tree-model="content.generated.treedata"
                      expanded-nodes="content.generated.expandedNodes"
                      on-selection="showSelected(node)"
-                     selected-node="content.selectedNode">
+                     selected-node="content.generated.selectedNode">
           <span class="glyphicon glyphicon-folder-close" ng-if="node.type == 'folder'"></span>
           {{node.name}}
         </treecontrol>

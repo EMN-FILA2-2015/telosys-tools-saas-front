@@ -117,7 +117,7 @@
       vm.generated.treedata[0].children[0].children[0].children[0].children[1]
     ];
 
-    vm.selectedNode = vm.generated.treedata[0].children[0].children[0].children[0].children[0].children[0];
+    vm.generated.selectedNode = vm.generated.treedata[0].children[0].children[0].children[0].children[0].children[0];
 
     ////////////////
 

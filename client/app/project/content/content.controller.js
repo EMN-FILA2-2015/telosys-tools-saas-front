@@ -136,6 +136,7 @@
     function addFile(path) {
 
       var modalInstance = $modal.open({
+        backdrop: 'static',
         templateUrl: 'app/project/file/addFile.html',
         controller: 'AddFileController as addFile',
         resolve: {

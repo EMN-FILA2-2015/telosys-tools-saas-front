@@ -9,13 +9,15 @@
     .module('telosysToolsSaasFrontApp')
     .controller('ContentController', ContentController);
 
-  ContentController.$inject = ['ProjectService', 'Logger'];
+  ContentController.$inject = ['ProjectService', 'Logger', '$modal'];
 
-  function ContentController(ProjectService, Logger) {
+  function ContentController(ProjectService, Logger, $modal) {
 
     /* jshint validthis: true */
     var vm = this;
     var logger = Logger.getInstance('ContentController');
+
+    vm.addFile = addFile;
 
     ////
 
@@ -128,6 +130,27 @@
     function closeAlert(index) {
       vm.alerts.splice(index, 1);
     }
+
+    ////////////////
+
+    function addFile(path) {
+
+      var modalInstance = $modal.open({
+        templateUrl: 'app/project/file/addFile.html',
+        controller: 'AddFileController as addFile',
+        resolve: {
+          path: function () {
+            return path;
+          }
+        }
+      });
+
+      modalInstance.result
+        .then(function (newFile) {
+          // Afficher le message de confirmation de l'ajout
+          // Rafraîchir l'arborescence des fichiers
+        });
+    };
 
   }
 

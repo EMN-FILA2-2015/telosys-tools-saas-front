@@ -34,7 +34,8 @@
       </button>
       <button class="pull-right btn btn-default withripple btn-form"
               style="margin-right: 5px;"
-              ng-click="addFile.cancel()">
+              ng-click="addFile.cancel()"
+              ng-disabled="addFile.isSaving">
         Cancel
       </button>
     </div>

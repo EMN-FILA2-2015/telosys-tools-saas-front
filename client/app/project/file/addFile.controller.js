@@ -28,7 +28,7 @@
 
     function cancel() {
       $modalInstance.dismiss();
-    };
+    }
 
     function createFile(form, file) {
 
@@ -36,28 +36,31 @@
         return;
       }
 
-      $scope.isSaving = true;
-      $scope.errorValidationMessages = [];
+      vm.isSaving = true;
+      vm.errorValidationMessages = [];
+
+      // à supprimer
+      alert('Create file : '+file.path+"/"+file.name);
 
       /*
-       return FileResource
+      return FileResource
        .from(uri)
        .add(file)
        .then(function (addedFile) {
-       $scope.isSaving = false;
+       vm.isSaving = false;
        $modalInstance.close(addedFile);
        })
        .catch(function (response) {
 
-       $scope.isSaving = false;
-       $scope.isFailed = true;
+       vm.isSaving = false;
+       vm.isFailed = true;
 
        if (response.status === 422) {
-       $scope.errorValidationMessages = response.data.messages;
+       vm.errorValidationMessages = response.data.messages;
        }
 
        return $timeout(function () {
-       $scope.isFailed = false;
+       vm.isFailed = false;
        }, 800);
 
        });

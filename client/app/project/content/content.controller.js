@@ -19,13 +19,26 @@
 
     vm.addFile = addFile;
     vm.addFolder = addFolder;
+    vm.showSelected = showSelected;
+    vm.saveFile = saveFile;
+    vm.deleteFile = deleteFile;
 
     ////
 
     vm.aceOptions = {
       mode: 'html',
-      useWrapMode : true
+      useWrapMode : true,
+      $blockScrolling: Infinity,
+      onLoad: function(_editor) {
+        vm.aceEditor = _editor;
+        _editor.session.setNewLineMode('unix');
+      },
+      onChange: function() {
+        vm.contentChanged = true;
+      }
     };
+
+    vm.contentChanged = false;
 
     ////
 
@@ -68,7 +81,7 @@
             { "name" : "BookController.java", "type" : "file", "children" : [] },
             { "name" : "AuthorController.java", "type" : "file", "children" : [] }
           ] },
-          { "name" : "Application.java", "type" : "file", "children" : [] }
+          { "name" : "Application.java", "type" : "file", "readOnly": true, "children" : [] }
         ]}
       ];
 
@@ -81,16 +94,7 @@
     vm.generated.treedata = [];
     vm.generated.expandedNodes = [];
 
-    //vm.generated.expandedNodes = [
-    //  vm.generated.treedata[0],
-    //  vm.generated.treedata[0].children[0],
-    //  vm.generated.treedata[0].children[0].children[0],
-    //  vm.generated.treedata[0].children[0].children[0].children[0],
-    //  vm.generated.treedata[0].children[0].children[0].children[0].children[0],
-    //  vm.generated.treedata[0].children[0].children[0].children[0].children[1]
-    //];
-    //
-    //vm.generated.selectedNode = vm.generated.treedata[0].children[0].children[0].children[0].children[0].children[0];
+    ////
 
     getWorkspace();
 
@@ -188,6 +192,43 @@
         });
     };
 
+    function showSelected(node) {
+      if (node.type === 'file')
+        WorkspaceService.getFile($stateParams.projectId, node.path)
+          .then(function(data) {
+            vm.aceEditor.setValue(data.content, 0);
+            vm.aceEditor.setReadOnly(node.readOnly);
+          })
+          .catch(function(error) {
+            $state.transitionTo('error', {
+              code: error.status,
+              text: error.statusText
+            });
+          });
+    };
+
+    function saveFile(node) {
+      if (vm.contentChanged) {
+        var content = vm.aceEditor.getValue();
+        console.log(content);
+        WorkspaceService.updateFile($stateParams.projectId, node.path, content)
+          .then(function(data) {
+            vm.contentChanged = false;
+            // TODO : Afficher un message de confirm
+          })
+          .catch(function(error) {
+            $state.transitionTo('error', {
+              code: error.status,
+              text: error.statusText
+            });
+          });
+      }
+    };
+
+    function deleteFile(file) {
+      console.log(file);
+    }
+
     ////////////////
 
     /**
@@ -202,6 +243,7 @@
         treedata.push({
           "name": root.files[fileID].name,
           "type": "file",
+          "readOnly": root.files[fileID].readOnly,
           "path": root.files[fileID].absolutePath
         });
 

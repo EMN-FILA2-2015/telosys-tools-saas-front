@@ -15,8 +15,8 @@
                      options="content.treeOptions"
                      tree-model="content.model.treedata"
                      expanded-nodes="content.model.expandedNodes"
-                     on-selection="showSelected(node)"
-                     selected-node="content.model.selectedNode">
+                     on-selection="content.showSelected(node)"
+                     selected-node="content.selectedNode">
           <span class="glyphicon glyphicon-folder-close" ng-if="node.type == 'folder'"></span>
           {{node.name}}
         </treecontrol>
@@ -38,7 +38,7 @@
                      tree-model="content.bundles.treedata"
                      expanded-nodes="content.bundles.expandedNodes"
                      on-selection="showSelected(node)"
-                     selected-node="content.bundles.selectedNode">
+                     selected-node="content.selectedNode">
           <span class="glyphicon glyphicon-folder-close" ng-if="node.type == 'folder'"></span>
           {{node.name}}
         </treecontrol>
@@ -56,29 +56,29 @@
                      tree-model="content.generated.treedata"
                      expanded-nodes="content.generated.expandedNodes"
                      on-selection="showSelected(node)"
-                     selected-node="content.generated.selectedNode">
+                     selected-node="content.selectedNode">
           <span class="glyphicon glyphicon-folder-close" ng-if="node.type == 'folder'"></span>
           {{node.name}}
         </treecontrol>
       </div>
     </div>
   </div>
-  <div class="project-editor col-lg-8">
+  <div id="editor" class="project-editor col-lg-8" ng-show="content.selectedNode.type == 'file'">
     <div class="editor-tabs">
       <ul>
         <li>
-          <a href="#" class="active">File 1.txt</a>
+          <a href="#" class="active">{{content.selectedNode.name}}</a>
         </li>
       </ul>
     </div>
     <div class="editor-toolbar">
-      <ul>
-        <li><a href="#"><span class="glyphicon glyphicon-floppy-disk"></span>&nbsp;Save</a></li>
-        <li><a href="#"><span class="glyphicon glyphicon-remove"></span>&nbsp;Delete</a></li>
+      <ul ng-hide="content.selectedNode.readOnly">
+        <li><a ng-click="content.saveFile(content.selectedNode)"><span class="glyphicon glyphicon-floppy-disk"></span>&nbsp;Save</a></li>
+        <li><a ng-click="content.deleteFile(content.selectedNode)"><span class="glyphicon glyphicon-remove"></span>&nbsp;Delete</a></li>
       </ul>
     </div>
     <div>
-      <div ui-ace="content.aceOptions" ng-trim="true">File content</div>
+      <div ui-ace="content.aceOptions" ng-trim="true"></div>
     </div>
   </div>
 </div>

@@ -70,6 +70,11 @@
       "download" : "Télécharger les bundles sélectionnés",
       "install" : "Installer les bundles téléchargés",
       "log" : "Logs"
+    },
+    "content" : {
+      "notification" : {
+        "saved" : "Le fichier {{name}} a été sauvegardé."
+      }
     }
   },
   "projects" : {

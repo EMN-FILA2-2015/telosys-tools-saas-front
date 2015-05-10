@@ -70,6 +70,11 @@
       "download" : "Download selected bundles",
       "install" : "Install downloaded bundles",
       "log" : "Logs"
+    },
+    "content" : {
+      "notification" : {
+        "saved" : "The file {{name}} has been successfully saved."
+      }
     }
   },
   "projects" : {

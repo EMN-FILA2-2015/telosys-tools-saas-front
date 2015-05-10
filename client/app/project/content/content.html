@@ -1,4 +1,8 @@
 <div class="project-content row">
+  <alert ng-repeat="alert in content.alerts" type="{{alert.type}}" close="content.closeAlert($index)">
+    <span translate="{{alert.msg}}" translate-values="{name:content.selected}"></span>
+  </alert>
+
   <div class="project-files col-lg-4">
     <div class="panel panel-default">
       <div class="panel-heading">

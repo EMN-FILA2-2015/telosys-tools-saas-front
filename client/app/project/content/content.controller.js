@@ -17,6 +17,9 @@
     var vm = this;
     var logger = Logger.getInstance('ContentController');
 
+    vm.alerts = [];
+    vm.closeAlert = closeAlert;
+
     vm.addFile = addFile;
     vm.addFolder = addFolder;
     vm.showSelected = showSelected;
@@ -39,6 +42,7 @@
     };
 
     vm.contentChanged = false;
+    vm.selected = {};
 
     ////
 
@@ -198,6 +202,7 @@
           .then(function(data) {
             vm.aceEditor.setValue(data.content, 0);
             vm.aceEditor.setReadOnly(node.readOnly);
+            vm.selected = node.path;
           })
           .catch(function(error) {
             $state.transitionTo('error', {
@@ -214,7 +219,10 @@
         WorkspaceService.updateFile($stateParams.projectId, node.path, content)
           .then(function() {
             vm.contentChanged = false;
-            // TODO : Afficher un message de confirm
+            vm.alerts.push({
+              type: 'success',
+              msg: 'project.content.notification.saved'
+            });
           })
           .catch(function(error) {
             $state.transitionTo('error', {

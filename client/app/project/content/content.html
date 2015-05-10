@@ -24,8 +24,8 @@
     </div>
     <div class="panel panel-default">
       <div class="panel-heading">
-        <button class="btn btn-default" style="float: right; margin:-7px 0; padding: 5px"><span class="glyphicon glyphicon-plus" style="font-weight: normal"></span> New file</button>
-        <button class="btn btn-default" style="float: right; margin:-7px 0; padding: 5px"><span class="glyphicon glyphicon-plus" style="font-weight: normal"></span> New folder</button>
+        <a ng-click="content.addFile('bundles', 'PATH')" class="btn btn-default" style="float: right; margin:-7px 0; padding: 5px"><span class="glyphicon glyphicon-plus" style="font-weight: normal"></span> New file</a>
+        <a ng-click="content.addFolder('bundles', 'PATH')" class="btn btn-default" style="float: right; margin:-7px 0; padding: 5px"><span class="glyphicon glyphicon-plus" style="font-weight: normal"></span> New folder</a>
         <h6 class="panel-title">Bundles</h6>
       </div>
       <div class="panel-body">
@@ -37,7 +37,7 @@
                      options="content.treeOptions"
                      tree-model="content.bundles.treedata"
                      expanded-nodes="content.bundles.expandedNodes"
-                     on-selection="showSelected(node)"
+                     on-selection="content.showSelected(node)"
                      selected-node="content.selectedNode">
           <span class="glyphicon glyphicon-folder-close" ng-if="node.type == 'folder'"></span>
           {{node.name}}
@@ -55,7 +55,7 @@
                      options="content.treeOptions"
                      tree-model="content.generated.treedata"
                      expanded-nodes="content.generated.expandedNodes"
-                     on-selection="showSelected(node)"
+                     on-selection="content.showSelected(node)"
                      selected-node="content.selectedNode">
           <span class="glyphicon glyphicon-folder-close" ng-if="node.type == 'folder'"></span>
           {{node.name}}

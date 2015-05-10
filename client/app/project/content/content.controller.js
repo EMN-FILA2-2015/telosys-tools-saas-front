@@ -1,5 +1,5 @@
 /**
- * Created by Killian on 08/04/2015.
+ * @author Adrian
  */
 
 (function () {
@@ -165,7 +165,7 @@
             text: error.statusText
           });
         });
-    };
+    }
 
     function addFolder(rootFolder, path) {
       WorkspaceService.createFolder($stateParams.projectId, rootFolder.concat(path))
@@ -190,7 +190,7 @@
             text: error.statusText
           });
         });
-    };
+    }
 
     function showSelected(node) {
       if (node.type === 'file')
@@ -205,14 +205,14 @@
               text: error.statusText
             });
           });
-    };
+    }
 
     function saveFile(node) {
       if (vm.contentChanged) {
         var content = vm.aceEditor.getValue();
         console.log(content);
         WorkspaceService.updateFile($stateParams.projectId, node.path, content)
-          .then(function(data) {
+          .then(function() {
             vm.contentChanged = false;
             // TODO : Afficher un message de confirm
           })
@@ -223,7 +223,7 @@
             });
           });
       }
-    };
+    }
 
     function deleteFile(file) {
       console.log(file);
@@ -238,21 +238,24 @@
      * @returns {Array} a treedata
      */
     function buildTree(root) {
-      var treedata = []
+      var treedata = [];
       for (var fileID in root.files)
         treedata.push({
           "name": root.files[fileID].name,
           "type": "file",
-          "readOnly": root.files[fileID].readOnly,
+          "readOnly": root.readOnly,
           "path": root.files[fileID].absolutePath
         });
 
+      var folder;
       for (var folderID in root.folders) {
+        folder = root.folders[folderID];
+        if (root.readOnly) folder.readOnly = true;
         treedata.push({
-          "name": root.folders[folderID].name,
+          "name": folder.name,
           "type": "folder",
-          "path": root.folders[folderID].absolutePath,
-          "children": buildTree(root.folders[folderID])
+          "path": folder.absolutePath,
+          "children": buildTree(folder)
         });
       }
       return treedata;

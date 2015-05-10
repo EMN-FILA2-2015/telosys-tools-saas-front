@@ -74,6 +74,9 @@
     "content" : {
       "notification" : {
         "saved" : "The file {{name}} has been successfully saved."
+      },
+      "modal": {
+        "unsaved-file": "The file {{name}} contains unsaved changes. Do you wish to discard them ?"
       }
     }
   },

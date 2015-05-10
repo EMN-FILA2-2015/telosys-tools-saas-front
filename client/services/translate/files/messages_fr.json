@@ -74,6 +74,9 @@
     "content" : {
       "notification" : {
         "saved" : "Le fichier {{name}} a été sauvegardé."
+      },
+      "modal": {
+        "unsaved-file": "Le fichier {{name}} n'a pas été sauvegardé. Tous les changements seront perdus. Continuer ?"
       }
     }
   },

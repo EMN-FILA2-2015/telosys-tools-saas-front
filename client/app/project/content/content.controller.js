@@ -31,10 +31,10 @@
     vm.aceOptions = {
       mode: 'html',
       useWrapMode : true,
-      $blockScrolling: Infinity,
       onLoad: function(_editor) {
         vm.aceEditor = _editor;
         _editor.session.setNewLineMode('unix');
+        _editor.$blockScrolling = Infinity;
       },
       onChange: function() {
         vm.contentChanged = true;
@@ -42,7 +42,7 @@
     };
 
     vm.contentChanged = false;
-    vm.selected = {};
+    vm.selectedNode = {};
 
     ////
 
@@ -66,33 +66,8 @@
     vm.model.expandedNodes = [];
 
     vm.bundles = {};
-
-    vm.bundles.treedata =
-      [
-        { "name" : "back-jpa", "type" : "folder", "children" : [
-          { "name" : "Bean.vm", "type" : "file", "children" : [] },
-          { "name" : "repository", "type" : "folder", "children" : [
-            { "name" : "BookRepository.java", "type" : "file", "children" : [] },
-            { "name" : "AuthorRepository.java", "type" : "file", "children" : [] }
-          ]}
-        ]},
-        { "name" : "front-spring-mvc", "type" : "folder", "children" : [
-          { "name" : "domain", "type" : "folder", "children" : [
-            { "name" : "Book.java", "type" : "file", "children" : [] },
-            { "name" : "Author.java", "type" : "file", "children" : [] }
-          ] },
-          { "name" : "web", "type" : "folder", "children" : [
-            { "name" : "BookController.java", "type" : "file", "children" : [] },
-            { "name" : "AuthorController.java", "type" : "file", "children" : [] }
-          ] },
-          { "name" : "Application.java", "type" : "file", "readOnly": true, "children" : [] }
-        ]}
-      ];
-
-    vm.bundles.expandedNodes = [
-      vm.bundles.treedata[0],
-      vm.bundles.treedata[1]
-    ];
+    vm.bundles.treedata = [];
+    vm.bundles.expandedNodes = [];
 
     vm.generated = {};
     vm.generated.treedata = [];
@@ -197,19 +172,47 @@
     }
 
     function showSelected(node) {
-      if (node.type === 'file')
-        WorkspaceService.getFile($stateParams.projectId, node.path)
-          .then(function(data) {
-            vm.aceEditor.setValue(data.content, 0);
-            vm.aceEditor.setReadOnly(node.readOnly);
-            vm.selected = node.path;
-          })
-          .catch(function(error) {
-            $state.transitionTo('error', {
-              code: error.status,
-              text: error.statusText
-            });
+      if (vm.currentlySelected != undefined && !vm.currentlySelected.readOnly && vm.contentChanged) {
+        var saveModal = $modal.open({
+          animation: true,
+          templateUrl: 'app/project/file/saveFileModal.html',
+          controller: 'SaveFileModalController as modalCtrl',
+          size: 'sm',
+          resolve: {
+            file: function() {
+              return vm.currentlySelected.path;
+            }
+          }
+        });
+
+        saveModal.result.then(function() {
+          // Sortie sans sauvegarder
+          if (node.type === 'file') loadFile(node);
+          else vm.currentlySelected = undefined;
+        }, function() {
+          logger.debug('Dismissed save file modal');
+          vm.selectedNode = vm.currentlySelected;
+        })
+      } else if (node.type === 'file') {
+        loadFile(node);
+        vm.contentChanged = false;
+      }
+
+    }
+
+    function loadFile(node) {
+      WorkspaceService.getFile($stateParams.projectId, node.path)
+        .then(function (data) {
+          vm.aceEditor.setValue(data.content, 1);
+          vm.aceEditor.setReadOnly(node.readOnly);
+          vm.currentlySelected = node;
+        })
+        .catch(function (error) {
+          $state.transitionTo('error', {
+            code: error.status,
+            text: error.statusText
           });
+        });
     }
 
     function saveFile(node) {

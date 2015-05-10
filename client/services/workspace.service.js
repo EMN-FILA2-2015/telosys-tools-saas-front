@@ -17,6 +17,7 @@
 
         return {
           get: get,
+          createFolder: createFolder,
           createFile: createFile,
           getFile: getFileContent
         };
@@ -34,9 +35,20 @@
           });
       }
 
-      function createFile(id, path, content) {
+      function createFolder(id, path) {
+        logger.debug('call post /projects/id/workspace/folder service');
+        return service.one(id).one('workspace/folders').doPOST({"path": path})
+          .then(function(data) {
+            return data;
+          })
+          .catch(function(error) {
+            logger.error('createFolder', 'Error during post /projects/id/workspace/folders service', error);
+          });
+      }
+
+      function createFile(id, path) {
         logger.debug('call post /projects/id/workspace/files service');
-        return service.one(id).one('files').post({"path":path, "content": content})
+        return service.one(id).one('workspace/files').doPOST({"path":path})
           .then(function(data) {
             return data;
           })
@@ -45,7 +57,7 @@
           });
       }
 
-      function getFileContent(path) {
+      function getFileContent(id, path) {
         logger.debug('call get /projects/id/workspace/files service');
         return service.one('files').doGET({"path": path})
           .then(function(data) {

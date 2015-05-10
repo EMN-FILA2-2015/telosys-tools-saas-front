@@ -9,15 +9,16 @@
     .module('telosysToolsSaasFrontApp')
     .controller('ContentController', ContentController);
 
-  ContentController.$inject = ['ProjectService', 'Logger', '$modal'];
+  ContentController.$inject = ['WorkspaceService', 'Logger', '$modal', '$stateParams', '$state'];
 
-  function ContentController(ProjectService, Logger, $modal) {
+  function ContentController(WorkspaceService, Logger, $modal, $stateParams, $state) {
 
     /* jshint validthis: true */
     var vm = this;
     var logger = Logger.getInstance('ContentController');
 
     vm.addFile = addFile;
+    vm.addFolder = addFolder;
 
     ////
 
@@ -44,15 +45,8 @@
     };
 
     vm.model = {};
-
-    vm.model.treedata =
-      [
-        { "name" : "book", "type" : "file", "children" : [] },
-        { "name" : "author", "type" : "file", "children" : [] },
-      ];
-
-    vm.model.expandedNodes = [
-    ];
+    vm.model.treedata = [];
+    vm.model.expandedNodes = [];
 
     vm.bundles = {};
 
@@ -84,57 +78,48 @@
     ];
 
     vm.generated = {};
+    vm.generated.treedata = [];
+    vm.generated.expandedNodes = [];
 
-    vm.generated.treedata =
-      [
-        { "name" : "src", "type" : "folder", "children" : [
-          { "name" : "main", "type" : "folder", "children" : [
-            { "name" : "java", "type" : "folder", "children" : [
-              { "name" : "org.demo.myapp", "type" : "folder", "children" : [
-                { "name" : "domain", "type" : "folder", "children" : [
-                  { "name" : "Book.java", "type" : "file", "children" : [] },
-                  { "name" : "Author.java", "type" : "file", "children" : [] }
-                ] },
-                { "name" : "repository", "type" : "folder", "children" : [
-                  { "name" : "BookRepository.java", "type" : "file", "children" : [] },
-                  { "name" : "AuthorRepository.java", "type" : "file", "children" : [] }
-                ] },
-                { "name" : "web", "type" : "folder", "children" : [
-                  { "name" : "BookController.java", "type" : "file", "children" : [] },
-                  { "name" : "AuthorController.java", "type" : "file", "children" : [] }
-                ] },
-                { "name" : "Application.java", "type" : "file", "children" : [] }
-              ]}
-            ]}
-          ]}
-        ]}
-      ];
+    //vm.generated.expandedNodes = [
+    //  vm.generated.treedata[0],
+    //  vm.generated.treedata[0].children[0],
+    //  vm.generated.treedata[0].children[0].children[0],
+    //  vm.generated.treedata[0].children[0].children[0].children[0],
+    //  vm.generated.treedata[0].children[0].children[0].children[0].children[0],
+    //  vm.generated.treedata[0].children[0].children[0].children[0].children[1]
+    //];
+    //
+    //vm.generated.selectedNode = vm.generated.treedata[0].children[0].children[0].children[0].children[0].children[0];
 
-    vm.generated.expandedNodes = [
-      vm.generated.treedata[0],
-      vm.generated.treedata[0].children[0],
-      vm.generated.treedata[0].children[0].children[0],
-      vm.generated.treedata[0].children[0].children[0].children[0],
-      vm.generated.treedata[0].children[0].children[0].children[0].children[0],
-      vm.generated.treedata[0].children[0].children[0].children[0].children[1]
-    ];
-
-    vm.generated.selectedNode = vm.generated.treedata[0].children[0].children[0].children[0].children[0].children[0];
+    getWorkspace();
 
     ////////////////
 
     /**
-     * Fonction permettant de fermer une notification.
-     * @param index
+     * Récupération du workspace.
      */
-    function closeAlert(index) {
-      vm.alerts.splice(index, 1);
+    function getWorkspace() {
+      WorkspaceService.get($stateParams.projectId)
+        .then(function(data) {
+          logger.debug('Retrieving workspace');
+          vm.model.treedata = buildTree(data.models);
+          vm.generated.treedata = buildTree(data.generated);
+          // TODO : Handling bundles and templates
+        })
+        .catch(function(error) {
+          $state.transitionTo('error', {
+            code: error.status,
+            text: error.statusText
+          });
+        });
     }
 
     ////////////////
 
-    function addFile(path) {
+    function addFile(rootFolder, path) {
 
+      /*
       var modalInstance = $modal.open({
         backdrop: 'static',
         templateUrl: 'app/project/file/addFile.html',
@@ -148,10 +133,96 @@
 
       modalInstance.result
         .then(function (newFile) {
+            console.log(newFile);
           // Afficher le message de confirmation de l'ajout
           // Rafraîchir l'arborescence des fichiers
         });
+        */
+
+      WorkspaceService.createFile($stateParams.projectId, rootFolder.concat(path))
+        .then(function(data) {
+          switch(rootFolder) {
+            case "models" :
+              vm.model.treedata = buildTree(data);
+              break;
+            case "bundles" :
+              vm.bundles.treedata = buildTree(data);
+              break;
+            default :
+              $state.transitionTo('error', {
+                code: 403,
+                text: 'Unable to rebuild the file tree'
+              });
+          }
+        })
+        .catch(function(error) {
+          $state.transitionTo('error', {
+            code: error.status,
+            text: error.statusText
+          });
+        });
     };
+
+    function addFolder(rootFolder, path) {
+      WorkspaceService.createFolder($stateParams.projectId, rootFolder.concat(path))
+        .then(function(data) {
+          switch(rootFolder) {
+            case "models" :
+              vm.model.treedata = buildTree(data);
+              break;
+            case "bundles" :
+              vm.bundles.treedata = buildTree(data);
+              break;
+            default :
+              $state.transitionTo('error', {
+                code: 403,
+                text: 'Unable to rebuild the file tree'
+              });
+          }
+        })
+        .catch(function(error) {
+          $state.transitionTo('error', {
+            code: error.status,
+            text: error.statusText
+          });
+        });
+    };
+
+    ////////////////
+
+    /**
+     * Recursive function that builds a treedata from a root folder
+     *
+     * @param root the root folder
+     * @returns {Array} a treedata
+     */
+    function buildTree(root) {
+      var treedata = []
+      for (var fileID in root.files)
+        treedata.push({
+          "name": root.files[fileID].name,
+          "type": "file",
+          "path": root.files[fileID].absolutePath
+        });
+
+      for (var folderID in root.folders) {
+        treedata.push({
+          "name": root.folders[folderID].name,
+          "type": "folder",
+          "path": root.folders[folderID].absolutePath,
+          "children": buildTree(root.folders[folderID])
+        });
+      }
+      return treedata;
+    }
+
+    /**
+     * Fonction permettant de fermer une notification.
+     * @param index
+     */
+    function closeAlert(index) {
+      vm.alerts.splice(index, 1);
+    }
 
   }
 

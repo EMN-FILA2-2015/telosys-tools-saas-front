@@ -43,6 +43,7 @@
 
     vm.contentChanged = false;
     vm.selectedNode = {};
+    vm.selectedTree;
 
     ////
 
@@ -104,7 +105,15 @@
     function addFile(rootFolder, path) {
       var filePath;
       if (path !== undefined) {
-        filePath = path;
+        //if (rootFolder == vm.selectedTree) {
+          if (vm.selectedNode.type === 'folder') {
+            filePath = path;
+          } else {
+            filePath = path.substring(0,path.lastIndexOf('/'));
+          }
+        //} else {
+        //  filePath = rootFolder;
+        //}
       } else {
         filePath = rootFolder;
       }
@@ -173,7 +182,15 @@
 
       var folderPath;
       if (path !== undefined) {
-        folderPath = path;
+        //if (rootFolder == vm.selectedTree) {
+        if (vm.selectedNode.type === 'folder') {
+          folderPath = path;
+        } else {
+          folderPath = path.substring(0,path.lastIndexOf('/'));
+        }
+        //} else {
+        //  folderPath = rootFolder;
+        //}
       } else {
         folderPath = rootFolder;
       }
@@ -263,12 +280,14 @@
         }, function() {
           logger.debug('Dismissed save file modal');
           vm.selectedNode = vm.currentlySelected;
+          //var nodePath = vm.selectedNode.path;
+          //vm.selectedTree = nodePath.split("/")[0];
+          //logger.debug("selectedTree is now "+vm.selectedTree);
         })
       } else if (node.type === 'file') {
         loadFile(node);
         vm.contentChanged = false;
       }
-
     }
 
     function loadFile(node) {

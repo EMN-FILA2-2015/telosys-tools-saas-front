@@ -4,9 +4,10 @@
       cursor: pointer;
     }
   }
-  .form-horizontal {
-    .save-config {
-      float: right;
-    }
+  .save-config {
+    float: right;
+  }
+  .hasError {
+    @extend .alert-danger;
   }
 }

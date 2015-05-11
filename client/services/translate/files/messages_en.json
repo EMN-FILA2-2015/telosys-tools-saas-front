@@ -49,7 +49,8 @@
         "delete" : "Delete",
         "insert" : "Insert variable",
         "new" : "New variable",
-        "show_reserved" : "Show reserved variable names"
+        "show_reserved" : "Show reserved variable names",
+        "hide_reserved" : "Hide reserved variable names"
       },
       "reinitialisation" : "Revert changes",
       "save" : "Save",
@@ -58,7 +59,8 @@
       },
       "error" : {
         "getting" : "An arror occured while getting the configuration.",
-        "saving" : "An error occured while saving the configuration."
+        "saving" : "An error occured while saving the configuration.",
+        "fields" : "You have either used a reserved variable name or not filled a field.."
       }
     },
     "bundle" : {

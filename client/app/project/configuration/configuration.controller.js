@@ -35,8 +35,9 @@
     vm.variables = [];
     vm.createVariable = createVariable;
     vm.deleteVariable = deleteVariable;
-    vm.reservedVariables = [];
-    getReservedVariables();
+    vm.reservedVariables = getReservedVariables();
+    vm.validateVariable = validateVariable;
+    vm.showReservedVariables = false;
 
     vm.setConfig = setConfig;
     vm.getConfig = getConfig;
@@ -59,13 +60,11 @@
               'name' : 'project.configuration.packages.root_package',
               'id' : 'ROOT_PKG',
               'shortcut' : '${ROOT_PKG}',
-              'example' : 'org.demo',
               'value' : data.packages.ROOT_PKG
             }, {
               'name' : 'project.configuration.packages.entity_classes_package',
               'id' : 'ENTITY_PKG',
               'shortcut' : '${ENTITY_PKG}',
-              'example' : 'org.demo.entities',
               'value' : data.packages.ENTITY_PKG
             }
           ];
@@ -75,43 +74,36 @@
               'name' : 'project.configuration.folders.sources',
               'id' : 'SRC',
               'shortcut' : '${SRC}',
-              'example' : 'src',
               'value' : data.folders.SRC
             }, {
               'name' : 'project.configuration.folders.resources',
               'id' : 'RES',
               'shortcut' : '${RES}',
-              'example' : 'src/resources',
               'value' : data.folders.RES
             }, {
               'name' : 'project.configuration.folders.web_content',
               'id' : 'WEB',
               'shortcut' : '${WEB}',
-              'example' : 'webapp',
               'value' : data.folders.WEB
             }, {
               'name' : 'project.configuration.folders.tests_sources',
               'id' : 'TEST_SRC',
               'shortcut' : '${TEST_SRC}',
-              'example' : 'test',
               'value' : data.folders.TEST_SRC
             }, {
               'name' : 'project.configuration.folders.tests_resources',
               'id' : 'TEST_RES',
               'shortcut' : '${TEST_RES}',
-              'example' : 'test/resources',
               'value' : data.folders.TEST_RES
             }, {
               'name' : 'project.configuration.folders.documentation',
               'id' : 'DOC',
               'shortcut' : '${DOC}',
-              'example' : 'doc',
               'value' : data.folders.DOC
             }, {
               'name' : 'project.configuration.folders.temporary_files',
               'id' : 'TMP',
               'shortcut' : '${TMP}',
-              'example' : 'tmp',
               'value' : data.folders.TMP
             }
           ];
@@ -156,24 +148,32 @@
         config.variables[vm.variables[vrb].name] = vm.variables[vrb].value;
       }
       // Envoi des données
-      ProjectService.setConfig($stateParams.projectId, config)
-        .then(function() {
-          vm.alerts.push({
-            type: 'success',
-            msg: 'project.configuration.notification.saved'
+      if (validateVariables(config.variables)) {
+        ProjectService.setConfig($stateParams.projectId, config)
+          .then(function () {
+            vm.alerts.push({
+              type: 'success',
+              msg: 'project.configuration.notification.saved'
+            });
+          })
+          .catch(function (error) {
+            logger.error("Unable to save the configuration", error);
+            vm.alerts.push({
+              type: 'danger',
+              msg: 'project.configuration.error.saving'
+            });
+          })
+          .finally(function () {
+            // Déplacement vers le haut de la page pour afficher la notification
+            $('html, body').animate({scrollTop: 0}, 'fast');
           });
-        })
-        .catch(function(error) {
-          logger.error("Unable to save the configuration", error);
-          vm.alerts.push({
-            type: 'danger',
-            msg: 'project.configuration.error.saving'
-          });
-        })
-        .finally(function() {
-          // Déplacement vers le haut de la page pour afficher la notification
-          $('html, body').animate({ scrollTop: 0 }, 'fast');
-        })
+      } else {
+        vm.alerts.push({
+          type: 'danger',
+          msg: 'project.configuration.error.fields'
+        });
+      }
+      $('html, body').animate({scrollTop: 0}, 'fast');
     }
 
     /**
@@ -272,8 +272,42 @@
       }
     }
 
+    /**
+     * Function checking if the variables are reserved.
+     */
+    function validateVariables(variables) {
+      for (var variable in variables) {
+        if (vm.reservedVariables.indexOf(variables[variable]) == -1 || variables[variable] == '') {
+          return false;
+        }
+      }
+      return true;
+    }
+
+    /**
+     * Function checking if the variable is reserved or undefined :
+     * ==> yes : add hasError class
+     * ==> no : remove hasError clas
+     */
+    function validateVariable(inputId) {
+      var input = $('#' + inputId);
+      var value = input.val();
+      if (value.trim() == '') {
+        input.addClass("hasError");
+      } else {
+        if (vm.reservedVariables.indexOf(input.val()) == -1) {
+          input.removeClass("hasError");
+        } else {
+          input.addClass("hasError");
+        }
+      }
+    }
+
+    /**
+     * Function returning the reserved variable names.
+     */
     function getReservedVariables() {
-      vm.reservedVariables = [
+      return [
         'AMP',
         'DOC',
         'DOLLAR',

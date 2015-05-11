@@ -49,7 +49,8 @@
         "delete" : "Supprimer",
         "insert" : "Insérer une variable",
         "new" : "Nouvelle variable",
-        "show_reserved" : "Voir les noms de variables réservés"
+        "show_reserved" : "Voir les noms de variables réservés",
+        "hide_reserved" : "Masquer les noms de variables réservés"
       },
       "reinitialisation" : "Annuler les changements",
       "save" : "Enregister",
@@ -58,7 +59,8 @@
       },
       "error" : {
         "getting" : "Une erreur est survenue pendant la récupération de la configuration.",
-        "saving" : "Une erreur est survenue pendant l'enregistrement."
+        "saving" : "Une erreur est survenue pendant l'enregistrement.",
+        "fields" : "Vous n'avez soit pas rempli un champ ou utilisé un nom de variable réservé."
       }
     },
     "bundle" : {

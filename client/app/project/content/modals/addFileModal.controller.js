@@ -39,33 +39,7 @@
       vm.isSaving = true;
       vm.errorValidationMessages = [];
 
-      // à supprimer
-      alert('Create file : '+file.path+"/"+file.name);
-
-      /*
-      return FileResource
-       .from(uri)
-       .add(file)
-       .then(function (addedFile) {
-       vm.isSaving = false;
-       $modalInstance.close(addedFile);
-       })
-       .catch(function (response) {
-
-       vm.isSaving = false;
-       vm.isFailed = true;
-
-       if (response.status === 422) {
-       vm.errorValidationMessages = response.data.messages;
-       }
-
-       return $timeout(function () {
-       vm.isFailed = false;
-       }, 800);
-
-       });
-       */
-
+      $modalInstance.close(file);
     }
   }
 })();

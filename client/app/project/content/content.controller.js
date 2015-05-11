@@ -103,10 +103,9 @@
 
     function addFile(rootFolder, path) {
 
-      /*
       var modalInstance = $modal.open({
         backdrop: 'static',
-        templateUrl: 'app/project/file/addFile.html',
+        templateUrl: 'app/project/content/modals/addFileModal.html',
         controller: 'AddFileController as addFile',
         resolve: {
           path: function () {
@@ -115,61 +114,53 @@
         }
       });
 
-      modalInstance.result
-        .then(function (newFile) {
-            console.log(newFile);
-          // Afficher le message de confirmation de l'ajout
-          // Rafraîchir l'arborescence des fichiers
-        });
-        */
-      vm.currentPath = path;
-      WorkspaceService.createFile($stateParams.projectId, rootFolder.concat(path))
-        .then(function(data) {
-          switch(rootFolder) {
-            case "model" :
-              vm.model.treedata = buildTree(data);
-              break;
-            case "templates" :
-              vm.templates.treedata = buildTree(data);
-              break;
-            default :
-              $state.transitionTo('error', {
-                code: 403,
-                text: 'Unable to rebuild the file tree'
-              });
-          }
-          vm.alerts.push({
-            type: 'success',
-            msg: 'project.content.notification.file_created'
+      modalInstance.result.then(function (file) {
+        logger.debug('Creating file ' + file.path + "/" + file.name)
+        WorkspaceService.createFile($stateParams.projectId, file.path + "/" + file.name)
+          .then(function(data) {
+            switch(rootFolder) {
+              case "model" :
+                vm.model.treedata = buildTree(data);
+                break;
+              case "templates" :
+                vm.templates.treedata = buildTree(data);
+                break;
+              default :
+                $state.transitionTo('error', {
+                  code: 403,
+                  text: 'Unable to rebuild the file tree'
+                });
+            }
+          })
+          .catch(function(error) {
+            switch (error.status) {
+              case 409 :
+                vm.alerts.push({
+                  type: 'danger',
+                  msg: 'project.content.error.duplicate_file'
+                });
+                break;
+              case 403 :
+                vm.alerts.push({
+                  type: 'danger',
+                  msg: 'project.content.error.invalid_path'
+                });
+                break;
+              case 404 :
+                vm.alerts.push({
+                  type: 'danger',
+                  msg: 'project.content.error.parent_not_found'
+                });
+                break;
+              default :
+                $state.transitionTo('error', {
+                  code: error.status,
+                  text: error.statusText
+                });
+            }
           });
-        })
-        .catch(function(error) {
-          switch (error.status) {
-            case 409 :
-              vm.alerts.push({
-                type: 'danger',
-                msg: 'project.content.error.duplicate_file'
-              });
-              break;
-            case 403 :
-              vm.alerts.push({
-                type: 'danger',
-                msg: 'project.content.error.invalid_path'
-              });
-              break;
-            case 404 :
-              vm.alerts.push({
-                type: 'danger',
-                msg: 'project.content.error.parent_not_found'
-              });
-              break;
-            default :
-              $state.transitionTo('error', {
-                code: error.status,
-                text: error.statusText
-              });
-          }
-        });
+      });
+
     }
 
     function addFolder(rootFolder, path) {

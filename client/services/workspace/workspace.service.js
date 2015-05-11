@@ -87,25 +87,25 @@
           })
       }
 
-      function deleteFile(path) {
+      function deleteFile(id, path) {
         logger.debug('call the delete /projects/id/workspace/files service')
-        return service.delete({"path" : path})
+        return service.one(id).one('workspace').doDELETE("files", {path : path})
           .then(function(data) {
             return data;
           })
           .catch(function(error) {
-            logger.error('delete','Error during the delete /projects/id/workspace/files call',error);
+            logger.debug('delete', 'Error during the delete /projects/id/workspace/files call', error);
           })
       }
 
-      function renameFile(path,newName) {
+      function renameFile(id, path,newName) {
         logger.debug('call the patch /projects/id/workspace/files service')
-        return service.patch({"path" : path, "name" : newName})
+        return service.one(id).one('workspace/files').patch({path: path, name: newName})
           .then(function(data) {
             return data;
           })
           .catch(function(error) {
-            logger.error('rename','Error during the patch /projects/id/workspace/files call',error);
+            logger.debug('rename', 'Error during the patch /projects/id/workspace/files call', error);
           })
       }
 

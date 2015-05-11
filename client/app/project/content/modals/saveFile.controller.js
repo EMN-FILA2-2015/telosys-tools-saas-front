@@ -1,14 +1,17 @@
+/**
+ * Created by Adrian
+ */
 (function () {
     'use strict';
 
     angular
         .module('telosysToolsSaasFrontApp')
-        .controller('SaveFileModalController', SaveFileModalController);
+        .controller('SaveFileController', SaveFileController);
 
-    SaveFileModalController.$inject = ['$modalInstance', 'file'];
+    SaveFileController.$inject = ['$modalInstance', 'file'];
 
     /* @ngInject */
-    function SaveFileModalController($modalInstance, file) {
+    function SaveFileController($modalInstance, file) {
         /* jshint validthis: true */
         var vm = this;
         vm.filename = file;

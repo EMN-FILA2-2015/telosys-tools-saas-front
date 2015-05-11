@@ -24,7 +24,7 @@
     vm.addFolder = addFolder;
     vm.showSelected = showSelected;
     vm.saveFile = saveFile;
-    vm.deleteFile = deleteFile;
+    vm.deleteFileModal = deleteFileModal;
 
     ////
 
@@ -126,7 +126,7 @@
       WorkspaceService.createFile($stateParams.projectId, rootFolder.concat(path))
         .then(function(data) {
           switch(rootFolder) {
-            case "models" :
+            case "model" :
               vm.model.treedata = buildTree(data);
               break;
             case "templates" :
@@ -288,8 +288,54 @@
       }
     }
 
-    function deleteFile(file) {
-      console.log(file);
+    function deleteFileModal(node) {
+      if (vm.selectedNode != undefined && vm.selectedNode.type == 'file') {
+        var deleteModal = $modal.open({
+          animation: true,
+          templateUrl: 'app/project/content/modals/deleteResource.html',
+          controller: 'DeleteResourceController as modalCtrl',
+          size: 'sm',
+          resolve: {
+            path: function() {
+              return node.path;
+            },
+            type: function() {
+              return node.type;
+            }
+          }
+        });
+
+        deleteModal.result.then(function(path) {
+          logger.debug('Deleting file ' + path)
+          WorkspaceService.deleteFile($stateParams.projectId, path)
+            .then(function(data) {
+              vm.aceEditor.setValue('');
+              vm.currentlySelected = undefined;
+              switch(data.name) {
+                case "model" :
+                  vm.model.treedata = buildTree(data);
+                  vm.selectedNode = vm.model.treedata[0];
+                  break;
+                case "templates" :
+                  vm.templates.treedata = buildTree(data);
+                  vm.selectedNode = vm.model.treedata[0];
+                  break;
+                default :
+                  $state.transitionTo('error', {
+                    code: 403,
+                    text: 'Unable to rebuild the file tree'
+                  });
+              }
+            })
+            .catch(function(error) {
+              logger.error('error loading file - ' + error.statusText);
+              vm.alerts.push({
+                type: 'danger',
+                msg: 'project.content.error.delete_file'
+              });
+            });
+        });
+      }
     }
 
     ////////////////

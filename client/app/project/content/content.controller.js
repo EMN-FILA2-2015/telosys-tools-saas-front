@@ -102,14 +102,19 @@
     ////////////////
 
     function addFile(rootFolder, path) {
-
+      var filePath;
+      if (path !== undefined) {
+        filePath = path;
+      } else {
+        filePath = rootFolder;
+      }
       var modalInstance = $modal.open({
         backdrop: 'static',
         templateUrl: 'app/project/content/modals/addFileModal.html',
         controller: 'AddFileController as addFile',
         resolve: {
           path: function () {
-            return path;
+            return filePath;
           }
         }
       });

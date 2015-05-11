@@ -122,7 +122,7 @@
           // Rafraîchir l'arborescence des fichiers
         });
         */
-
+      vm.currentPath = path;
       WorkspaceService.createFile($stateParams.projectId, rootFolder.concat(path))
         .then(function(data) {
           switch(rootFolder) {
@@ -138,6 +138,10 @@
                 text: 'Unable to rebuild the file tree'
               });
           }
+          vm.alerts.push({
+            type: 'success',
+            msg: 'project.content.notification.file_created'
+          });
         })
         .catch(function(error) {
           switch (error.status) {
@@ -169,7 +173,7 @@
     }
 
     function addFolder(rootFolder, path) {
-      vm.creationPath = path;
+      vm.currentPath = path;
       WorkspaceService.createFolder($stateParams.projectId, rootFolder.concat(path))
         .then(function(data) {
           switch(rootFolder) {
@@ -306,6 +310,7 @@
         });
 
         deleteModal.result.then(function(path) {
+          vm.currentPath = path;
           logger.debug('Deleting file ' + path)
           WorkspaceService.deleteFile($stateParams.projectId, path)
             .then(function(data) {
@@ -326,6 +331,10 @@
                     text: 'Unable to rebuild the file tree'
                   });
               }
+              vm.alerts.push({
+                type: 'success',
+                msg: 'project.content.notification.resource_deleted'
+              });
             })
             .catch(function(error) {
               logger.error('error loading file - ' + error.statusText);

@@ -75,7 +75,10 @@
     },
     "content" : {
       "notification" : {
-        "saved" : "The file {{name}} has been successfully saved."
+        "saved" : "The file {{name}} has been successfully saved.",
+        "file_created": "The file {{path}} has been successfully created.",
+        "folder_created": "The folder {{path}} has been successfully created.",
+        "resource_deleted": "The resource {{path}} has been successfully deleted."
       },
       "error": {
         "duplicate_folder" : "The folder {{path}} already exists.",

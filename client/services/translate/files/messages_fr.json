@@ -75,11 +75,14 @@
     },
     "content" : {
       "notification" : {
-        "saved" : "Le fichier {{name}} a été sauvegardé."
+        "saved" : "Le fichier {{name}} a été sauvegardé.",
+        "file_created": "Le fichier {{path}} a été créé.",
+        "folder_created": "Le dossier {{path}} a été créé.",
+        "resource_deleted": "La ressource {{path}} a été supprimée"
       },
       "error": {
-        "duplicate_folder" : "Le dossier {{name}} existe déjà.",
-        "duplicate_file": "Le fichier {{name}} existe déjà.",
+        "duplicate_folder" : "Le dossier {{path}} existe déjà.",
+        "duplicate_file": "Le fichier {{path}} existe déjà.",
         "parent_not_found": "Le dossier parent n'a pas pu être trouvé pour le chemin {{path}}.",
         "save_file": "Impossible d'enregistrer le fichier. Une erreur inattendue est survenue : {{message}}",
         "load_file": "Impossible de charger le fichier. Une erreur inattendue est survenue : {{message}}",

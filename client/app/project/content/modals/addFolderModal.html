@@ -1,0 +1,43 @@
+<div class="modal-content">
+  <div class="modal-header">Add a folder</div>
+  <form class="form-horizontal"
+        name="addFolderForm"
+        novalidate>
+    <div class="modal-body">
+      <div class="form-group">
+        <label class="col-xs-3 control-label form-label">Path</label>
+        <div class="col-xs-8 form-container-input">
+          {{addFolder.folder.path}}
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="addFolderName"
+               class="col-xs-3 control-label form-label">Name</label>
+        <div class="col-xs-8 form-container-input">
+          <input type="text"
+                 class="form-control"
+                 id="addFolderName"
+                 name="addFolderName"
+                 ng-model="addFolder.folder.name"
+                 newinput>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="pull-right btn btn-primary withripple btn-form"
+              ng-class="{ 'btn-danger': addFolder.isFailed }"
+              ng-click="addFolder.createFolder(addFolderForm, addFolder.folder)">
+        <span ng-if="!addFolder.isCreating()" class="animate-if-fast">Add</span>
+        <span ng-if="addFolder.isSaving" class="animate-if-fast"><i class="fa fa-circle-o-notch fa-spin"></i></span>
+        <span ng-if="addFolder.isFailed" class="animate-if-fast"><i class="fa fa-close"></i></span>
+      </button>
+      <button class="pull-right btn btn-default withripple btn-form"
+              style="margin-right: 5px;"
+              ng-click="addFolder.cancel()"
+              ng-disabled="addFolder.isSaving">
+        Cancel
+      </button>
+    </div>
+</form>
+</div>
+

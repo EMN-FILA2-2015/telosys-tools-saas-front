@@ -170,54 +170,76 @@
 
     function addFolder(rootFolder, path) {
       vm.currentPath = path;
-      WorkspaceService.createFolder($stateParams.projectId, rootFolder.concat(path))
-        .then(function(data) {
-          switch(rootFolder) {
-            case "model" :
-              vm.model.treedata = buildTree(data);
-              break;
-            case "templates" :
-              vm.templates.treedata = buildTree(data);
-              break;
-            default :
-              $state.transitionTo('error', {
-                code: 500,
-                text: 'Unable to rebuild the file tree'
-              });
-          }
-          vm.alerts.push({
-            type: 'success',
-            msg: 'project.content.notification.folder_created'
-          });
-        })
-        .catch(function(error) {
-          switch (error.status) {
-            case 409 :
-              vm.alerts.push({
-                type: 'danger',
-                msg: 'project.content.error.duplicate_folder'
-              });
-              break;
-            case 403 :
-              vm.alerts.push({
-                type: 'danger',
-                msg: 'project.content.error.invalid_path'
-              });
-              break;
-            case 404 :
-              vm.alerts.push({
-                type: 'danger',
-                msg: 'project.content.error.parent_not_found'
-              });
-              break;
-            default :
-              $state.transitionTo('error', {
-                code: error.status,
-                text: error.statusText
-              });
-          }
 
-        });
+      var folderPath;
+      if (path !== undefined) {
+        folderPath = path;
+      } else {
+        folderPath = rootFolder;
+      }
+      var modalInstance = $modal.open({
+        backdrop: 'static',
+        templateUrl: 'app/project/content/modals/addFolderModal.html',
+        controller: 'AddFolderController as addFolder',
+        resolve: {
+          path: function () {
+            return folderPath;
+          }
+        }
+      });
+
+
+      modalInstance.result.then(function (folder) {
+        logger.debug('Creating folder ' + folder.path + "/" + folder.name)
+        WorkspaceService.createFolder($stateParams.projectId, folder.path + "/" + folder.name)
+          .then(function (data) {
+            switch (rootFolder) {
+              case "model" :
+                vm.model.treedata = buildTree(data);
+                break;
+              case "templates" :
+                vm.templates.treedata = buildTree(data);
+                break;
+              default :
+                $state.transitionTo('error', {
+                  code: 500,
+                  text: 'Unable to rebuild the file tree'
+                });
+            }
+            vm.alerts.push({
+              type: 'success',
+              msg: 'project.content.notification.folder_created'
+            });
+          })
+          .catch(function (error) {
+            switch (error.status) {
+              case 409 :
+                vm.alerts.push({
+                  type: 'danger',
+                  msg: 'project.content.error.duplicate_folder'
+                });
+                break;
+              case 403 :
+                vm.alerts.push({
+                  type: 'danger',
+                  msg: 'project.content.error.invalid_path'
+                });
+                break;
+              case 404 :
+                vm.alerts.push({
+                  type: 'danger',
+                  msg: 'project.content.error.parent_not_found'
+                });
+                break;
+              default :
+                $state.transitionTo('error', {
+                  code: error.status,
+                  text: error.statusText
+                });
+            }
+
+          });
+      });
     }
 
     function showSelected(node) {

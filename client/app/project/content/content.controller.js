@@ -341,7 +341,7 @@
                   break;
                 case "templates" :
                   vm.templates.treedata = buildTree(data);
-                  vm.selectedNode = vm.model.treedata[0];
+                  vm.selectedNode = vm.templates.treedata[0];
                   break;
                 default :
                   $state.transitionTo('error', {

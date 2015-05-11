@@ -61,17 +61,18 @@
       }
     };
 
-    vm.model = {};
-    vm.model.treedata = [];
-    vm.model.expandedNodes = [];
-
-    vm.bundles = {};
-    vm.bundles.treedata = [];
-    vm.bundles.expandedNodes = [];
-
-    vm.generated = {};
-    vm.generated.treedata = [];
-    vm.generated.expandedNodes = [];
+    vm.model = {
+      treedata: [],
+      expandedNodes: []
+    };
+    vm.templates = {
+      treedata: [],
+      expandedNodes: []
+    };
+    vm.generated = {
+      treedata: [],
+      expandedNodes: []
+    };
 
     ////
 
@@ -86,9 +87,9 @@
       WorkspaceService.get($stateParams.projectId)
         .then(function(data) {
           logger.debug('Retrieving workspace');
-          vm.model.treedata = buildTree(data.models);
+          vm.model.treedata = buildTree(data.model);
+          vm.templates.treedata = buildTree(data.templates);
           vm.generated.treedata = buildTree(data.generated);
-          // TODO : Handling bundles and templates
         })
         .catch(function(error) {
           $state.transitionTo('error', {
@@ -128,8 +129,8 @@
             case "models" :
               vm.model.treedata = buildTree(data);
               break;
-            case "bundles" :
-              vm.bundles.treedata = buildTree(data);
+            case "templates" :
+              vm.templates.treedata = buildTree(data);
               break;
             default :
               $state.transitionTo('error', {
@@ -139,35 +140,83 @@
           }
         })
         .catch(function(error) {
-          $state.transitionTo('error', {
-            code: error.status,
-            text: error.statusText
-          });
+          switch (error.status) {
+            case 409 :
+              vm.alerts.push({
+                type: 'danger',
+                msg: 'project.content.error.duplicate_file'
+              });
+              break;
+            case 403 :
+              vm.alerts.push({
+                type: 'danger',
+                msg: 'project.content.error.invalid_path'
+              });
+              break;
+            case 404 :
+              vm.alerts.push({
+                type: 'danger',
+                msg: 'project.content.error.parent_not_found'
+              });
+              break;
+            default :
+              $state.transitionTo('error', {
+                code: error.status,
+                text: error.statusText
+              });
+          }
         });
     }
 
     function addFolder(rootFolder, path) {
+      vm.creationPath = path;
       WorkspaceService.createFolder($stateParams.projectId, rootFolder.concat(path))
         .then(function(data) {
           switch(rootFolder) {
-            case "models" :
+            case "model" :
               vm.model.treedata = buildTree(data);
               break;
-            case "bundles" :
-              vm.bundles.treedata = buildTree(data);
+            case "templates" :
+              vm.templates.treedata = buildTree(data);
               break;
             default :
               $state.transitionTo('error', {
-                code: 403,
+                code: 500,
                 text: 'Unable to rebuild the file tree'
               });
           }
+          vm.alerts.push({
+            type: 'success',
+            msg: 'project.content.notification.folder_created'
+          });
         })
         .catch(function(error) {
-          $state.transitionTo('error', {
-            code: error.status,
-            text: error.statusText
-          });
+          switch (error.status) {
+            case 409 :
+              vm.alerts.push({
+                type: 'danger',
+                msg: 'project.content.error.duplicate_folder'
+              });
+              break;
+            case 403 :
+              vm.alerts.push({
+                type: 'danger',
+                msg: 'project.content.error.invalid_path'
+              });
+              break;
+            case 404 :
+              vm.alerts.push({
+                type: 'danger',
+                msg: 'project.content.error.parent_not_found'
+              });
+              break;
+            default :
+              $state.transitionTo('error', {
+                code: error.status,
+                text: error.statusText
+              });
+          }
+
         });
     }
 
@@ -175,8 +224,8 @@
       if (vm.currentlySelected != undefined && !vm.currentlySelected.readOnly && vm.contentChanged) {
         var saveModal = $modal.open({
           animation: true,
-          templateUrl: 'app/project/file/saveFileModal.html',
-          controller: 'SaveFileModalController as modalCtrl',
+          templateUrl: 'app/project/content/modals/saveFile.html',
+          controller: 'SaveFileController as modalCtrl',
           size: 'sm',
           resolve: {
             file: function() {
@@ -208,9 +257,11 @@
           vm.currentlySelected = node;
         })
         .catch(function (error) {
-          $state.transitionTo('error', {
-            code: error.status,
-            text: error.statusText
+          vm.errorMessage = 'Code : ' + error.status + ' ' + error.statusText;
+          logger.error('error loading file - ' + error.statusText);
+          vm.alerts.push({
+            type: 'danger',
+            msg: 'project.content.error.load_file'
           });
         });
     }
@@ -218,7 +269,6 @@
     function saveFile(node) {
       if (vm.contentChanged) {
         var content = vm.aceEditor.getValue();
-        console.log(content);
         WorkspaceService.updateFile($stateParams.projectId, node.path, content)
           .then(function() {
             vm.contentChanged = false;
@@ -228,9 +278,11 @@
             });
           })
           .catch(function(error) {
-            $state.transitionTo('error', {
-              code: error.status,
-              text: error.statusText
+            vm.errorMessage = 'Code : ' + error.status + ' ' + error.statusText;
+            logger.error('error saving file - ' + error.statusText);
+            vm.alerts.push({
+              type: 'danger',
+              msg: 'project.content.error.save_file'
             });
           });
       }
@@ -278,6 +330,7 @@
      */
     function closeAlert(index) {
       vm.alerts.splice(index, 1);
+      vm.errorMessage = null;
     }
 
   }

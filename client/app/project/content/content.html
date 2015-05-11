@@ -1,13 +1,13 @@
 <div class="project-content row">
   <alert ng-repeat="alert in content.alerts" type="{{alert.type}}" close="content.closeAlert($index)">
-    <span translate="{{alert.msg}}" translate-values="{name:content.selected}"></span>
+    <span translate="{{alert.msg}}" translate-values="{name:content.selectedNode.path, path:content.creationPath, message:content.errorMessage}"></span>
   </alert>
 
   <div class="project-files col-lg-4">
     <div class="panel panel-default">
       <div class="panel-heading">
-        <a ng-click="content.addFile('models', '/test/file.txt')" class="btn btn-default btn-treedata"><span class="glyphicon glyphicon-plus" style="font-weight: normal"></span>&nbsp;<span translate="project.content.button.add_file"></span></a>
-        <a ng-click="content.addFolder('models', '/test')" class="btn btn-default btn-treedata"><span class="glyphicon glyphicon-plus" style="font-weight: normal"></span>&nbsp;<span translate="project.content.button.add_folder"></span></a>
+        <a ng-click="content.addFile('model', '/test/file.txt')" class="btn btn-default btn-treedata"><span class="glyphicon glyphicon-plus" style="font-weight: normal"></span>&nbsp;<span translate="project.content.button.add_file"></span></a>
+        <a ng-click="content.addFolder('model', '/test')" class="btn btn-default btn-treedata"><span class="glyphicon glyphicon-plus" style="font-weight: normal"></span>&nbsp;<span translate="project.content.button.add_folder"></span></a>
         <h6 class="panel-title">Model</h6>
       </div>
       <div class="panel-body">
@@ -30,7 +30,7 @@
       <div class="panel-heading">
         <a ng-click="content.addFile('bundles', 'PATH')" class="btn btn-default btn-treedata"><span class="glyphicon glyphicon-plus" style="font-weight: normal"></span>&nbsp;<span translate="project.content.button.add_file"></span></a>
         <a ng-click="content.addFolder('bundles', 'PATH')" class="btn btn-default btn-treedata"><span class="glyphicon glyphicon-plus" style="font-weight: normal"></span>&nbsp;<span translate="project.content.button.add_folder"></span></a>
-        <h6 class="panel-title">Bundles</h6>
+        <h6 class="panel-title">Templates</h6>
       </div>
       <div class="panel-body">
         <!-- -->
@@ -39,8 +39,8 @@
         <!-- -->
         <treecontrol class="tree-light"
                      options="content.treeOptions"
-                     tree-model="content.bundles.treedata"
-                     expanded-nodes="content.bundles.expandedNodes"
+                     tree-model="content.templates.treedata"
+                     expanded-nodes="content.templates.expandedNodes"
                      on-selection="content.showSelected(node)"
                      selected-node="content.selectedNode">
           <span class="glyphicon glyphicon-folder-close" ng-if="node.type == 'folder'"></span>

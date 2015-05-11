@@ -32,7 +32,7 @@
             return data;
           })
           .catch(function(error) {
-            logger.error('get', 'Error during the get /projects/id/workspace call', error);
+            logger.debug('get', 'Error during the get /projects/id/workspace call', error);
             throw error;
           });
       }
@@ -44,7 +44,7 @@
             return data;
           })
           .catch(function(error) {
-            logger.error('createFolder', 'Error during post /projects/id/workspace/folders service', error);
+            logger.debug('createFolder', 'Error during post /projects/id/workspace/folders service', error);
             throw error;
           });
       }
@@ -56,7 +56,7 @@
             return data;
           })
           .catch(function(error) {
-            logger.error('createFile', 'Error during post /projects/id/workspace/files service', error);
+            logger.debug('createFile', 'Error during post /projects/id/workspace/files service', error);
             throw error;
           });
       }
@@ -68,7 +68,7 @@
             return data;
           })
           .catch(function(error) {
-            logger.error('getFileContent', 'Error during get /projects/id/workspace/files service', error);
+            logger.debug('getFileContent', 'Error during get /projects/id/workspace/files service', error);
             throw error;
           });
       }
@@ -80,7 +80,7 @@
             return data;
           })
           .catch(function(error) {
-            logger.error('updateFileContent', 'Error during put /proejcts/id/workspace/files service', error);
+            logger.debug('updateFileContent', 'Error during put /proejcts/id/workspace/files service', error);
             throw error;
           })
       }

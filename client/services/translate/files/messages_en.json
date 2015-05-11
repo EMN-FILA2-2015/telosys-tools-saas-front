@@ -77,11 +77,20 @@
       "notification" : {
         "saved" : "The file {{name}} has been successfully saved."
       },
+      "error": {
+        "duplicate_folder" : "The folder {{path}} already exists.",
+        "duplicate_file": "The file {{path}} already exists.",
+        "parent_not_found": "Could not find parent folder for path {{path}}.",
+        "save_file": "Failed to save the file. Unexpected error trace : {{message}}",
+        "load_file": "Failed to load the file. Unexpected error trace : {{message}}"
+      },
       "button": {
         "add_file": "New file",
         "add_folder": "New folder",
         "save_file": "Save",
-        "delete_file": "Delete"
+        "delete_file": "Delete",
+        "ignore": "Ignore",
+        "cancel": "Cancel"
       },
       "modal": {
         "unsaved-file": "The file {{name}} contains unsaved changes. Do you wish to discard them ?"

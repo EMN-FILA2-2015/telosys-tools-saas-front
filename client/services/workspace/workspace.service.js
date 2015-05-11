@@ -20,7 +20,9 @@
           createFolder: createFolder,
           createFile: createFile,
           getFile: getFileContent,
-          updateFile: updateFileContent
+          updateFile: updateFileContent,
+          deleteFile: deleteFile,
+          renameFile: renameFile
         };
 
         ////////////////
@@ -82,6 +84,28 @@
           .catch(function(error) {
             logger.debug('updateFileContent', 'Error during put /proejcts/id/workspace/files service', error);
             throw error;
+          })
+      }
+
+      function deleteFile(path) {
+        logger.debug('call the delete /projects/id/workspace/files service')
+        return service.delete({"path" : path})
+          .then(function(data) {
+            return data;
+          })
+          .catch(function(error) {
+            logger.error('delete','Error during the delete /projects/id/workspace/files call',error);
+          })
+      }
+
+      function renameFile(path,newName) {
+        logger.debug('call the patch /projects/id/workspace/files service')
+        return service.patch({"path" : path, "name" : newName})
+          .then(function(data) {
+            return data;
+          })
+          .catch(function(error) {
+            logger.error('rename','Error during the patch /projects/id/workspace/files call',error);
           })
       }
 

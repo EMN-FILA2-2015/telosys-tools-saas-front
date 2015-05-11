@@ -77,6 +77,12 @@
       "notification" : {
         "saved" : "Le fichier {{name}} a été sauvegardé."
       },
+      "button": {
+        "add_file": "Nouveau fichier",
+        "add_folder": "Nouveau dossier",
+        "save_file": "Sauver",
+        "delete_file": "Supprimer"
+      },
       "modal": {
         "unsaved-file": "Le fichier {{name}} n'a pas été sauvegardé. Tous les changements seront perdus. Continuer ?"
       }

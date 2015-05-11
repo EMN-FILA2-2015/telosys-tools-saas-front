@@ -5,7 +5,7 @@
         .module('telosysToolsSaasFrontApp')
         .controller('SaveFileModalController', SaveFileModalController);
 
-    SaveFileModalController.$inject = ['$modalInstance', 'Logger', 'file'];
+    SaveFileModalController.$inject = ['$modalInstance', 'file'];
 
     /* @ngInject */
     function SaveFileModalController($modalInstance, file) {

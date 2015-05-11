@@ -6,8 +6,8 @@
   <div class="project-files col-lg-4">
     <div class="panel panel-default">
       <div class="panel-heading">
-        <a ng-click="content.addFile('models', '/test/file.txt')" class="btn btn-default" style="float: right; margin:-7px 0; padding: 5px"><span class="glyphicon glyphicon-plus" style="font-weight: normal"></span> New file</a>
-        <a ng-click="content.addFolder('models', '/test')" class="btn btn-default" style="float: right; margin:-7px 0; padding: 5px"><span class="glyphicon glyphicon-plus" style="font-weight: normal"></span> New folder</a>
+        <a ng-click="content.addFile('models', '/test/file.txt')" class="btn btn-default btn-treedata"><span class="glyphicon glyphicon-plus" style="font-weight: normal"></span>&nbsp;<span translate="project.content.button.add_file"></span></a>
+        <a ng-click="content.addFolder('models', '/test')" class="btn btn-default btn-treedata"><span class="glyphicon glyphicon-plus" style="font-weight: normal"></span>&nbsp;<span translate="project.content.button.add_folder"></span></a>
         <h6 class="panel-title">Model</h6>
       </div>
       <div class="panel-body">
@@ -28,8 +28,8 @@
     </div>
     <div class="panel panel-default">
       <div class="panel-heading">
-        <a ng-click="content.addFile('bundles', 'PATH')" class="btn btn-default" style="float: right; margin:-7px 0; padding: 5px"><span class="glyphicon glyphicon-plus" style="font-weight: normal"></span> New file</a>
-        <a ng-click="content.addFolder('bundles', 'PATH')" class="btn btn-default" style="float: right; margin:-7px 0; padding: 5px"><span class="glyphicon glyphicon-plus" style="font-weight: normal"></span> New folder</a>
+        <a ng-click="content.addFile('bundles', 'PATH')" class="btn btn-default btn-treedata"><span class="glyphicon glyphicon-plus" style="font-weight: normal"></span>&nbsp;<span translate="project.content.button.add_file"></span></a>
+        <a ng-click="content.addFolder('bundles', 'PATH')" class="btn btn-default btn-treedata"><span class="glyphicon glyphicon-plus" style="font-weight: normal"></span>&nbsp;<span translate="project.content.button.add_folder"></span></a>
         <h6 class="panel-title">Bundles</h6>
       </div>
       <div class="panel-body">
@@ -77,8 +77,8 @@
     </div>
     <div class="editor-toolbar">
       <ul ng-hide="content.selectedNode.readOnly">
-        <li><a ng-click="content.saveFile(content.selectedNode)"><span class="glyphicon glyphicon-floppy-disk"></span>&nbsp;Save</a></li>
-        <li><a ng-click="content.deleteFile(content.selectedNode)"><span class="glyphicon glyphicon-remove"></span>&nbsp;Delete</a></li>
+        <li><a ng-click="content.saveFile(content.selectedNode)"><span class="glyphicon glyphicon-floppy-disk"></span>&nbsp;<span translate="project.content.button.save_file"></span></a></li>
+        <li><a ng-click="content.deleteFile(content.selectedNode)"><span class="glyphicon glyphicon-remove"></span>&nbsp;<span translate="project.content.button.delete_file"></span></a></li>
       </ul>
     </div>
     <div>

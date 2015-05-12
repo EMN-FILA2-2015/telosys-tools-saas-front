@@ -78,7 +78,8 @@
         "saved" : "The file {{name}} has been successfully saved.",
         "file_created": "The file {{path}} has been successfully created.",
         "folder_created": "The folder {{path}} has been successfully created.",
-        "folder_renameed": "The folder {{path}} has been successfully renamed.",
+        "file_renamed": "The file {{path}} has been successfully renamed.",
+        "folder_renamed": "The folder {{path}} has been successfully renamed.",
         "resource_deleted": "The resource {{path}} has been successfully deleted."
       },
       "error": {

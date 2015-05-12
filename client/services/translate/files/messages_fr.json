@@ -78,6 +78,7 @@
         "saved" : "Le fichier {{name}} a été sauvegardé.",
         "file_created": "Le fichier {{path}} a été créé.",
         "folder_created": "Le dossier {{path}} a été créé.",
+        "file_renamed": "Le file {{path}} a été renommé.",
         "folder_renamed": "Le dossier {{path}} a été renommé.",
         "resource_deleted": "La ressource {{path}} a été supprimée"
       },

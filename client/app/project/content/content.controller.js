@@ -179,6 +179,7 @@
     }
 
     function renameFile(rootFolder,path) {
+      vm.currentPath = path;
       var modalInstance = $modal.open({
         backdrop: 'static',
         templateUrl: 'app/project/content/modals/renameFileModal.html',
@@ -320,6 +321,7 @@
     }
 
     function renameFolder(rootFolder,path) {
+      vm.currentPath = path;
       console.log("coucou gabi");
       var modalInstance = $modal.open({
         backdrop: 'static',

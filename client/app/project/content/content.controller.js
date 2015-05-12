@@ -105,15 +105,15 @@
     function addFile(rootFolder, path) {
       var filePath;
       if (path !== undefined) {
-        //if (rootFolder == vm.selectedTree) {
+        if (rootFolder == vm.selectedTree) {
           if (vm.selectedNode.type === 'folder') {
             filePath = path;
           } else {
             filePath = path.substring(0,path.lastIndexOf('/'));
           }
-        //} else {
-        //  filePath = rootFolder;
-        //}
+        } else {
+          filePath = rootFolder;
+        }
       } else {
         filePath = rootFolder;
       }
@@ -182,15 +182,15 @@
 
       var folderPath;
       if (path !== undefined) {
-        //if (rootFolder == vm.selectedTree) {
+        if (rootFolder == vm.selectedTree) {
         if (vm.selectedNode.type === 'folder') {
           folderPath = path;
         } else {
           folderPath = path.substring(0,path.lastIndexOf('/'));
         }
-        //} else {
-        //  folderPath = rootFolder;
-        //}
+        } else {
+          folderPath = rootFolder;
+        }
       } else {
         folderPath = rootFolder;
       }
@@ -277,17 +277,20 @@
           // Sortie sans sauvegarder
           if (node.type === 'file') loadFile(node);
           else vm.currentlySelected = undefined;
+          var nodePath = node.path;
+          vm.selectedTree = nodePath.split("/")[0];
+          logger.debug("1) selectedTree is now "+vm.selectedTree);
         }, function() {
           logger.debug('Dismissed save file modal');
           vm.selectedNode = vm.currentlySelected;
-          //var nodePath = vm.selectedNode.path;
-          //vm.selectedTree = nodePath.split("/")[0];
-          //logger.debug("selectedTree is now "+vm.selectedTree);
         })
       } else if (node.type === 'file') {
         loadFile(node);
         vm.contentChanged = false;
       }
+      var nodePath = node.path;
+      vm.selectedTree = nodePath.split("/")[0];
+      logger.debug("2) selectedTree is now "+vm.selectedTree);
     }
 
     function loadFile(node) {

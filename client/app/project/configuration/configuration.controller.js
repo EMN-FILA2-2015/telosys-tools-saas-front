@@ -60,12 +60,12 @@
               'name' : 'project.configuration.packages.root_package',
               'id' : 'ROOT_PKG',
               'shortcut' : '${ROOT_PKG}',
-              'value' : data.packages.ROOT_PKG
+              'value' : data.packages.ROOT_PKG.replace("\\\\", "\\")
             }, {
               'name' : 'project.configuration.packages.entity_classes_package',
               'id' : 'ENTITY_PKG',
               'shortcut' : '${ENTITY_PKG}',
-              'value' : data.packages.ENTITY_PKG
+              'value' : data.packages.ENTITY_PKG.replace("\\\\", "\\")
             }
           ];
 
@@ -74,37 +74,37 @@
               'name' : 'project.configuration.folders.sources',
               'id' : 'SRC',
               'shortcut' : '${SRC}',
-              'value' : data.folders.SRC
+              'value' : data.folders.SRC.replace("\\\\", "\\")
             }, {
               'name' : 'project.configuration.folders.resources',
               'id' : 'RES',
               'shortcut' : '${RES}',
-              'value' : data.folders.RES
+              'value' : data.folders.RES.replace("\\\\", "\\")
             }, {
               'name' : 'project.configuration.folders.web_content',
               'id' : 'WEB',
               'shortcut' : '${WEB}',
-              'value' : data.folders.WEB
+              'value' : data.folders.WEB.replace("\\\\", "\\")
             }, {
               'name' : 'project.configuration.folders.tests_sources',
               'id' : 'TEST_SRC',
               'shortcut' : '${TEST_SRC}',
-              'value' : data.folders.TEST_SRC
+              'value' : data.folders.TEST_SRC.replace("\\\\", "\\")
             }, {
               'name' : 'project.configuration.folders.tests_resources',
               'id' : 'TEST_RES',
               'shortcut' : '${TEST_RES}',
-              'value' : data.folders.TEST_RES
+              'value' : data.folders.TEST_RES.replace("\\\\", "\\")
             }, {
               'name' : 'project.configuration.folders.documentation',
               'id' : 'DOC',
               'shortcut' : '${DOC}',
-              'value' : data.folders.DOC
+              'value' : data.folders.DOC.replace("\\\\", "\\")
             }, {
               'name' : 'project.configuration.folders.temporary_files',
               'id' : 'TMP',
               'shortcut' : '${TMP}',
-              'value' : data.folders.TMP
+              'value' : data.folders.TMP.replace("\\\\", "\\")
             }
           ];
 
@@ -113,7 +113,7 @@
             if (data.variables.hasOwnProperty(variable)) {
               vm.variables.push({
                 'name' : variable,
-                'value' : data.variables[variable]
+                'value' : data.variables[variable].replace("\\\\", "\\")
               });
             }
           }
@@ -257,19 +257,12 @@
      * Fonction permettant d'ajouter une nouvelle variable vide à un index.
      * @param index
      */
-    function createVariable(index) {
+    function createVariable() {
       logger.debug('addVariable()','Creating a new variable');
-      if (index === undefined) {
-        vm.variables.push({
-          'name' : '',
-          'value' : ''
-        });
-      } else {
-        vm.variables.splice(index, 0, {
-          'name' : '',
-          'value' : ''
-        });
-      }
+      vm.variables.push({
+        'name' : 'VARIABLE_NAME',
+        'value' : 'VARIABLE_VALUE'
+      });
     }
 
     /**
@@ -277,7 +270,7 @@
      */
     function validateVariables(variables) {
       for (var variable in variables) {
-        if (vm.reservedVariables.indexOf(variables[variable]) == -1 || variables[variable] == '') {
+        if (vm.reservedVariables.indexOf(variable) != -1 || variable == '') {
           return false;
         }
       }

@@ -1,0 +1,43 @@
+<div class="modal-content">
+  <div class="modal-header">Rename a file</div>
+  <form class="form-horizontal"
+        name="renameFileForm"
+        novalidate>
+    <div class="modal-body">
+      <div class="form-group">
+        <label class="col-xs-3 control-label form-label">Path</label>
+        <div class="col-xs-8 form-container-input">
+          {{renameFile.file.path}}
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="renameFileName"
+               class="col-xs-3 control-label form-label">Name</label>
+        <div class="col-xs-8 form-container-input">
+          <input type="text"
+                 class="form-control"
+                 id="renameFileName"
+                 name="renameFileName"
+                 ng-model="renameFile.file.name"
+                 newinput>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="pull-right btn btn-primary withripple btn-form"
+              ng-class="{ 'btn-danger': renameFile.isFailed }"
+              ng-click="renameFile.createFile(renameFileForm, renameFile.file)">
+        <span ng-if="!renameFile.isCreating()" class="animate-if-fast">Rename</span>
+        <span ng-if="renameFile.isSaving" class="animate-if-fast"><i class="fa fa-circle-o-notch fa-spin"></i></span>
+        <span ng-if="renameFile.isFailed" class="animate-if-fast"><i class="fa fa-close"></i></span>
+      </button>
+      <button class="pull-right btn btn-default withripple btn-form"
+              style="margin-right: 5px;"
+              ng-click="renameFile.cancel()"
+              ng-disabled="renameFile.isSaving">
+        Cancel
+      </button>
+    </div>
+  </form>
+</div>
+

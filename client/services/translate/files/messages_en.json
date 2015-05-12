@@ -75,10 +75,36 @@
     },
     "content" : {
       "notification" : {
-        "saved" : "The file {{name}} has been successfully saved."
+        "saved" : "The file {{name}} has been successfully saved.",
+        "file_created": "The file {{path}} has been successfully created.",
+        "folder_created": "The folder {{path}} has been successfully created.",
+        "folder_renameed": "The folder {{path}} has been successfully renamed.",
+        "resource_deleted": "The resource {{path}} has been successfully deleted."
+      },
+      "error": {
+        "duplicate_folder" : "The folder {{path}} already exists.",
+        "duplicate_file": "The file {{path}} already exists.",
+        "parent_not_found": "Could not find parent folder for path {{path}}.",
+        "save_file": "Failed to save the file. Unexpected error trace : {{message}}",
+        "load_file": "Failed to load the file. Unexpected error trace : {{message}}",
+        "delete_file": "Failed to delete the file."
+      },
+      "button": {
+        "add_file": "New file",
+        "rename_file": "Rename file",
+        "add_folder": "New folder",
+        "rename_folder": "Rename folder",
+        "save_file": "Save",
+        "delete_file": "Delete",
+        "delete_folder": "Delete Folder",
+        "ignore": "Ignore",
+        "cancel": "Cancel",
+        "validate": "Validate"
       },
       "modal": {
-        "unsaved-file": "The file {{name}} contains unsaved changes. Do you wish to discard them ?"
+        "unsaved-file": "The file {{name}} contains unsaved changes. Do you wish to discard them ?",
+        "confirm_delete_file": "The file {{path}} will be deleted. Do you wish to continue ?",
+        "confirm_delete_folder": "The folder {{path}} and all its subfolders will be deleted. Do you wish to continue ?"
       }
     }
   },

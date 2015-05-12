@@ -75,10 +75,36 @@
     },
     "content" : {
       "notification" : {
-        "saved" : "Le fichier {{name}} a été sauvegardé."
+        "saved" : "Le fichier {{name}} a été sauvegardé.",
+        "file_created": "Le fichier {{path}} a été créé.",
+        "folder_created": "Le dossier {{path}} a été créé.",
+        "folder_renamed": "Le dossier {{path}} a été renommé.",
+        "resource_deleted": "La ressource {{path}} a été supprimée"
+      },
+      "error": {
+        "duplicate_folder" : "Le dossier {{path}} existe déjà.",
+        "duplicate_file": "Le fichier {{path}} existe déjà.",
+        "parent_not_found": "Le dossier parent n'a pas pu être trouvé pour le chemin {{path}}.",
+        "save_file": "Impossible d'enregistrer le fichier. Une erreur inattendue est survenue : {{message}}",
+        "load_file": "Impossible de charger le fichier. Une erreur inattendue est survenue : {{message}}",
+        "delete_file": "Impossible de supprimer le fichier."
+      },
+      "button": {
+        "add_file": "Nouv. fichier",
+        "rename_file": "Renommer",
+        "add_folder": "Nouv. dossier",
+        "rename_folder": "Renommer",
+        "save_file": "Sauver",
+        "delete_file": "Supprimer",
+        "delete_folder": "Supprimer",
+        "ignore": "Ignorer",
+        "cancel": "Annuler",
+        "validate": "Valider"
       },
       "modal": {
-        "unsaved-file": "Le fichier {{name}} n'a pas été sauvegardé. Tous les changements seront perdus. Continuer ?"
+        "unsaved-file": "Le fichier {{name}} n'a pas été sauvegardé. Tous les changements seront perdus. Continuer ?",
+        "confirm_delete_file": "Le fichier {{path}} sera supprimé. Continuer ?",
+        "confirm_delete_folder": "Le dossier {{path}} ainsi que ses sous-dossiers seront supprimés. Continuer ?"
       }
     }
   },

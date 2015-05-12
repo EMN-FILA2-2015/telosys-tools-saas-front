@@ -1,0 +1,43 @@
+<div class="modal-content">
+  <div class="modal-header">Rename a folder</div>
+  <form class="form-horizontal"
+        name="renameFolderForm"
+        novalidate>
+    <div class="modal-body">
+      <div class="form-group">
+        <label class="col-xs-3 control-label form-label">Path</label>
+        <div class="col-xs-8 form-container-input">
+          {{renameFolder.folder.path}}
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="renameFolderName"
+               class="col-xs-3 control-label form-label">Name</label>
+        <div class="col-xs-8 form-container-input">
+          <input type="text"
+                 class="form-control"
+                 id="renameFolderName"
+                 name="renameFolderName"
+                 ng-model="renameFolder.folder.name"
+                 newinput>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="pull-right btn btn-primary withripple btn-form"
+              ng-class="{ 'btn-danger': renameFolder.isFailed }"
+              ng-click="renameFolder.createFolder(renameFolderForm, renameFolder.folder)">
+        <span ng-if="!renameFolder.isCreating()" class="animate-if-fast">Rename</span>
+        <span ng-if="renameFolder.isSaving" class="animate-if-fast"><i class="fa fa-circle-o-notch fa-spin"></i></span>
+        <span ng-if="renameFolder.isFailed" class="animate-if-fast"><i class="fa fa-close"></i></span>
+      </button>
+      <button class="pull-right btn btn-default withripple btn-form"
+              style="margin-right: 5px;"
+              ng-click="renameFolder.cancel()"
+              ng-disabled="renameFolder.isSaving">
+        Cancel
+      </button>
+    </div>
+  </form>
+</div>
+

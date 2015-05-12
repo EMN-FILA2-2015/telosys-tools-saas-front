@@ -1,0 +1,14 @@
+<div class="modal-content">
+  <div class="modal-header">WARNING</div>
+  <div class="modal-body">
+    <span translate="{{modalCtrl.confirmMessage}}" translate-values="{path:modalCtrl.path}"></span>
+  </div>
+  <div class="modal-footer">
+    <button ng-click="modalCtrl.ok()" class="pull-right btn btn-primary withripple btn-form">
+      <span translate="project.content.button.validate"></span>
+    </button>
+    <button ng-click="modalCtrl.cancel()" class="pull-right btn btn-default withripple btn-form" style="margin-right: 5px;">
+      <span translate="project.content.button.cancel"></span>
+    </button>
+  </div>
+</div>

@@ -379,8 +379,57 @@
       });
     }
 
-    function deleteFolder() {
+    function deleteFolder(rootFolder, path) {
+        var deleteModal = $modal.open({
+          animation: true,
+          templateUrl: 'app/project/content/modals/deleteResource.html',
+          controller: 'DeleteResourceController as modalCtrl',
+          size: 'sm',
+          resolve: {
+            path: function() {
+              return path;
+            },
+            type: function() {
+              return 'folder';
+            }
+          }
+        });
 
+        deleteModal.result.then(function(path) {
+          vm.currentPath = path;
+          logger.debug('Deleting folder ' + path);
+          WorkspaceService.deleteFolder($stateParams.projectId, path)
+            .then(function(data) {
+              vm.aceEditor.setValue('');
+              vm.currentlySelected = undefined;
+              switch(rootFolder) {
+                case "model" :
+                  vm.model.treedata = buildTree(data);
+                  vm.selectedNode = vm.model.treedata[0];
+                  break;
+                case "templates" :
+                  vm.templates.treedata = buildTree(data);
+                  vm.selectedNode = vm.templates.treedata[0];
+                  break;
+                default :
+                  $state.transitionTo('error', {
+                    code: 403,
+                    text: 'Unable to rebuild the file tree'
+                  });
+              }
+              vm.alerts.push({
+                type: 'success',
+                msg: 'project.content.notification.resource_deleted'
+              });
+            })
+            .catch(function(error) {
+              logger.error('error loading file - ' + error.statusText);
+              vm.alerts.push({
+                type: 'danger',
+                msg: 'project.content.error.delete_file'
+              });
+            });
+        });
     }
 
     function showSelected(node, selected) {

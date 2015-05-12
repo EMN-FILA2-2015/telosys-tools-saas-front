@@ -66,7 +66,7 @@
 
       function deleteFolder(id, path) {
         logger.debug('call the delete /projects/id/workspace/folders service')
-        return service.one(id).one('workspace').doDELETE("folders", {"path" : path})
+        return service.one(id).one('workspace/folders').delete({"path" : path})
           .then(function(data) {
             return data;
           })

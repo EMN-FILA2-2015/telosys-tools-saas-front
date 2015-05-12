@@ -259,7 +259,6 @@
     }
 
     function showSelected(node, selected) {
-      //if (!selected) return;
       if (vm.currentlySelected != undefined && !vm.currentlySelected.readOnly && vm.contentChanged) {
         var saveModal = $modal.open({
           animation: true,
@@ -275,18 +274,16 @@
 
         saveModal.result.then(function() {
           // Sortie sans sauvegarder
-          if (node.type === 'file') loadFile(node);
+          if (selected && node.type === 'file') loadFile(node);
           else vm.currentlySelected = undefined;
           var nodePath = node.path;
           vm.selectedTree = nodePath.split("/")[0];
-          logger.debug("1) selectedTree is now "+vm.selectedTree);
         }, function() {
           logger.debug('Dismissed save file modal');
           vm.selectedNode = vm.currentlySelected;
         })
       } else {
         vm.selectedTree = node.path.split('/')[0];
-        logger.debug("1) selectedTree is now "+vm.selectedTree);
         if (node.type === 'file') {
           loadFile(node);
           vm.contentChanged = false;

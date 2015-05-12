@@ -22,7 +22,9 @@
           getFile: getFileContent,
           updateFile: updateFileContent,
           deleteFile: deleteFile,
-          renameFile: renameFile
+          renameFile: renameFile,
+          renameFolder: renameFolder,
+          deleteFolder: deleteFolder
         };
 
         ////////////////
@@ -49,6 +51,28 @@
             logger.debug('createFolder', 'Error during post /projects/id/workspace/folders service', error);
             throw error;
           });
+      }
+
+      function renameFolder(id, path, newName) {
+        logger.debug('call the patch /projects/id/workspace/folders service')
+        return service.one(id).one('workspace/folders').patch({"path": path, "name": newName})
+          .then(function(data) {
+            return data;
+          })
+          .catch(function(error) {
+            logger.debug('rename', 'Error during the patch /projects/id/workspace/folders call', error);
+          })
+      }
+
+      function deleteFolder(id, path) {
+        logger.debug('call the delete /projects/id/workspace/folders service')
+        return service.one(id).one('workspace').doDELETE("folders", {"path" : path})
+          .then(function(data) {
+            return data;
+          })
+          .catch(function(error) {
+            logger.debug('delete', 'Error during the delete /projects/id/workspace/folders call', error);
+          })
       }
 
       function createFile(id, path) {
@@ -100,7 +124,7 @@
 
       function renameFile(id, path,newName) {
         logger.debug('call the patch /projects/id/workspace/files service')
-        return service.one(id).one('workspace/files').patch({path: path, name: newName})
+        return service.one(id).one('workspace/files').patch({"path": path, "name": newName})
           .then(function(data) {
             return data;
           })

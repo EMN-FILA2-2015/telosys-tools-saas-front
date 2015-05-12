@@ -78,6 +78,7 @@
         "saved" : "The file {{name}} has been successfully saved.",
         "file_created": "The file {{path}} has been successfully created.",
         "folder_created": "The folder {{path}} has been successfully created.",
+        "folder_renameed": "The folder {{path}} has been successfully renamed.",
         "resource_deleted": "The resource {{path}} has been successfully deleted."
       },
       "error": {
@@ -90,9 +91,12 @@
       },
       "button": {
         "add_file": "New file",
+        "rename_file": "Rename file",
         "add_folder": "New folder",
+        "rename_folder": "Rename folder",
         "save_file": "Save",
         "delete_file": "Delete",
+        "delete_folder": "Delete Folder",
         "ignore": "Ignore",
         "cancel": "Cancel",
         "validate": "Validate"

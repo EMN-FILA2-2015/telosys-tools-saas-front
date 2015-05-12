@@ -25,6 +25,11 @@
           {{node.name}}
         </treecontrol>
       </div>
+      <div class="panel-footer" ng-show="(content.selectedNode.type == 'folder'&& content.selectedNode.path.indexOf('model')===0)">
+        <a ng-click="content.renameFolder('model',content.selectedNode.path)" class="btn btn-default"><span class="glyphicon glyphicon-pencil"></span>&nbsp;<span translate="project.content.button.rename_folder"></span></a></li>
+        <a ng-click="content.deleteFolder('model',content.selectedNode.path)" class="btn btn-default"><span class="glyphicon glyphicon-trash"></span>&nbsp;<span translate="project.content.button.delete_folder"></span></a></li>
+
+      </div>
     </div>
     <div class="panel panel-default">
       <div class="panel-heading">
@@ -46,6 +51,11 @@
           <span class="glyphicon glyphicon-folder-close" ng-if="node.type == 'folder'"></span>
           {{node.name}}
         </treecontrol>
+      </div>
+      <div class="panel-footer" ng-show="(content.selectedNode.type == 'folder' && content.selectedNode.path.indexOf('templates')===0)">
+        <a ng-click="content.renameFolder('templates',content.selectedNode.path)" class="btn btn-default"><span class="glyphicon glyphicon-pencil"></span>&nbsp;<span translate="project.content.button.rename_folder"></span></a></li>
+        <a ng-click="content.deleteFolder('templates',content.selectedNode.path)" class="btn btn-default"><span class="glyphicon glyphicon-trash"></span>&nbsp;<span translate="project.content.button.delete_folder"></span></a></li>
+
       </div>
     </div>
     <div class="panel panel-default">
@@ -78,6 +88,7 @@
     <div class="editor-toolbar">
       <ul ng-hide="content.selectedNode.readOnly">
         <li><a ng-click="content.saveFile(content.selectedNode)"><span class="glyphicon glyphicon-floppy-disk"></span>&nbsp;<span translate="project.content.button.save_file"></span></a></li>
+        <li><a ng-click="content.renameFile(rootFolder,content.selectedNode)"><span class="glyphicon glyphicon-pencil"></span>&nbsp;<span translate="project.content.button.rename_file"></span></a></li>
         <li><a ng-click="content.deleteFileModal(content.selectedNode)"><span class="glyphicon glyphicon-remove"></span>&nbsp;<span translate="project.content.button.delete_file"></span></a></li>
       </ul>
     </div>

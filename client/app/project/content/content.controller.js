@@ -22,6 +22,9 @@
 
     vm.addFile = addFile;
     vm.addFolder = addFolder;
+    vm.renameFile = renameFile;
+    vm.renameFolder = renameFolder;
+    vm.deleteFolder = deleteFolder;
     vm.showSelected = showSelected;
     vm.saveFile = saveFile;
     vm.deleteFileModal = deleteFileModal;
@@ -73,7 +76,6 @@
       treedata: [],
       expandedNodes: []
     };
-
     ////
 
     getWorkspace();
@@ -176,6 +178,65 @@
 
     }
 
+    function renameFile(rootFolder,path) {
+      var modalInstance = $modal.open({
+        backdrop: 'static',
+        templateUrl: 'app/project/content/modals/renameFileModal.html',
+        controller: 'RenameFileController as renameFile',
+        resolve: {
+          path: function () {
+            return path;
+          }
+        }
+      });
+
+      modalInstance.result.then(function (newName) {
+        logger.debug('Renaming file ' + path + " to " + newName);
+        WorkspaceService.renameFile($stateParams.projectId, path, newName)
+          .then(function (data) {
+            switch (rootFolder) {
+              case "model" :
+                vm.model.treedata = buildTree(data);
+                break;
+              case "templates" :
+                vm.templates.treedata = buildTree(data);
+                break;
+              default :
+                $state.transitionTo('error', {
+                  code: 500,
+                  text: 'Unable to rebuild the file tree'
+                });
+            }
+            vm.alerts.push({
+              type: 'success',
+              msg: 'project.content.notification.file_renamed'
+            });
+          })
+          .catch(function (error) {
+            switch (error.status) {
+              case 400 :
+                vm.alerts.push({
+                  type: 'danger',
+                  msg: 'project.content.error.invalid_path'
+                });
+                break;
+              case 404 :
+                vm.alerts.push({
+                  type: 'danger',
+                  msg: 'project.content.error.parent_not_found'
+                });
+                break;
+              default :
+                $state.transitionTo('error', {
+                  code: error.status,
+                  text: error.statusText
+                });
+            }
+
+          });
+      });
+    }
+
     function addFolder(rootFolder, path) {
       vm.currentPath = path;
 
@@ -256,6 +317,70 @@
 
           });
       });
+    }
+
+    function renameFolder(rootFolder,path) {
+      console.log("coucou gabi");
+      var modalInstance = $modal.open({
+        backdrop: 'static',
+        templateUrl: 'app/project/content/modals/renameFolderModal.html',
+        controller: 'RenameFolderController as renameFolder',
+        resolve: {
+          path: function () {
+            return path;
+          }
+        }
+      });
+
+      modalInstance.result.then(function (newName) {
+        logger.debug('Renaming folder ' + path + " to " + newName);
+        WorkspaceService.renameFolder($stateParams.projectId, path, newName)
+          .then(function (data) {
+            switch (rootFolder) {
+              case "model" :
+                vm.model.treedata = buildTree(data);
+                break;
+              case "templates" :
+                vm.templates.treedata = buildTree(data);
+                break;
+              default :
+                $state.transitionTo('error', {
+                  code: 500,
+                  text: 'Unable to rebuild the file tree'
+                });
+            }
+            vm.alerts.push({
+              type: 'success',
+              msg: 'project.content.notification.folder_renamed'
+            });
+          })
+          .catch(function (error) {
+            switch (error.status) {
+              case 400 :
+                vm.alerts.push({
+                  type: 'danger',
+                  msg: 'project.content.error.invalid_path'
+                });
+                break;
+              case 404 :
+                vm.alerts.push({
+                  type: 'danger',
+                  msg: 'project.content.error.parent_not_found'
+                });
+                break;
+              default :
+                $state.transitionTo('error', {
+                  code: error.status,
+                  text: error.statusText
+                });
+            }
+
+          });
+      });
+    }
+
+    function deleteFolder() {
+
     }
 
     function showSelected(node, selected) {

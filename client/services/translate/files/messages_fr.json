@@ -78,6 +78,7 @@
         "saved" : "Le fichier {{name}} a été sauvegardé.",
         "file_created": "Le fichier {{path}} a été créé.",
         "folder_created": "Le dossier {{path}} a été créé.",
+        "folder_renamed": "Le dossier {{path}} a été renommé.",
         "resource_deleted": "La ressource {{path}} a été supprimée"
       },
       "error": {
@@ -90,9 +91,12 @@
       },
       "button": {
         "add_file": "Nouv. fichier",
+        "rename_file": "Renommer",
         "add_folder": "Nouv. dossier",
+        "rename_folder": "Renommer",
         "save_file": "Sauver",
         "delete_file": "Supprimer",
+        "delete_folder": "Supprimer",
         "ignore": "Ignorer",
         "cancel": "Annuler",
         "validate": "Valider"

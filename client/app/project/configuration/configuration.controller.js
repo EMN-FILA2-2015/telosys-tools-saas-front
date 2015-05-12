@@ -139,13 +139,13 @@
         'variables' : {}
       };
       for (var pkg = 0; pkg < vm.packages.length; pkg++) {
-        config.packages[vm.packages[pkg].id] = vm.packages[pkg].value;
+        config.packages[vm.packages[pkg].id] = vm.packages[pkg].value.replace("\\", "\\\\");
       }
       for (var fld = 0; fld < vm.folders.length; fld++) {
-        config.folders[vm.folders[fld].id] = vm.folders[fld].value;
+        config.folders[vm.folders[fld].id] = vm.folders[fld].value.replace("\\", "\\\\");
       }
       for (var vrb = 0; vrb < vm.variables.length; vrb++) {
-        config.variables[vm.variables[vrb].name] = vm.variables[vrb].value;
+        config.variables[vm.variables[vrb].name] = vm.variables[vrb].value.replace("\\", "\\\\");
       }
       // Envoi des données
       if (validateVariables(config.variables)) {

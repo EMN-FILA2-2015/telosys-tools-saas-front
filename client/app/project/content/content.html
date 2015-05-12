@@ -19,7 +19,7 @@
                      options="content.treeOptions"
                      tree-model="content.model.treedata"
                      expanded-nodes="content.model.expandedNodes"
-                     on-selection="content.showSelected(node)"
+                     on-selection="content.showSelected(node, selected)"
                      selected-node="content.selectedNode">
           <span class="glyphicon glyphicon-folder-close" ng-if="node.type == 'folder'"></span>
           {{node.name}}
@@ -41,7 +41,7 @@
                      options="content.treeOptions"
                      tree-model="content.templates.treedata"
                      expanded-nodes="content.templates.expandedNodes"
-                     on-selection="content.showSelected(node)"
+                     on-selection="content.showSelected(node, selected)"
                      selected-node="content.selectedNode">
           <span class="glyphicon glyphicon-folder-close" ng-if="node.type == 'folder'"></span>
           {{node.name}}
@@ -59,7 +59,7 @@
                      options="content.treeOptions"
                      tree-model="content.generated.treedata"
                      expanded-nodes="content.generated.expandedNodes"
-                     on-selection="content.showSelected(node)"
+                     on-selection="content.showSelected(node, selected)"
                      selected-node="content.selectedNode">
           <span class="glyphicon glyphicon-folder-close" ng-if="node.type == 'folder'"></span>
           {{node.name}}

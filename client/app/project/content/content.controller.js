@@ -43,7 +43,6 @@
 
     vm.contentChanged = false;
     vm.selectedNode = {};
-    vm.selectedTree;
 
     ////
 
@@ -129,7 +128,7 @@
       });
 
       modalInstance.result.then(function (file) {
-        logger.debug('Creating file ' + file.path + "/" + file.name)
+        logger.debug('Creating file ' + file.path + "/" + file.name);
         WorkspaceService.createFile($stateParams.projectId, file.path + "/" + file.name)
           .then(function(data) {
             switch(rootFolder) {
@@ -207,7 +206,7 @@
 
 
       modalInstance.result.then(function (folder) {
-        logger.debug('Creating folder ' + folder.path + "/" + folder.name)
+        logger.debug('Creating folder ' + folder.path + "/" + folder.name);
         WorkspaceService.createFolder($stateParams.projectId, folder.path + "/" + folder.name)
           .then(function (data) {
             switch (rootFolder) {
@@ -259,7 +258,8 @@
       });
     }
 
-    function showSelected(node) {
+    function showSelected(node, selected) {
+      //if (!selected) return;
       if (vm.currentlySelected != undefined && !vm.currentlySelected.readOnly && vm.contentChanged) {
         var saveModal = $modal.open({
           animation: true,
@@ -284,13 +284,14 @@
           logger.debug('Dismissed save file modal');
           vm.selectedNode = vm.currentlySelected;
         })
-      } else if (node.type === 'file') {
-        loadFile(node);
-        vm.contentChanged = false;
+      } else {
+        vm.selectedTree = node.path.split('/')[0];
+        logger.debug("1) selectedTree is now "+vm.selectedTree);
+        if (node.type === 'file') {
+          loadFile(node);
+          vm.contentChanged = false;
+        }
       }
-      var nodePath = node.path;
-      vm.selectedTree = nodePath.split("/")[0];
-      logger.debug("2) selectedTree is now "+vm.selectedTree);
     }
 
     function loadFile(node) {
@@ -351,7 +352,7 @@
 
         deleteModal.result.then(function(path) {
           vm.currentPath = path;
-          logger.debug('Deleting file ' + path)
+          logger.debug('Deleting file ' + path);
           WorkspaceService.deleteFile($stateParams.projectId, path)
             .then(function(data) {
               vm.aceEditor.setValue('');

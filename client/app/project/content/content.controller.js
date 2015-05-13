@@ -150,18 +150,21 @@
           .catch(function(error) {
             switch (error.status) {
               case 409 :
+                vm.alerts = [];
                 vm.alerts.push({
                   type: 'danger',
                   msg: 'project.content.error.duplicate_file'
                 });
                 break;
               case 403 :
+                vm.alerts = [];
                 vm.alerts.push({
                   type: 'danger',
                   msg: 'project.content.error.invalid_path'
                 });
                 break;
               case 404 :
+                vm.alerts = [];
                 vm.alerts.push({
                   type: 'danger',
                   msg: 'project.content.error.parent_not_found'
@@ -208,6 +211,7 @@
                   text: 'Unable to rebuild the file tree'
                 });
             }
+            vm.alerts = [];
             vm.alerts.push({
               type: 'success',
               msg: 'project.content.notification.file_renamed'
@@ -216,12 +220,14 @@
           .catch(function (error) {
             switch (error.status) {
               case 400 :
+                vm.alerts = [];
                 vm.alerts.push({
                   type: 'danger',
                   msg: 'project.content.error.invalid_path'
                 });
                 break;
               case 404 :
+                vm.alerts = [];
                 vm.alerts.push({
                   type: 'danger',
                   msg: 'project.content.error.parent_not_found'
@@ -284,6 +290,7 @@
                   text: 'Unable to rebuild the file tree'
                 });
             }
+            vm.alerts = [];
             vm.alerts.push({
               type: 'success',
               msg: 'project.content.notification.folder_created'
@@ -292,18 +299,21 @@
           .catch(function (error) {
             switch (error.status) {
               case 409 :
+                vm.alerts = [];
                 vm.alerts.push({
                   type: 'danger',
                   msg: 'project.content.error.duplicate_folder'
                 });
                 break;
               case 403 :
+                vm.alerts = [];
                 vm.alerts.push({
                   type: 'danger',
                   msg: 'project.content.error.invalid_path'
                 });
                 break;
               case 404 :
+                vm.alerts = [];
                 vm.alerts.push({
                   type: 'danger',
                   msg: 'project.content.error.parent_not_found'
@@ -351,6 +361,7 @@
                   text: 'Unable to rebuild the file tree'
                 });
             }
+            vm.alerts = [];
             vm.alerts.push({
               type: 'success',
               msg: 'project.content.notification.folder_renamed'
@@ -359,12 +370,14 @@
           .catch(function (error) {
             switch (error.status) {
               case 400 :
+                vm.alerts = [];
                 vm.alerts.push({
                   type: 'danger',
                   msg: 'project.content.error.invalid_path'
                 });
                 break;
               case 404 :
+                vm.alerts = [];
                 vm.alerts.push({
                   type: 'danger',
                   msg: 'project.content.error.parent_not_found'
@@ -419,6 +432,7 @@
                     text: 'Unable to rebuild the file tree'
                   });
               }
+              vm.alerts = [];
               vm.alerts.push({
                 type: 'success',
                 msg: 'project.content.notification.resource_deleted'
@@ -426,6 +440,7 @@
             })
             .catch(function(error) {
               logger.error('error loading file - ' + error.statusText);
+              vm.alerts = [];
               vm.alerts.push({
                 type: 'danger',
                 msg: 'project.content.error.delete_file'
@@ -477,6 +492,7 @@
         .catch(function (error) {
           vm.errorMessage = 'Code : ' + error.status + ' ' + error.statusText;
           logger.error('error loading file - ' + error.statusText);
+          vm.alerts = [];
           vm.alerts.push({
             type: 'danger',
             msg: 'project.content.error.load_file'
@@ -490,6 +506,7 @@
         WorkspaceService.updateFile($stateParams.projectId, node.path, content)
           .then(function() {
             vm.contentChanged = false;
+            vm.alerts = [];
             vm.alerts.push({
               type: 'success',
               msg: 'project.content.notification.saved'
@@ -498,6 +515,7 @@
           .catch(function(error) {
             vm.errorMessage = 'Code : ' + error.status + ' ' + error.statusText;
             logger.error('error saving file - ' + error.statusText);
+            vm.alerts = [];
             vm.alerts.push({
               type: 'danger',
               msg: 'project.content.error.save_file'
@@ -545,6 +563,7 @@
                     text: 'Unable to rebuild the file tree'
                   });
               }
+              vm.alerts = [];
               vm.alerts.push({
                 type: 'success',
                 msg: 'project.content.notification.resource_deleted'
@@ -552,6 +571,7 @@
             })
             .catch(function(error) {
               logger.error('error loading file - ' + error.statusText);
+              vm.alerts = [];
               vm.alerts.push({
                 type: 'danger',
                 msg: 'project.content.error.delete_file'

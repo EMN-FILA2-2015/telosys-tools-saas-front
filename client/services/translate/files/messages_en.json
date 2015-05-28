@@ -91,6 +91,8 @@
         "delete_file": "Failed to delete the file."
       },
       "button": {
+        "add_entity": "New entity",
+        "rename_entity": "Rename entity",
         "add_file": "New file",
         "rename_file": "Rename file",
         "add_folder": "New folder",

@@ -91,6 +91,8 @@
         "delete_file": "Impossible de supprimer le fichier."
       },
       "button": {
+        "add_entity": "Nouv. entité",
+        "rename_entity": "Renommer",
         "add_file": "Nouv. fichier",
         "rename_file": "Renommer",
         "add_folder": "Nouv. dossier",

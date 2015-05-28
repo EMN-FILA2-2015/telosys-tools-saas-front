@@ -20,6 +20,7 @@
     vm.alerts = [];
     vm.closeAlert = closeAlert;
 
+    vm.addEntity = addEntity;
     vm.addFile = addFile;
     vm.addFolder = addFolder;
     vm.renameFile = renameFile;
@@ -38,16 +39,31 @@
         vm.aceEditor = _editor;
         _editor.session.setNewLineMode('unix');
         _editor.$blockScrolling = Infinity;
+        console.log('onLoad');
       },
-      onChange: function() {
-        vm.contentChanged = true;
+      onFocus: function(e) {
+        console.log('onFocus');
+      },
+      require: ['ace/ext/language_tools'],
+      advanced: {
+        enableSnippets: true,
+        enableBasicAutocompletion: true,
+        enableLiveAutocompletion: true
       }
     };
 
-    vm.contentChanged = false;
+    vm.originalContent = undefined;
     vm.selectedNode = {};
+    vm.hasContentChanged = hasContentChanged;
 
     ////
+
+    function hasContentChanged() {
+      if(vm.originalContent == null) {
+        return false;
+      }
+      return vm.originalContent != vm.aceEditor.getValue();
+    }
 
     vm.treeOptions = {
       nodeChildren: "children",
@@ -103,6 +119,144 @@
 
     ////////////////
 
+    function addEntity(rootFolder, path) {
+      var entityPath;
+      if (path !== undefined) {
+        if (rootFolder == vm.selectedTree) {
+          if (vm.selectedNode.type === 'folder') {
+            entityPath = path;
+          } else {
+            entityPath = path.substring(0,path.lastIndexOf('/'));
+          }
+        } else {
+          entityPath = rootFolder;
+        }
+      } else {
+        entityPath = rootFolder;
+      }
+      var modalInstance = $modal.open({
+        backdrop: 'static',
+        templateUrl: 'app/project/content/modals/addEntityModal.html',
+        controller: 'AddEntityController as addEntity',
+        resolve: {
+          path: function () {
+            return entityPath;
+          }
+        }
+      });
+
+      modalInstance.result.then(function (entity) {
+        logger.debug('Creating entity ' + entity.path + "/" + entity.name);
+        WorkspaceService.createFile($stateParams.projectId, entity.path + "/" + entity.name)
+          .then(function(data) {
+            switch(rootFolder) {
+              case "model" :
+                vm.model.treedata = buildTree(data);
+                break;
+              default :
+                $state.transitionTo('error', {
+                  code: 403,
+                  text: 'Unable to rebuild the entity tree'
+                });
+            }
+          })
+          .catch(function(error) {
+            switch (error.status) {
+              case 409 :
+                vm.alerts = [];
+                vm.alerts.push({
+                  type: 'danger',
+                  msg: 'project.content.error.duplicate_entity'
+                });
+                break;
+              case 403 :
+                vm.alerts = [];
+                vm.alerts.push({
+                  type: 'danger',
+                  msg: 'project.content.error.invalid_path'
+                });
+                break;
+              case 404 :
+                vm.alerts = [];
+                vm.alerts.push({
+                  type: 'danger',
+                  msg: 'project.content.error.parent_not_found'
+                });
+                break;
+              default :
+                $state.transitionTo('error', {
+                  code: error.status,
+                  text: error.statusText
+                });
+            }
+          });
+      });
+
+    }
+
+    function renameEntity(rootFolder,path) {
+      vm.currentPath = path;
+      var modalInstance = $modal.open({
+        backdrop: 'static',
+        templateUrl: 'app/project/content/modals/renameEntityModal.html',
+        controller: 'RenameEntityController as renameEntity',
+        resolve: {
+          path: function () {
+            return path;
+          }
+        }
+      });
+
+      modalInstance.result.then(function (newName) {
+        logger.debug('Renaming entity ' + path + " to " + newName);
+        WorkspaceService.renameFile($stateParams.projectId, path, newName)
+          .then(function (data) {
+            switch (rootFolder) {
+              case "model" :
+                vm.model.treedata = buildTree(data);
+                break;
+              case "templates" :
+                vm.templates.treedata = buildTree(data);
+                break;
+              default :
+                $state.transitionTo('error', {
+                  code: 500,
+                  text: 'Unable to rebuild the entity tree'
+                });
+            }
+            vm.alerts = [];
+            vm.alerts.push({
+              type: 'success',
+              msg: 'project.content.notification.entity_renamed'
+            });
+          })
+          .catch(function (error) {
+            switch (error.status) {
+              case 400 :
+                vm.alerts = [];
+                vm.alerts.push({
+                  type: 'danger',
+                  msg: 'project.content.error.invalid_path'
+                });
+                break;
+              case 404 :
+                vm.alerts = [];
+                vm.alerts.push({
+                  type: 'danger',
+                  msg: 'project.content.error.parent_not_found'
+                });
+                break;
+              default :
+                $state.transitionTo('error', {
+                  code: error.status,
+                  text: error.statusText
+                });
+            }
+
+          });
+      });
+    }
+
     function addFile(rootFolder, path) {
       var filePath;
       if (path !== undefined) {
@@ -134,9 +288,6 @@
         WorkspaceService.createFile($stateParams.projectId, file.path + "/" + file.name)
           .then(function(data) {
             switch(rootFolder) {
-              case "model" :
-                vm.model.treedata = buildTree(data);
-                break;
               case "templates" :
                 vm.templates.treedata = buildTree(data);
                 break;
@@ -416,6 +567,7 @@
           WorkspaceService.deleteFolder($stateParams.projectId, path)
             .then(function(data) {
               vm.aceEditor.setValue('');
+              delete vm.originalContent;
               vm.currentlySelected = undefined;
               switch(rootFolder) {
                 case "model" :
@@ -450,7 +602,7 @@
     }
 
     function showSelected(node, selected) {
-      if (vm.currentlySelected != undefined && !vm.currentlySelected.readOnly && vm.contentChanged) {
+      if (vm.currentlySelected != undefined && !vm.currentlySelected.readOnly && vm.hasContentChanged()) {
         var saveModal = $modal.open({
           animation: true,
           templateUrl: 'app/project/content/modals/saveFile.html',
@@ -477,7 +629,6 @@
         vm.selectedTree = node.path.split('/')[0];
         if (node.type === 'file') {
           loadFile(node);
-          vm.contentChanged = false;
         }
       }
     }
@@ -486,6 +637,7 @@
       WorkspaceService.getFile($stateParams.projectId, node.path)
         .then(function (data) {
           vm.aceEditor.setValue(data.content, 1);
+          vm.originalContent = data.content;
           vm.aceEditor.setReadOnly(node.readOnly);
           vm.currentlySelected = node;
         })
@@ -501,11 +653,11 @@
     }
 
     function saveFile(node) {
-      if (vm.contentChanged) {
+      if (vm.hasContentChanged()) {
         var content = vm.aceEditor.getValue();
         WorkspaceService.updateFile($stateParams.projectId, node.path, content)
           .then(function() {
-            vm.contentChanged = false;
+            delete vm.originalContent;
             vm.alerts = [];
             vm.alerts.push({
               type: 'success',
@@ -547,6 +699,7 @@
           WorkspaceService.deleteFile($stateParams.projectId, path)
             .then(function(data) {
               vm.aceEditor.setValue('');
+              delete vm.originalContent;
               vm.currentlySelected = undefined;
               switch(data.name) {
                 case "model" :

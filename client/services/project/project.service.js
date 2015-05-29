@@ -15,7 +15,7 @@
   function ProjectService(Restangular, Logger) {
 
     var logger = Logger.getInstance('ProjectService');
-    var service = Restangular.service('projects');
+    var service = Restangular.service('api/projects');
 
     return {
       get: get,

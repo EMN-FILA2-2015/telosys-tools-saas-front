@@ -14,19 +14,26 @@
   <!-- Librairies -->
   <!-- bower:js -->
   <script src="bower_components/jquery/dist/jquery.js"></script>
+  <script src="bower_components/modernizr/modernizr.js"></script>
+  <script src="bower_components/stomp-websocket/lib/stomp.min.js"></script>
+  <script src="bower_components/sockjs-dist/sockjs.js"></script>
+  <script src="bower_components/lodash/dist/lodash.compat.js"></script>
   <script src="bower_components/angular/angular.js"></script>
+  <script src="bower_components/restangular/dist/restangular.js"></script>
   <script src="bower_components/angular-resource/angular-resource.js"></script>
   <script src="bower_components/angular-cookies/angular-cookies.js"></script>
   <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
   <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
-  <script src="bower_components/lodash/dist/lodash.compat.js"></script>
   <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
   <script src="bower_components/angular-ui-ace/ui-ace.js"></script>
-  <script src="bower_components/restangular/dist/restangular.js"></script>
   <script src="bower_components/angular-translate/angular-translate.js"></script>
   <script src="bower_components/angular-translate-storage-cookie/angular-translate-storage-cookie.js"></script>
   <script src="bower_components/angular-translate-storage-local/angular-translate-storage-local.js"></script>
   <script src="bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.js"></script>
+  <script src="bower_components/angular-dynamic-locale/src/tmhDynamicLocale.js"></script>
+  <script src="bower_components/angular-local-storage/dist/angular-local-storage.js"></script>
+  <script src="bower_components/angular-cache-buster/angular-cache-buster.js"></script>
+  <script src="bower_components/ngInfiniteScroll/build/ng-infinite-scroll.js"></script>
   <script src="bower_components/angular-tree-control/angular-tree-control.js"></script>
   <!-- endbower -->
 
@@ -37,7 +44,25 @@
 
   <!-- Source and specs files -->
   <!-- injector:js -->
-  <script src="app/app.config.js"></script>
+  <script src="app/account/account.js"></script>
+  <script src="app/account/activate/activate.controller.js"></script>
+  <script src="app/account/activate/activate.js"></script>
+  <script src="app/account/login/login.controller.js"></script>
+  <script src="app/account/login/login.js"></script>
+  <script src="app/account/logout/logout.controller.js"></script>
+  <script src="app/account/logout/logout.js"></script>
+  <script src="app/account/password/password.controller.js"></script>
+  <script src="app/account/password/password.directive.js"></script>
+  <script src="app/account/password/password.js"></script>
+  <script src="app/account/register/register.controller.js"></script>
+  <script src="app/account/register/register.js"></script>
+  <script src="app/account/reset/finish/reset.finish.controller.js"></script>
+  <script src="app/account/reset/finish/reset.finish.js"></script>
+  <script src="app/account/reset/request/reset.request.controller.js"></script>
+  <script src="app/account/reset/request/reset.request.js"></script>
+  <script src="app/account/settings/settings.controller.js"></script>
+  <script src="app/account/settings/settings.js"></script>
+  <script src="app/app.constants.js"></script>
   <script src="app/error/error.controller.js"></script>
   <script src="app/error/error.controller.spec.js"></script>
   <script src="app/error/error.route.js"></script>
@@ -72,12 +97,31 @@
   <script src="app/shared/footer/footer.controller.js"></script>
   <script src="app/shared/navbar/language.controller.js"></script>
   <script src="app/shared/navbar/navbar.controller.js"></script>
+  <script src="app/shared/navbar/navbar.directive.js"></script>
   <script src="components/env/configuration.js"></script>
+  <script src="components/form/form.directive.js"></script>
+  <script src="components/form/pager.directive.js"></script>
+  <script src="components/form/pagination.directive.js"></script>
+  <script src="components/language/language.controller.js"></script>
+  <script src="components/language/language.service.js"></script>
   <script src="components/ui/modal/modal.service.js"></script>
+  <script src="components/util/base64.service.js"></script>
+  <script src="components/util/parse-links.service.js"></script>
+  <script src="components/util/truncate.filter.js"></script>
   <script src="components/utils/logger.js"></script>
+  <script src="services/auth/auth.service.js"></script>
+  <script src="services/auth/authority.directive.js"></script>
+  <script src="services/auth/principal.service.js"></script>
+  <script src="services/auth/provider/auth.xauth.service.js"></script>
+  <script src="services/auth/services/account.service.js"></script>
+  <script src="services/auth/services/activate.service.js"></script>
+  <script src="services/auth/services/password.service.js"></script>
+  <script src="services/auth/services/register.service.js"></script>
   <script src="services/project/project.service.js"></script>
   <script src="services/project/project.service.spec.js"></script>
+  <script src="services/tracker/tracker.service.js"></script>
   <script src="services/translate/translate.service.js"></script>
+  <script src="services/user/user.service.js"></script>
   <script src="services/workspace/workspace.service.js"></script>
   <script src="services/workspace/workspace.service.spec.js"></script>
   <!-- endinjector -->

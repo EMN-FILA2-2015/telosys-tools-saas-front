@@ -12,7 +12,7 @@
     // look for parameter passing the id ?
     /* @ngInject */
     function WorkspaceService(Restangular, Logger) {
-        var service = Restangular.service('projects');
+        var service = Restangular.service('api/projects');
         var logger = Logger.getInstance("WorkspaceService");
 
         return {

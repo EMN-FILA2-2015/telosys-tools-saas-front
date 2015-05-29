@@ -19,6 +19,9 @@ module.exports = function (grunt) {
   // Require for the replacement of configuration values
   grunt.loadNpmTasks('grunt-replace');
 
+  // proxies : http://www.hierax.org/2014/01/grunt-proxy-setup-for-yeoman.html
+  grunt.loadNpmTasks('grunt-connect-proxy');
+
   // Define the configuration for all the tasks
   grunt.initConfig({
 
@@ -66,17 +69,30 @@ module.exports = function (grunt) {
         hostname: 'localhost',
         livereload: 35729
       },
+      // proxies : http://www.hierax.org/2014/01/grunt-proxy-setup-for-yeoman.html
+      proxies: [{
+          context: '/api',
+          host: 'localhost',
+          port: 8080
+        }, {
+          context: '/resource',
+          host: 'localhost',
+          port: 8080
+        }
+      ],
       livereload: {
         options: {
           open: true,
-          middleware: function (connect) {
+          middleware: function (connect, options) {
             return [
               connect.static('.tmp'),
               connect().use(
                 '/client/bower_components',
                 connect.static('./client/bower_components')
               ),
-              connect.static('client')
+              connect.static('client'),
+              // Setup the proxy
+              require('grunt-connect-proxy/lib/utils').proxyRequest
             ];
           }
         }
@@ -574,6 +590,7 @@ module.exports = function (grunt) {
       'wiredep',
       'autoprefixer',
       'wait',
+      'configureProxies:server', // added just before connect
       'connect:livereload',
       'watch'
     ]);

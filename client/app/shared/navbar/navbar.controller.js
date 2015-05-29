@@ -9,9 +9,9 @@
     .module('telosysToolsSaasFrontApp')
     .controller('NavbarController', NavbarController)
 
-  NavbarController.$inject = ['$scope', '$state'];
+  NavbarController.$inject = ['$scope', '$location', '$state', 'Auth', 'Principal'];
 
-  function NavbarController($scope, $state) {
+  function NavbarController($scope, $location, $state, Auth, Principal) {
 
     $scope.navbar = [
       {
@@ -27,6 +27,14 @@
 
     $scope.isActive = function (state) {
       return $state.is(state);
+    };
+
+    $scope.isAuthenticated = Principal.isAuthenticated;
+    $scope.$state = $state;
+
+    $scope.logout = function () {
+      Auth.logout();
+      $state.go('home');
     };
 
   }

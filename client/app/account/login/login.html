@@ -6,6 +6,13 @@
             <div class="alert alert-danger" ng-show="authenticationError" translate="login.messages.error.authentication">
                 <strong>Authentication failed!</strong> Please check your credentials and try again.
             </div>
+            <div class="alert alert-warning">
+                Sample account :
+                <ul>
+                  <li>Login : <b>user</b></li>
+                  <li>Password : <b>user</b></li>
+                </ul>
+            </div>
             <form class="form" role="form" ng-submit="login($event)">
                 <div class="form-group">
                     <label for="username" translate="global.form.username">Login</label>
